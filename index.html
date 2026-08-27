@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI for Rookies — Marcia McCoy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F2EC;
+    --limestone:#E9E3D7;
+    --stone:#DED6C6;
+    --ink:#1B1813;
+    --graphite:#6C665B;
+    --gilt:#9A7B43;
+    --gilt-soft:#B79A63;
+    --deep:#1B1814;
+    --hair:rgba(27,24,19,.16);
+    --hair-soft:rgba(27,24,19,.09);
+    --serif:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;      /* body + UI (Monolith uses sans for text) */
+    --display:"Playfair Display",Georgia,"Times New Roman",serif;             /* headings / display */
+    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;        /* labels / nav / data */
+    --gutter:clamp(1rem,3.4vw,3rem);
+    --maxw:1440px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--serif);font-size:clamp(1rem,.62rem + .58vw,1.1rem);
+    line-height:1.7;font-weight:400;letter-spacing:0;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  img,svg,video{max-width:100%;height:auto;display:block}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{margin:0;font-weight:400;line-height:1.04}
+  p{margin:0 0 1.05em}
+  ::selection{background:rgba(154,123,67,.22)}
+  :focus-visible{outline:2px solid var(--gilt);outline-offset:3px}
+
+  .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+  .sec{padding-block:clamp(3.6rem,8.5vw,7.5rem)}
+  .rule{height:1px;background:var(--hair);border:0;margin:0}
+
+  /* ---------- labels / apparatus ---------- */
+  .kicker{
+    font-family:var(--sans);font-size:.68rem;font-weight:600;
+    letter-spacing:.3em;text-transform:uppercase;color:var(--gilt);
+  }
+  .eyebrow{
+    font-family:var(--display);font-style:italic;font-size:clamp(1.15rem,2.6vw,1.5rem);
+    color:var(--gilt);letter-spacing:.01em;line-height:1.2;
+  }
+  .plate-label{display:flex;align-items:center;gap:.9rem;margin-bottom:clamp(1.6rem,3.5vw,2.6rem)}
+  .plate-label .no{
+    display:inline-flex;align-items:center;justify-content:center;
+    height:clamp(28px,3vw,34px);width:auto;flex:none;line-height:1;
+    /* legacy numbered pill styling kept for graceful fallback if the emblem img fails */
+    font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.18em;
+    color:var(--gilt);
+  }
+  .plate-label .no img{height:100%;width:auto;display:block}
+  /* dark-band variant: invert emblem to bright white on the dark section */
+  .band-dark .plate-label .no img{filter:brightness(0) invert(1)}
+  .plate-label .nm{
+    font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.26em;
+    text-transform:uppercase;color:var(--graphite);white-space:normal;
+  }
+  .plate-label .ln{flex:1;height:1px;background:var(--hair);min-width:1.5rem}
+
+  /* ---------- headings ---------- */
+  .h-display{
+    font-family:var(--display);font-weight:300;
+    font-size:clamp(2.5rem,2rem + 5.4vw,5.4rem);line-height:1.01;letter-spacing:-.008em;
+  }
+  .h-section{
+    font-family:var(--display);font-weight:300;
+    font-size:clamp(2rem,1.5rem + 3vw,3.5rem);line-height:1.06;letter-spacing:-.005em;
+  }
+  .h-label{
+    font-family:var(--display);font-weight:500;text-transform:uppercase;
+    font-size:clamp(1.35rem,1rem + 1.7vw,2.1rem);letter-spacing:.09em;line-height:1.12;
+  }
+  .lede{
+    font-family:var(--display);font-weight:400;color:var(--ink);
+    font-size:clamp(1.3rem,1rem + 1.5vw,1.85rem);line-height:1.4;letter-spacing:0;
+  }
+  .body{color:var(--graphite);max-width:60ch}
+  .body p{margin-bottom:.55em}
+  .body p:last-child{margin-bottom:0}
+  .body.tight{max-width:52ch}
+  .muted{color:var(--graphite)}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+    font-family:var(--sans);font-size:.74rem;font-weight:600;letter-spacing:.18em;
+    text-transform:uppercase;white-space:normal;text-align:center;line-height:1.3;
+    padding:1.05rem 1.7rem;border:1px solid var(--ink);border-radius:2px;
+    cursor:pointer;transition:background .35s ease,color .35s ease,border-color .35s ease;
+    width:100%;
+  }
+  .btn--primary{background:var(--ink);color:var(--paper)}
+  .btn--primary:hover{background:var(--gilt);border-color:var(--gilt);color:#fff}
+  .btn--ghost{background:transparent;color:var(--ink)}
+  .btn--ghost:hover{background:var(--ink);color:var(--paper)}
+  .btn--onDark{border-color:rgba(245,242,236,.55);color:var(--paper)}
+  .btn--onDark.btn--primary{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .btn--onDark.btn--primary:hover{background:var(--gilt-soft);border-color:var(--gilt-soft);color:var(--deep)}
+  .btn--onDark.btn--ghost:hover{background:rgba(245,242,236,.12);color:var(--paper)}
+  .btn-row{display:flex;flex-direction:column;gap:.8rem;margin-top:1.9rem;max-width:30rem}
+  @media(min-width:560px){
+    .btn{width:auto}
+    .btn-row{flex-direction:row;flex-wrap:wrap;max-width:none}
+    .btn-row .btn{flex:0 1 auto}
+  }
+
+  /* ---------- architectural "plates" (drawn, self-contained) ---------- */
+  .plate{
+    position:relative;overflow:hidden;border-radius:2px;
+    background:
+      radial-gradient(120% 90% at 30% 12%,rgba(255,255,255,.5),transparent 55%),
+      linear-gradient(160deg,#efe9dd 0%,#e4dccd 46%,#d7cdb9 100%);
+    box-shadow:inset 0 0 0 1px var(--hair-soft);
+    aspect-ratio:4/5;
+  }
+  .plate--wide{aspect-ratio:16/11}
+  .plate-img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 22%;display:block}
+  .plate--tall{aspect-ratio:3/4}
+  .plate--sq{aspect-ratio:1/1}
+  .plate .motif{position:absolute;inset:0;width:100%;height:100%}
+  .plate .motif *{vector-effect:non-scaling-stroke}
+  .plate .cap{
+    position:absolute;left:0;bottom:0;padding:.7rem .85rem;
+    font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.2em;
+    text-transform:uppercase;color:rgba(27,24,19,.5);
+  }
+  .plate--dark{
+    background:
+      radial-gradient(130% 100% at 50% -10%,rgba(183,154,99,.22),transparent 60%),
+      linear-gradient(165deg,#2b2721 0%,#1c1914 65%,#141210 100%);
+  }
+  .plate--dark .cap{color:rgba(245,242,236,.45)}
+
+  /* ---------- NAV (overlays hero, flips solid on scroll) ---------- */
+  .nav{
+    position:absolute;top:0;left:0;right:0;z-index:60;
+    background:transparent;border-bottom:1px solid transparent;
+    transition:background .4s ease,border-color .4s ease,backdrop-filter .4s ease;
+  }
+  .nav.is-solid{background:rgba(245,242,236,.9);backdrop-filter:blur(10px);border-bottom-color:var(--hair)}
+  .nav__in{
+    max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter);
+    height:78px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;
+  }
+  .nav__right{display:flex;align-items:center;gap:.9rem;justify-self:end}
+  .brand{display:flex;align-items:center;gap:.55rem;font-family:var(--display);justify-self:start}
+  .brand__logo{height:clamp(38px,4.2vw,50px);width:auto;display:block}
+  .brand__logo--white{filter:brightness(0) invert(1)}
+  .brand__logo--dark{display:none}
+  .nav.is-solid .brand__logo--white{display:none}
+  .nav.is-solid .brand__logo--dark{display:block}
+  .nav .brand > b,.nav .brand > span,
+  .foot .brand > b,.foot .brand > span{display:none}       /* hidden while the logo shows */
+  .nav .brand.logo-failed .brand__logo,
+  .foot .brand.logo-failed .brand__logo{display:none}
+  .nav .brand.logo-failed > b,.foot .brand.logo-failed > b{display:inline-block}
+  .nav .brand.logo-failed > span,.foot .brand.logo-failed > span{display:inline-block}
+  .foot .brand__logo{height:clamp(46px,5vw,64px)}
+  .brand b{font-weight:500;font-size:1.12rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;transition:color .4s ease}
+  .brand span{font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gilt-soft);transition:color .4s ease}
+  .nav__links{display:none;align-items:center;gap:clamp(1.4rem,2.6vw,2.6rem);justify-self:center}
+  .nav__links a{
+    font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.16em;
+    text-transform:uppercase;color:#fff;position:relative;padding:.4rem 0;transition:color .4s ease;
+  }
+  .nav__links a::after{content:"";position:absolute;left:0;bottom:.1rem;width:0;height:1px;background:var(--gilt-soft);transition:width .3s ease}
+  .nav__links a:hover::after{width:100%}
+  .nav__cta{
+    display:none;font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;padding:.6rem 1.15rem;border:1px solid rgba(255,255,255,.6);border-radius:2px;color:#fff;
+    transition:background .3s,color .3s,border-color .4s ease;
+  }
+  .nav:not(.is-solid) .nav__cta:hover{background:#fff;color:var(--ink);border-color:#fff}
+  .burger{
+    display:inline-flex;flex-direction:column;justify-content:center;gap:5px;
+    width:44px;height:44px;background:none;border:0;cursor:pointer;padding:10px;margin-right:-10px;
+  }
+  .burger span{display:block;height:1.5px;width:100%;background:#fff;transition:transform .3s,opacity .3s,background .4s ease}
+  /* solid-state colours */
+  .nav.is-solid .brand b{color:var(--ink)}
+  .nav.is-solid .brand span{color:var(--gilt)}
+  .nav.is-solid .nav__links a{color:var(--ink)}
+  .nav.is-solid .nav__links a::after{background:var(--gilt)}
+  .nav.is-solid .nav__cta{color:var(--ink);border-color:var(--ink)}
+  .nav.is-solid .nav__cta:hover{background:var(--ink);color:var(--paper)}
+  .nav.is-solid .burger span{background:var(--ink)}
+  /* legibility over the raw image (no overlay) — dropped once the nav goes solid */
+  .nav:not(.is-solid) .nav__links a,
+  .nav:not(.is-solid) .nav__cta,
+  .nav:not(.is-solid) .brand > b{text-shadow:0 1px 10px rgba(0,0,0,.5)}
+  .nav:not(.is-solid) .brand__logo--white{filter:brightness(0) invert(1) drop-shadow(0 1px 5px rgba(0,0,0,.5))}
+  .nav:not(.is-solid) .burger span{filter:drop-shadow(0 1px 5px rgba(0,0,0,.5))}
+  /* when the mobile sheet is open, force dark marks on the burger regardless of scroll */
+  .burger.is-open span{background:var(--ink)}
+  .burger.is-open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .burger.is-open span:nth-child(2){opacity:0}
+  .burger.is-open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  @media(min-width:900px){
+    .nav__links{display:flex}
+    .nav__cta{display:inline-flex}
+    .burger{display:none}
+  }
+  /* mobile panel */
+  .sheet{
+    position:fixed;inset:0;z-index:55;background:var(--paper);
+    padding:calc(78px + 1.5rem) var(--gutter) 2rem;
+    display:flex;flex-direction:column;gap:.4rem;
+    transform:translateY(-101%);transition:transform .42s cubic-bezier(.6,.02,.1,1);
+    visibility:hidden;
+  }
+  .sheet.open{transform:translateY(0);visibility:visible}
+  .sheet a{
+    font-family:var(--display);font-size:1.7rem;font-weight:400;padding:.7rem 0;
+    border-bottom:1px solid var(--hair-soft);
+  }
+  .sheet .btn{margin-top:1.4rem}
+  @media(min-width:900px){.sheet{display:none}}
+
+  /* ---------- HERO (full-bleed image, nav overlays it) ---------- */
+  .hero{position:relative;isolation:isolate;overflow:hidden;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;
+    min-height:clamp(580px,92vh,940px);
+    background:linear-gradient(160deg,#2a2620,#16130f)} /* fallback if image is slow/blocked */
+  /* image rotated 90° and sized so it still covers the box (dimensions swap under rotation) */
+  .hero-img{position:absolute;top:50%;left:50%;z-index:-2;
+    width:105vh;height:105vw;max-width:none;max-height:none;object-fit:cover;object-position:center;
+    transform:translate(-50%,-50%) rotate(90deg) scale(1.14);
+    animation:heroZoomOut 22s ease-out forwards}
+  @keyframes heroZoomOut{
+    from{transform:translate(-50%,-50%) rotate(90deg) scale(1.14)}
+    to  {transform:translate(-50%,-50%) rotate(90deg) scale(1)}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-img{animation:none;transform:translate(-50%,-50%) rotate(90deg) scale(1)}
+  }
+  .hero-inner{width:100%;padding-top:clamp(6rem,14vh,9rem);padding-bottom:clamp(2.8rem,7vh,5rem)}
+  .hero-eyebrow{font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--gilt-soft);text-shadow:0 1px 12px rgba(0,0,0,.45)}
+  .hero-title{margin:clamp(1.1rem,2.6vw,1.6rem) 0 0;font-size:clamp(2.5rem,1.6rem + 3.8vw,4.4rem);
+    line-height:1.05;letter-spacing:-.012em;color:#fff;max-width:36ch}
+  .hero-sub{font-family:var(--serif);color:#fff;max-width:64ch;margin-top:1.5rem;
+    font-size:clamp(1rem,.72rem + .48vw,1.14rem);line-height:1.7;text-shadow:0 1px 14px rgba(0,0,0,.5)}
+  .hero .btn-row{margin-top:2.1rem}
+  /* slim epigraph row that sits under the spec strip (keeps the hero itself clean, Monolith-style) */
+  .epigraph-row{background:var(--paper);padding-block:clamp(2.4rem,5vw,3.6rem)}
+  .epigraph-row blockquote{margin:0;max-width:60ch}
+  .epigraph-row p{font-family:var(--display);font-style:italic;font-size:clamp(1.2rem,1rem + 1vw,1.7rem);
+    line-height:1.42;color:var(--ink);margin:0}
+  .epigraph-row cite{display:block;margin-top:.9rem;font-family:var(--sans);font-style:normal;
+    font-size:.66rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gilt)}
+  @media(min-width:900px){
+    .hero-title{font-size:clamp(3rem,1rem + 3.4vw,4.4rem);max-width:34ch}
+    .hero-sub{max-width:60ch}
+  }
+
+  /* ---------- generic two-col ---------- */
+  .split{display:grid;gap:clamp(2rem,5vw,4rem);align-items:start}
+  @media(min-width:860px){.split{grid-template-columns:1fr 1fr}
+    .split--textFirst .col-media{order:2}
+    .split--wideText{grid-template-columns:1.05fr .95fr}
+  }
+  .col-media,.col-text{min-width:0}
+
+  /* ---------- benchmark / provenance strip (Monolith spec band) ---------- */
+  .provenance{background:var(--limestone);border-block:1px solid var(--hair)}
+  .provenance .wrap{padding-block:clamp(2rem,4.5vw,3.2rem)}
+  .prov-grid{display:grid;grid-template-columns:1fr;gap:0}
+  .prov-grid > div{padding:clamp(1.1rem,2.6vw,1.5rem) 0;border-top:1px solid var(--hair)}
+  .prov-grid > div:first-child{border-top:0}
+  .prov-grid .val{font-family:var(--display);font-weight:500;font-size:clamp(1.9rem,1.4rem + 1.4vw,2.5rem);line-height:1;letter-spacing:-.01em}
+  .prov-grid .lab{font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--graphite);margin-top:.7rem}
+  @media(min-width:680px){
+    .prov-grid{grid-template-columns:repeat(2,1fr);column-gap:clamp(2rem,6vw,5rem);row-gap:clamp(1.4rem,3vw,2rem)}
+    .prov-grid > div{border-top:0;padding-block:0}
+  }
+  @media(min-width:1000px){
+    .prov-grid{grid-template-columns:repeat(4,1fr)}
+  }
+  .represented{margin-top:clamp(2rem,4vw,3rem);display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:baseline}
+  .represented .who{font-family:var(--display);font-size:clamp(1.05rem,1.5vw,1.35rem);font-style:italic}
+  .represented .sep{color:var(--gilt);font-size:.8rem}
+  /* roster of image-filled circles */
+  .roster{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.6rem,4vw,2.6rem) clamp(1.2rem,3vw,2rem)}
+  .roster__head{grid-column:1/-1;text-align:center;margin-bottom:clamp(.9rem,2.4vw,1.8rem)}
+  .roster .rfig{margin:0}
+  .roster .disc{position:relative;display:block;width:100%;aspect-ratio:1;border-radius:50%;overflow:hidden;
+    background:radial-gradient(120% 120% at 32% 20%,#efe9dd,#d8cdb8);box-shadow:0 24px 54px -26px rgba(27,24,19,.55)}
+  .roster .disc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .roster .disc::after{content:"";position:absolute;inset:0;border-radius:50%;z-index:3;
+    box-shadow:inset 0 0 0 1px rgba(154,123,67,.45);pointer-events:none;transition:box-shadow .4s ease}
+  .roster .rname{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:0 14%;color:#fff;font-family:var(--display);font-weight:500;
+    font-size:clamp(1.05rem,2.2vw,1.7rem);line-height:1.14;letter-spacing:.01em;
+    text-shadow:0 1px 16px rgba(0,0,0,.65),0 1px 3px rgba(0,0,0,.55);
+    background:radial-gradient(circle at 50% 50%,rgba(0,0,0,.52) 0%,rgba(0,0,0,.3) 46%,rgba(0,0,0,.08) 70%,transparent 82%)}
+  .roster .rfig:hover .disc img{transform:scale(1.06)}
+  .roster .rfig:hover .disc::after{box-shadow:inset 0 0 0 2px rgba(154,123,67,.8)}
+  .roster .disc.noimg img{display:none}
+  .roster .disc.noimg::before{content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(60% 60% at 50% 42%,rgba(154,123,67,.16),transparent 60%),
+      repeating-linear-gradient(45deg,rgba(154,123,67,.10) 0 2px,transparent 2px 12px)}
+  @media(min-width:620px){.roster{grid-template-columns:repeat(3,1fr)}}
+  @media(min-width:1000px){.roster{grid-template-columns:repeat(3,1fr);max-width:1080px;margin-inline:auto;
+    column-gap:clamp(1.8rem,3vw,2.6rem);row-gap:clamp(2rem,4vw,3rem)}}
+
+  /* ---------- four jobs (editorial numbered cards) ---------- */
+  #architecture .plate-label{justify-content:center}
+  #architecture .plate-label .ln{display:none}
+  .arch-head{max-width:64ch;margin-inline:auto;text-align:center}
+  .arch-head .body{margin-inline:auto}
+  .arch-close{max-width:74ch;margin-inline:auto;text-align:center;margin-top:clamp(2rem,4vw,3rem)}
+  .jobs{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.6vw,1.3rem);margin-top:clamp(2.2rem,4.5vw,3.4rem)}
+  .job{position:relative;margin:0;padding:clamp(1.6rem,3vw,2.4rem) clamp(1.4rem,2.4vw,2.1rem) clamp(1.6rem,3vw,2.2rem);
+    background:#f8f4ec;border:1px solid var(--hair);border-radius:2px;text-align:left;overflow:hidden;
+    transition:background .5s ease,border-color .5s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+  .job::before{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gilt);
+    transition:width .5s cubic-bezier(.2,.7,.2,1)}
+  .job:hover{background:var(--paper);border-color:rgba(154,123,67,.4);transform:translateY(-2px)}
+  .job:hover::before{width:2px}
+  .job__icon{width:clamp(52px,4.8vw,68px);height:clamp(52px,4.8vw,68px);color:var(--gilt);
+    display:block;margin-bottom:clamp(1.2rem,2vw,1.6rem);transition:transform .5s cubic-bezier(.2,.7,.2,1),color .5s ease}
+  .job__icon::after{content:""}
+  .job:hover .job__icon{transform:translateY(-2px);color:var(--gilt-soft)}
+  .job h3{font-family:var(--display);font-weight:400;color:var(--ink);letter-spacing:-.005em;
+    font-size:clamp(1.5rem,1rem + 1.2vw,2rem);line-height:1.08;margin:0 0 .8rem;position:relative;padding-bottom:.8rem}
+  .job h3::after{content:"";position:absolute;left:0;bottom:0;width:36px;height:1px;background:var(--hair);transition:width .5s cubic-bezier(.2,.7,.2,1),background .5s ease}
+  .job:hover h3::after{width:64px;background:var(--gilt)}
+  .job__desc{color:var(--graphite);max-width:32ch;margin:0;
+    font-size:clamp(.94rem,.7rem + .32vw,1.02rem);line-height:1.55}
+  @media(min-width:600px){.jobs{grid-template-columns:repeat(2,1fr);gap:clamp(1.1rem,2vw,1.5rem)}}
+  @media(min-width:1080px){.jobs{grid-template-columns:repeat(4,1fr)}
+    .job{padding:clamp(2rem,3.2vw,2.6rem) clamp(1.6rem,2.4vw,2.2rem) clamp(1.8rem,3vw,2.4rem)}}
+
+  /* ---------- CREATE timeline ---------- */
+  .tl{position:relative;margin-top:clamp(2rem,5vw,3.5rem)}
+  .tl::before{content:"";position:absolute;top:0;bottom:0;left:19px;width:1px;background:var(--hair)}
+  .tl-row{position:relative;padding:0 0 clamp(2.2rem,4vw,3.4rem) 3.6rem}
+  .tl-row:last-child{padding-bottom:0}
+  .tl-node{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:999px;
+    background:var(--paper);border:1px solid var(--gilt);display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);font-weight:500;font-size:1.2rem;color:var(--gilt)}
+  .tl-row h3{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.06em;
+    font-size:clamp(1.2rem,1rem + 1vw,1.6rem);margin-bottom:.5rem}
+  .tl-row .outcome{margin-top:.7rem;font-family:var(--sans);font-size:.68rem;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--gilt)}
+  @media(min-width:900px){
+    .tl::before{left:50%}
+    .tl-row{width:50%;padding:0 0 clamp(2.6rem,4vw,4rem) 0}
+    .tl-row .tl-inner{padding-right:3.2rem;text-align:right}
+    .tl-row:nth-child(even){margin-left:50%}
+    .tl-row:nth-child(even) .tl-inner{padding-right:0;padding-left:3.2rem;text-align:left}
+    .tl-node{left:auto;right:-20px}
+    .tl-row:nth-child(even) .tl-node{right:auto;left:-20px}
+    .tl-row .body{max-width:none}
+  }
+
+  /* ---------- CREATE tiles (URS-style vertical image cards) ---------- */
+  .create-tiles{margin-top:clamp(2rem,5vw,3.5rem);
+    width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
+    display:grid;grid-template-columns:1fr;gap:0}
+  .ct{position:relative;aspect-ratio:3/4;overflow:hidden;display:block;isolation:isolate;
+    color:#fff}
+  .ct-art{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+  .ct::before{content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(43,71,124,.62) 0%,rgba(35,58,102,.58) 55%,rgba(23,36,66,.72) 100%);
+    mix-blend-mode:multiply}
+  .ct::after{content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.02) 40%,rgba(0,0,0,.55) 100%)}
+  .ct-body{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-start;
+    padding:clamp(1.6rem,3vw,2.4rem)}
+  .ct-letter{font-family:var(--display);font-weight:500;font-size:clamp(1rem,1.4vw,1.15rem);
+    letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:.9rem}
+  .ct-title{font-family:var(--display);font-weight:400;color:#fff;letter-spacing:-.005em;
+    font-size:clamp(2rem,1.4rem + 2.4vw,3rem);line-height:1.02;margin:0 0 1.1rem;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+  .ct-title::after{content:"";display:block;width:44px;height:1px;background:rgba(255,255,255,.7);margin-top:1rem}
+  .ct-desc{font-family:var(--sans);font-size:clamp(.86rem,.7rem + .3vw,.98rem);line-height:1.55;
+    color:rgba(255,255,255,.9);max-width:32ch;margin:0}
+  .ct-meta{position:absolute;left:clamp(1.6rem,3vw,2.4rem);bottom:clamp(1.2rem,2.4vw,1.8rem);z-index:2;
+    font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+    color:rgba(255,255,255,.82);display:flex;align-items:center;gap:.55rem}
+  .ct-meta::before{content:"";width:6px;height:6px;border:1px solid rgba(255,255,255,.7);border-radius:50%}
+  .ct:hover .ct-art > .art-scene{transform:scale(1.04)}
+  .art-scene{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+  @media(min-width:640px){.create-tiles{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1000px){.create-tiles{grid-template-columns:repeat(3,1fr)}}
+  @media(min-width:1300px){.create-tiles{grid-template-columns:repeat(6,1fr)}
+    .ct{aspect-ratio:2/5}
+    .ct-title{font-size:clamp(1.6rem,1.6vw,2rem)}
+    .ct-desc{font-size:.84rem}
+  }
+
+  /* ---------- labs (project cards) ---------- */
+  .proj-grid{display:grid;grid-template-columns:1fr;gap:clamp(1.6rem,3vw,2.2rem);margin-top:clamp(2rem,4vw,3rem)}
+  @media(min-width:760px){.proj-grid{grid-template-columns:repeat(3,1fr)}}
+  .proj h3{font-family:var(--display);font-weight:500;font-size:clamp(1.2rem,1.4vw,1.5rem);margin:1rem 0 .4rem}
+  .proj .idx{font-family:var(--sans);font-size:.64rem;font-weight:600;letter-spacing:.2em;color:var(--gilt);text-transform:uppercase}
+  /* show the full book covers inside the square plate (no cropping) */
+  .proj .plate-img{object-fit:contain;object-position:50% 50%;padding:clamp(.6rem,1.4vw,1.1rem)}
+  /* clean white frame, no in-plate caption, no under-image label */
+  .proj .plate{background:#fff;box-shadow:inset 0 0 0 1px var(--hair-soft)}
+  .proj .cap,.proj .idx{display:none}
+  .labcall{position:relative;overflow:hidden;color:var(--ink);
+    margin-top:clamp(2.4rem,5vw,4rem);
+    background:var(--limestone) url('https://dashboard.katalyst-crm.com/files/t1/bggg.png') center/cover no-repeat;
+    border:1px solid var(--hair);border-radius:2px;padding:clamp(1.8rem,4vw,3rem)}
+  .labcall .eyebrow{color:var(--gilt)}
+  .labcall > .body{color:var(--ink) !important}
+  .labcall .hours{display:grid;grid-template-columns:1fr;gap:clamp(1.2rem,2.4vw,1.8rem);margin-top:1.4rem;max-width:52ch}
+  .labcall .hour .t{font-family:var(--display);font-style:italic;color:var(--gilt);font-size:1.15rem;margin-bottom:.3rem}
+  .labcall .hour .body{color:var(--graphite)}
+  .labcall .btn--primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .labcall .btn--primary:hover{background:var(--gilt);color:#fff;border-color:var(--gilt)}
+
+  /* ---------- offers / price sheet ---------- */
+  .steward{background:var(--deep);color:var(--paper);border-radius:2px;
+    padding:clamp(1.8rem,4vw,3rem);margin-bottom:clamp(2.4rem,5vw,3.6rem)}
+  .steward p{font-family:var(--display);font-style:italic;font-size:clamp(1.2rem,1rem + 1vw,1.7rem);
+    line-height:1.45;color:rgba(245,242,236,.9);margin:0}
+  .steward cite{display:block;margin-top:1rem;font-family:var(--sans);font-style:normal;font-size:.64rem;
+    font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gilt-soft)}
+  .steward .note{font-family:var(--serif);font-style:normal;font-size:1.02rem;color:rgba(245,242,236,.72);margin-top:1.4rem}
+  .tiers{border-top:1px solid var(--hair)}
+  .tier{display:grid;grid-template-columns:1fr;gap:.9rem;padding:clamp(1.6rem,3.4vw,2.3rem) 0;border-bottom:1px solid var(--hair);align-items:start}
+  .tier .t-head{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+  .tier h3{font-family:var(--display);font-weight:500;font-size:clamp(1.3rem,1rem + 1.1vw,1.85rem);letter-spacing:.01em}
+  .tier .price{font-family:var(--display);font-weight:300;font-size:clamp(1.5rem,1.2rem + 1.4vw,2.4rem);white-space:nowrap;color:var(--ink);line-height:1}
+  .tier .desc{color:var(--graphite);max-width:62ch}
+  .tier .t-cta{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;margin-top:.6rem}
+  .tier .t-cta .btn{margin-top:0}
+  .tier--feature{background:var(--limestone);margin-inline:calc(-1 * var(--gutter));padding-inline:var(--gutter);border-bottom:1px solid var(--hair)}
+  /* Custom One-on-One tier: photo background, no dark overlay */
+  .tier--custom{position:relative;isolation:isolate;overflow:hidden;color:#fff;
+    background:var(--limestone);
+    margin-inline:calc(-1 * var(--gutter));padding-inline:var(--gutter);padding-block:clamp(1.9rem,3.6vw,2.6rem);
+    border-bottom:1px solid var(--hair);border-top:1px solid var(--hair)}
+  .tier--custom::before{content:"";position:absolute;inset:0;z-index:-2;
+    background:url('https://dashboard.katalyst-crm.com/files/t1/ChatGPT%20Image%20Aug%2026,%202026,%2008_19_56%20PM.png') center/cover no-repeat}
+  /* dark overlay removed per request — legibility carried by text-shadow only */
+  .tier--custom h3{color:#fff;text-shadow:0 1px 18px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.65)}
+  .tier--custom .price{color:#fff;text-shadow:0 1px 18px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.65)}
+  .tier--custom .desc{color:#fff;text-shadow:0 1px 18px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.65)}
+  .tier--custom .btn{background:transparent;color:#fff;border-color:rgba(255,255,255,.85);text-shadow:0 1px 6px rgba(0,0,0,.5)}
+  .tier--custom .btn:hover{background:#fff;color:var(--ink);border-color:#fff;text-shadow:none}
+  /* §7 Action Labs: centered wider header */
+  .labs-sec .plate-label{justify-content:center}
+  .labs-sec .plate-label .ln{display:none}
+  .labs-head{max-width:none;text-align:center}
+  .labs-head .body{margin-inline:auto;max-width:64ch}
+  @media(min-width:820px){
+    .tier{grid-template-columns:minmax(0,1fr) auto;column-gap:clamp(2rem,5vw,4rem);row-gap:1rem}
+    .tier .t-body{grid-column:1;grid-row:2}
+    .tier .t-head{grid-column:1;grid-row:1}
+    .tier .t-cta{grid-column:2;grid-row:1 / span 2;align-self:center;justify-self:center;margin-top:0;text-align:center}
+    .tier .t-cta .btn{min-width:14rem}
+  }
+
+  /* ---------- dark band (floor test) ---------- */
+  .band-dark{background:var(--deep);color:var(--paper)}
+  .band-dark .plate-label .nm{color:rgba(245,242,236,.6)}
+  .band-dark .plate-label .ln{background:rgba(245,242,236,.2)}
+  .band-dark .h-section{color:#f6f2ea}
+  .band-dark .body{color:rgba(245,242,236,.72)}
+  /* §9 floor test: background image */
+  .floor-bg{position:relative;overflow:hidden}
+  .floor-bg::before{content:"";position:absolute;inset:0;z-index:0;
+    background:url('https://dashboard.katalyst-crm.com/files/t1/f8832bec70dea88c89db6db27aa8d17f_LE_upscale_gentle.jpg') center/cover no-repeat}
+  .floor-bg::after{content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(21,18,14,.82) 0%,rgba(21,18,14,.72) 50%,rgba(21,18,14,.84) 100%)}
+  .floor-bg > .wrap{position:relative;z-index:2}
+  .pull{font-family:var(--display);font-style:italic;font-weight:400;
+    font-size:clamp(1.5rem,1.1rem + 2vw,2.6rem);line-height:1.28;color:#f6f2ea;
+    max-width:24ch;margin:clamp(1.8rem,4vw,2.8rem) 0}
+  .band-dark .pull{color:var(--gilt-soft)}
+  /* mission pull (§11 close): centered and wide */
+  .mission-pull{max-width:none;margin-top:clamp(2.4rem,5vw,3.6rem);text-align:center}
+  .mission-pull .pull{max-width:52ch;margin:0 auto}
+  /* read-more collapsible */
+  .readmore{padding:0;border:0;background:transparent}
+  .readmore > summary{list-style:none;cursor:pointer;
+    display:inline-flex;align-items:center;gap:.7rem;
+    font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink);padding:.9rem 1.5rem;border:1px solid var(--ink);border-radius:2px;
+    transition:background .3s ease,color .3s ease}
+  .readmore > summary::-webkit-details-marker{display:none}
+  .readmore > summary::marker{content:""}
+  .readmore > summary:hover{background:var(--ink);color:var(--paper)}
+  .readmore .readmore__label--expanded{display:none}
+  .readmore[open] > summary .readmore__label--collapsed{display:none}
+  .readmore[open] > summary .readmore__label--expanded{display:inline}
+  .readmore__icon{width:9px;height:9px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+    transform:rotate(45deg) translate(-2px,-2px);transition:transform .35s cubic-bezier(.2,.7,.2,1);display:inline-block}
+  .readmore[open] > summary .readmore__icon{transform:rotate(-135deg) translate(-2px,-2px)}
+  .readmore__body{margin-top:clamp(1.4rem,3vw,2rem)}
+  .readmore__body > p{margin-bottom:.9em}
+  .readmore__body > p:last-child{margin-bottom:0}
+  .mission-byline{margin-top:1.2rem;color:var(--gilt)}
+  /* §4 Parks: pull + lede moved to right column under the photo */
+  .parks-pull{font-size:clamp(1.35rem,1rem + 1vw,1.9rem);line-height:1.28;max-width:none;margin-block:clamp(1.4rem,2.6vw,1.8rem) .5rem}
+  .parks-lede{font-family:var(--display);font-size:clamp(1.1rem,.9rem + .7vw,1.3rem);line-height:1.42;color:var(--graphite);max-width:none;margin:0}
+  .parks-close{margin-top:clamp(1.4rem,3vw,2rem)}
+  .parks-close p{margin-bottom:.5em}
+  .parks-close p:last-child{margin-bottom:0}
+
+  /* ---------- FAQ (collapsible) ---------- */
+  .faq{border-top:1px solid var(--hair);margin-top:clamp(1.6rem,3vw,2.4rem)}
+  .faq-item{border-bottom:1px solid var(--hair)}
+  .faq-item summary{display:flex;align-items:baseline;justify-content:space-between;gap:1.2rem;
+    padding:clamp(1.3rem,2.8vw,1.9rem) 0;cursor:pointer;list-style:none;
+    font-family:var(--serif);font-weight:400;font-size:clamp(1.06rem,.8rem + .6vw,1.22rem);
+    color:var(--ink);line-height:1.36;-webkit-user-select:none;user-select:none}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::marker{display:none;content:""}
+  .faq-item summary .fq-plus{flex:none;width:22px;height:22px;position:relative;
+    border:1px solid var(--hair);border-radius:50%;transition:transform .35s ease}
+  .faq-item summary .fq-plus::before,.faq-item summary .fq-plus::after{
+    content:"";position:absolute;background:var(--graphite);top:50%;left:50%;transform:translate(-50%,-50%)}
+  .faq-item summary .fq-plus::before{width:10px;height:1.2px}
+  .faq-item summary .fq-plus::after{width:1.2px;height:10px;transition:height .3s ease,opacity .3s ease}
+  .faq-item[open] summary .fq-plus{transform:rotate(90deg)}
+  .faq-item[open] summary .fq-plus::after{height:0;opacity:0}
+  .faq-item .a{color:var(--graphite);max-width:68ch;padding:0 0 clamp(1.3rem,2.6vw,1.8rem);line-height:1.65}
+  .faq-head{max-width:none}
+
+  /* ---------- closing (editorial resonance) ---------- */
+  .closing{position:relative;isolation:isolate;overflow:hidden;
+    background:linear-gradient(160deg,#26221c,#0f0d0a);color:#f7f3ec;text-align:center;
+    padding-block:clamp(4rem,10vw,7.5rem)}
+  .closing::before{content:"";position:absolute;inset:0;z-index:-2;
+    background:url('https://dashboard.katalyst-crm.com/files/t1/d00aac267c1e363c6312e3371b6ae0ba.jpg') center/cover no-repeat}
+  .closing::after{content:"";position:absolute;inset:0;z-index:-1;
+    background:
+      radial-gradient(120% 80% at 50% 50%,rgba(14,11,8,.12) 0%,rgba(14,11,8,.32) 70%,rgba(14,11,8,.46) 100%),
+      linear-gradient(180deg,rgba(14,11,8,.22) 0%,rgba(14,11,8,.10) 40%,rgba(14,11,8,.38) 100%)}
+  .closing .wrap{max-width:900px}
+  .closing-mark{font-family:var(--sans);font-size:.66rem;font-weight:600;letter-spacing:.4em;
+    text-transform:uppercase;color:var(--gilt-soft);display:inline-flex;align-items:center;gap:1rem;margin:0 auto}
+  .closing-mark::before,.closing-mark::after{content:"";width:38px;height:1px;background:rgba(183,154,99,.5)}
+  .closing-heading{margin:0 auto;font-family:var(--display);font-weight:400;
+    color:#faf5eb;line-height:1.06;letter-spacing:-.008em;
+    font-size:clamp(2.2rem,1.4rem + 3.6vw,4rem);max-width:22ch;
+    text-shadow:0 2px 30px rgba(0,0,0,.85),0 1px 4px rgba(0,0,0,.7)}
+  .closing-heading span{display:block}
+  .closing-heading .a{font-style:normal}
+  .closing-heading .b{font-style:italic;color:#faf5eb;margin-top:.35em;position:relative;padding-top:.6em}
+  .closing-heading .b::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:56px;height:1px;background:rgba(255,255,255,.55)}
+  .closing-sub{font-family:var(--sans);font-style:normal;color:#faf5eb;
+    font-size:clamp(1rem,.75rem + .55vw,1.18rem);line-height:1.6;letter-spacing:.005em;
+    max-width:52ch;margin:clamp(2rem,4vw,2.8rem) auto 0;text-shadow:0 1px 18px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.6)}
+  .closing-cta{margin:clamp(2rem,4vw,2.8rem) auto 0;display:inline-flex}
+  .closing-cta .btn{background:#faf5eb;color:var(--ink);border-color:#faf5eb;padding:1.15rem 2.4rem;letter-spacing:.22em}
+  .closing-cta .btn:hover{background:var(--gilt-soft);border-color:var(--gilt-soft);color:var(--deep)}
+  .closing-sig{margin-top:clamp(3rem,6vw,4.2rem);font-family:var(--display);font-style:italic;
+    color:#faf5eb;font-size:1.05rem;letter-spacing:.02em;text-shadow:0 1px 14px rgba(0,0,0,.7)}
+  .closing-sig::before{content:"";display:block;width:1px;height:24px;background:rgba(255,255,255,.55);margin:0 auto 1.1rem}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--deep);color:rgba(245,242,236,.72);border-top:1px solid rgba(245,242,236,.12)}
+  .foot{display:grid;gap:1.6rem;padding-block:clamp(2.4rem,5vw,3.4rem)}
+  .foot .brand b{color:#f7f3ec}
+  .foot .brand span{color:var(--gilt-soft)}
+  .foot .tag{font-family:var(--display);font-style:italic;font-size:1.2rem;color:rgba(245,242,236,.86);max-width:34ch}
+  .foot .flinks{display:flex;flex-wrap:wrap;gap:1.2rem;font-family:var(--sans);font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+  .foot .flinks a{color:rgba(245,242,236,.7)}
+  .foot .flinks a:hover{color:var(--gilt-soft)}
+  .foot .cr{font-family:var(--sans);font-size:.66rem;letter-spacing:.06em;color:rgba(245,242,236,.42)}
+  @media(min-width:820px){
+    .foot{grid-template-columns:1fr auto;align-items:end;column-gap:3rem}
+    .foot .brand-block{grid-column:1}
+    .foot .flinks{grid-column:1;grid-row:2}
+    .foot .cr{grid-column:1;grid-row:3}
+    .foot .tag-block{grid-column:2;grid-row:1 / span 3;text-align:right;justify-self:end}
+    .foot .tag{margin-left:auto}
+  }
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto !important}
+    .reveal{opacity:1 !important;transform:none !important;transition:none}
+    .btn,.nav__links a::after,.bignav .arrow{transition:none}
+  }
+  /* JS-off safety net: never hide content */
+  .no-js .reveal{opacity:1 !important;transform:none !important}
+</style>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="nav__in">
+    <a class="brand" href="#top" aria-label="Marcia McCoy — AI for Rookies">
+      <img class="brand__logo brand__logo--white" alt="Marcia McCoy — AI for Rookies"
+        src="https://dashboard.katalyst-crm.com/files/t1/LOGO%20MARCI%CC%87A%20MCCOY.png"
+        onerror="this.closest('.brand').classList.add('logo-failed')">
+      <img class="brand__logo brand__logo--dark" alt="" aria-hidden="true"
+        src="https://dashboard.katalyst-crm.com/files/t1/LOGO%20MARCI%CC%87A%20MCCOY.png"
+        onerror="this.closest('.brand').classList.add('logo-failed')">
+      <b>Marcia&nbsp;McCoy</b><span>AI for Rookies</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#benchmark">The Benchmark</a>
+      <a href="#create">The Method</a>
+      <a href="#labs">The Labs</a>
+      <a href="#offers">Offers</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav__right">
+      <a href="#offers" class="nav__cta">Begin</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="sheet">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="sheet" id="sheet">
+  <a href="#benchmark">The Benchmark</a>
+  <a href="#create">The Method</a>
+  <a href="#labs">The Labs</a>
+  <a href="#offers">Offers</a>
+  <a href="#faq">FAQ</a>
+  <a href="#miracle">The Mission</a>
+  <a href="#offers" class="btn btn--primary">Begin My Ten Steps</a>
+</div>
+
+<main id="top">
+
+  <!-- ============ §1 HERO (full-bleed image) ============ -->
+  <section class="hero" id="hero">
+    <img class="hero-img" src="https://dashboard.katalyst-crm.com/files/t1/ChatGPT%20Image%20Aug%2026,%202026,%2008_19_56%20PM.png" alt="" loading="eager" onerror="this.style.display='none'">
+    <div class="hero-inner wrap">
+      <div class="hero-copy reveal">
+        <h1 class="hero-title h-display">You've Built a Career on Your Craft.<br>Don't Let AI Make You Invisible.</h1>
+        <p class="hero-sub">AI for Rookies is ten steps to get started in one hour: the confidence to use AI as your assistant, without becoming a programmer. You are still the creator. AI is your assistant.</p>
+        <div class="btn-row">
+          <a href="#offers" class="btn btn--primary btn--onDark">Begin My Ten Steps</a>
+          <a href="#offers" class="btn btn--ghost btn--onDark">Get the Free Quick Start Sheet</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- spec strip, directly beneath the hero (Monolith) -->
+  <section class="provenance hero-strip reveal">
+    <div class="wrap">
+      <div class="prov-grid">
+        <div><div class="val">40 Years</div><div class="lab">At the top of the art world</div></div>
+        <div><div class="val">23 Years</div><div class="lab">The Parks exhibition, touring</div></div>
+        <div><div class="val">15 Books</div><div class="lab">Written &amp; self-published</div></div>
+        <div><div class="val">1,000,000</div><div class="lab">Creators — the mission</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ §2 BENCHMARK ============ -->
+  <section class="sec" id="benchmark">
+    <div class="wrap">
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='02'"></span><span class="nm">The Blue-Chip Benchmark</span><span class="ln"></span></div>
+      <div class="split split--wideText">
+        <div class="col-text reveal">
+          <p class="eyebrow">Forty years at the top of the art world</p>
+          <h2 class="h-section" style="margin:.7rem 0 1.4rem">I spent four decades as a global art agent.</h2>
+          <div class="body">
+            <p>I spent four decades as a global art agent, working at the highest level the art world offers. I represented, curated, and promoted work by Joan Miró, Henry Moore, Alexander Calder, Louise Nevelson, Duane Hanson, and my lifelong friend, Gordon Parks.</p>
+            <p>I built collections for Chase Manhattan Bank, Citicorp, and Prudential. I recommended exhibitions to institutions including the Smithsonian. My galleries and exhibitions have been covered in THE Magazine, Pasatiempo, and Journal North.</p>
+            <p>Along the way, I founded FATE, Fine Art Traveling Exhibitions, ran my own gallery in Santa Fe, and self-published fifteen books.</p>
+            <p style="color:var(--ink)">I am not a certified AI coach. I am the person these artists trusted with their legacy. Art is simply where I proved the method first.</p>
+          </div>
+        </div>
+        <div class="col-media reveal">
+          <div class="plate plate--tall">
+            <img class="plate-img" loading="lazy" alt="Forty years at the top of the art world"
+              src="https://dashboard.katalyst-crm.com/files/t1/c33db137-e541-47e5-859d-a6d58c374741.png"
+              onerror="this.style.display='none'">
+          </div>
+        </div>
+      </div>
+
+      <!-- ROSTER: one circle per artist. Name is inside the circle; swap an image by changing its src.
+           Confident: Henry Moore (reclining figure), Duane Hanson (Flea Market Lady), Gordon Parks (portrait).
+           BEST-GUESS (verify): Miró & Calder (now swapped per request), Nevelson.
+           Spare Duane Hanson image: .../142946-duane-hanson-housepainter-i-1984-1988.jpg -->
+      <div class="roster reveal" style="margin-top:clamp(2.4rem,5vw,3.4rem)">
+        <p class="kicker roster__head">Represented, curated &amp; promoted</p>
+
+        <figure class="rfig">
+          <span class="disc">
+            <img loading="lazy" alt="Work attributed to Joan Miró"
+              src="https://dashboard.katalyst-crm.com/files/t1/72.2020_ph_web_2.jpg"
+              onerror="this.closest('.disc').classList.add('noimg')">
+            <span class="rname">Joan Miró</span>
+          </span>
+        </figure>
+
+        <figure class="rfig">
+          <span class="disc">
+            <img loading="lazy" alt="Henry Moore, Large Reclining Figure"
+              src="https://dashboard.katalyst-crm.com/files/t1/BLOG-large-reclining-figure-HMS-BANNER-THIS-ONE-JYZ9532.webp"
+              onerror="this.closest('.disc').classList.add('noimg')">
+            <span class="rname">Henry Moore</span>
+          </span>
+        </figure>
+
+        <figure class="rfig">
+          <span class="disc">
+            <img loading="lazy" alt="Work attributed to Alexander Calder"
+              src="https://dashboard.katalyst-crm.com/files/t1/ad115b8d1200c27baa0720e83455e9fd52ae15ef-1926x1284.jpg"
+              onerror="this.closest('.disc').classList.add('noimg')">
+            <span class="rname">Alexander Calder</span>
+          </span>
+        </figure>
+
+        <figure class="rfig">
+          <span class="disc">
+            <img loading="lazy" alt="The Golden Pearl, 1962 — Louise Nevelson"
+              src="https://dashboard.katalyst-crm.com/files/t1/the-golden-pearl-1962.webp"
+              onerror="this.closest('.disc').classList.add('noimg')">
+            <span class="rname">Louise Nevelson</span>
+          </span>
+        </figure>
+
+        <figure class="rfig">
+          <span class="disc">
+            <img loading="lazy" alt="Duane Hanson, Flea Market Lady, 1990"
+              src="https://dashboard.katalyst-crm.com/files/t1/Flea-Market-Lady-filler-oil-media-Duane-1990.webp"
+              onerror="this.closest('.disc').classList.add('noimg')">
+            <span class="rname">Duane Hanson</span>
+          </span>
+        </figure>
+
+        <figure class="rfig">
+          <span class="disc">
+            <img loading="lazy" alt="Marcia McCoy and Kirk Sharp"
+              src="https://dashboard.katalyst-crm.com/files/t1/Marcia-McCoy-and-Kirk-Sharp.jpg"
+              onerror="this.closest('.disc').classList.add('noimg')">
+            <span class="rname">Gordon Parks</span>
+          </span>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ §3 DILEMMA ============ -->
+  <section class="sec" id="dilemma" style="background:var(--limestone);border-block:1px solid var(--hair)">
+    <div class="wrap">
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='03'"></span><span class="nm">The Visualizer's Dilemma</span><span class="ln"></span></div>
+      <div class="split split--textFirst">
+        <div class="col-text reveal">
+          <h2 class="h-section" style="margin-bottom:1.4rem">Your Work Is Brilliant. Why Is It Still Sitting in Your Studio?</h2>
+          <div class="body">
+            <p>You know the feeling. A blank screen at midnight. A tutorial full of words that were never meant for a creative mind. The quiet dread that the world is moving on without you.</p>
+            <p>I have sat across from hundreds of visionaries with exactly this fear. It is never a lack of talent. It is never a lack of ideas. It is a lack of confidence.</p>
+            <p>When I stepped back from agenting full time, the calls didn't stop. People I'd worked with for decades still wanted me representing them. That's where this began: I realized I could teach them to do for themselves what I used to do for them.</p>
+            <p>Here is the truth I learned agenting: great work sitting in a studio that no one sees serves no one. By my own count, more than half the collections I watched over four decades ended up in storage, or worse, the dump, because no one built a system to share them while there was still time.</p>
+            <p style="color:var(--ink)">People do not need more technology. They need more confidence. That is what AI for Rookies gives you first.</p>
+            <p>I did not learn that lesson in a workshop. I learned it seventeen years ago, in a hospital bed, and I will tell you that story before we are through. For now, know this: confidence is not something you are born with. I have watched people build it in real time. I built mine the same way.</p>
+          </div>
+        </div>
+        <div class="col-media reveal">
+          <div class="plate plate--tall">
+            <img class="plate-img" loading="lazy" alt="The visualizer's dilemma — work sitting in the studio"
+              src="https://dashboard.katalyst-crm.com/files/t1/26a3a783e3b7963cea5c421ac7a91f68_LE_upscale_gentle.jpg"
+              onerror="this.style.display='none'">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ §4 GORDON PARKS ============ -->
+  <section class="sec" id="parks">
+    <div class="wrap">
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='04'"></span><span class="nm">The Gordon Parks Legacy</span><span class="ln"></span></div>
+      <div class="reveal" style="max-width:70ch">
+        <p class="eyebrow">The lesson behind everything I teach</p>
+        <h2 class="h-section" style="margin:.7rem 0 0">What Twenty-Three Years and Seven Hundred Thousand Dollars Taught Me</h2>
+      </div>
+
+      <div class="split split--wideText" style="margin-top:clamp(1rem,2.4vw,1.7rem)">
+        <div class="col-text reveal">
+          <div class="body">
+            <p>For thirty-three years, Gordon Parks was my friend. I built his first traveling exhibition, two hundred photographs that toured and sold out to museums for twenty-three years straight. He never finished high school. He became the first African American photographer to document the Civil Rights Movement for Life magazine, and the first Black director Hollywood ever commissioned, for The Learning Tree and then Shaft.</p>
+            <p>But Gordon had a second life the world refused to see. In his final thirty years, once he finally had the means to stop shooting on the street, he made fine art. Paintings. Drawings. A body of work he considered his truest voice.</p>
+            <p>When his retrospective catalog, Half Past Autumn, came out, it ran three hundred sixty pages. His fine art got twelve of them.</p>
+            <p>I spent twenty-three years and seven hundred thousand dollars of my own money trying to change that. Contracts. Gallery meetings. Museum pitches, one slow negotiation at a time. Gordon passed at ninety-three, in the middle of our launch, still believing the world had never fully accepted him as an artist.</p>
+            <p>I could not move fast enough back then. Every step was manual, and manual takes decades.</p>
+          </div>
+        </div>
+        <div class="col-media reveal">
+          <div class="plate plate--wide">
+            <img class="plate-img" loading="lazy" alt="Gordon Parks with Marcia McCoy — courtesy of Robert Hale"
+              style="object-position:center"
+              src="https://dashboard.katalyst-crm.com/files/t1/Portrait-of-Gordon-Parks-and-Marcia-McCoy-c.-Courtesy-of-Robert-Hale.jpg"
+              onerror="this.style.display='none'">
+          </div>
+          <div style="display:flex;gap:clamp(1.5rem,4vw,2.5rem);margin-top:clamp(1.4rem,3vw,2rem);flex-wrap:wrap">
+            <div>
+              <div class="h-section" style="font-size:clamp(2rem,3.6vw,3rem);color:var(--gilt)">23 yrs</div>
+              <div class="kicker" style="color:var(--graphite);margin-top:.4rem">Of my life</div>
+            </div>
+            <div>
+              <div class="h-section" style="font-size:clamp(2rem,3.6vw,3rem);color:var(--gilt)">$700,000</div>
+              <div class="kicker" style="color:var(--graphite);margin-top:.4rem">Of my own money</div>
+            </div>
+          </div>
+          <p class="pull parks-pull" style="color:var(--ink);margin-top:clamp(1.6rem,3vw,2.2rem)">If I had the tools I have now, his voice would have reached millions while he was still here to see it.</p>
+          <p class="lede parks-lede">That is the lesson behind everything I teach. Speed is not vanity. Speed is how a life's work gets seen in a life.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ §5 ARCHITECTURE ============ -->
+  <section class="sec arch" id="architecture" style="background:var(--limestone);border-block:1px solid var(--hair)">
+    <div class="wrap">
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='05'"></span><span class="nm">The Agent's Architecture</span><span class="ln"></span></div>
+      <div class="reveal arch-head">
+        <h2 class="h-section" style="margin-bottom:1.2rem">Your Automated Agent Team</h2>
+        <p class="body">For forty years, my job had four parts. I used to do all four by hand: hundreds of calls, plane tickets, contracts drafted at midnight. AI for Rookies teaches you to agent for yourself. The same four jobs, automated.</p>
+      </div>
+
+      <div class="jobs reveal">
+        <div class="job">
+          <svg class="job__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 5 L41 14 L41 34 L24 43 L7 34 L7 14 Z"/>
+            <path d="M7 14 L24 23 L41 14"/>
+            <path d="M24 23 L24 43"/>
+            <path d="M15.5 9.5 L32.5 18.5"/>
+          </svg>
+          <h3>Package</h3>
+          <p class="job__desc">Package the work so it stands out.</p>
+        </div>
+        <div class="job">
+          <svg class="job__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="24" cy="24" r="17"/>
+            <path d="M7 24 L41 24"/>
+            <path d="M24 7 C29 12.5 31.5 18 31.5 24 C31.5 30 29 35.5 24 41 C19 35.5 16.5 30 16.5 24 C16.5 18 19 12.5 24 7 Z"/>
+            <path d="M11 14.5 C15 17 19.4 18.4 24 18.4 C28.6 18.4 33 17 37 14.5"/>
+            <path d="M11 33.5 C15 31 19.4 29.6 24 29.6 C28.6 29.6 33 31 37 33.5"/>
+          </svg>
+          <h3>Connect</h3>
+          <p class="job__desc">Connect it to the people already looking for it, across languages and borders.</p>
+        </div>
+        <div class="job">
+          <svg class="job__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="12" width="38" height="24" rx="2"/>
+            <circle cx="24" cy="24" r="6.5"/>
+            <path d="M24 20 L24 28 M20 22 L28 22 M20 26 L28 26"/>
+            <circle cx="11" cy="18" r="1"/>
+            <circle cx="37" cy="30" r="1"/>
+          </svg>
+          <h3>Set&nbsp;Up the Money</h3>
+          <p class="job__desc">Set up the money so it flows without you chasing invoices.</p>
+        </div>
+        <div class="job">
+          <svg class="job__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="24" cy="16" r="5.5"/>
+            <path d="M13 37 C13 30.5 17.9 26.5 24 26.5 C30.1 26.5 35 30.5 35 37"/>
+            <circle cx="10" cy="20" r="4"/>
+            <path d="M4 36 C4 31 5.8 28 9 27.4"/>
+            <circle cx="38" cy="20" r="4"/>
+            <path d="M44 36 C44 31 42.2 28 39 27.4"/>
+          </svg>
+          <h3>Build Community</h3>
+          <p class="job__desc">Build a community around it, so the energy compounds instead of fading.</p>
+        </div>
+      </div>
+
+      <div class="reveal arch-close body">
+        <p>Not a marketing agency. Not a technical platform. Call it a gallery assistant, an ops team, a chief of staff, whatever your world calls the person who handles everything so you don't have to. The four jobs don't change. It works in the background while you stay focused on the one thing no software can do: create.</p>
+        <p style="color:var(--ink)">That is your automated agent team, built to make sure your work is never invisible again. Here is exactly how it works.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ §6 CREATE (timeline) ============ -->
+  <section class="sec" id="create">
+    <div class="wrap">
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='06'"></span><span class="nm">The C.R.E.A.T.E. System</span><span class="ln"></span></div>
+      <div class="reveal" style="max-width:66ch">
+        <p class="eyebrow">The same six moves I make every time</p>
+        <h2 class="h-section" style="margin:.7rem 0 1.1rem">The C.R.E.A.T.E. Framework</h2>
+        <p class="body">Six steps, condensed into an order anyone can follow. No coding. No jargon you have to decode alone, because I already decoded it for you.</p>
+      </div>
+
+      <div class="create-tiles reveal">
+
+        <!-- C · Clarity — a curator standing before a single spotlit framed work -->
+        <article class="ct">
+          <div class="ct-art"><img class="art-scene" loading="lazy" alt="C — Clarity" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091709_c48371e3-7a5d-4134-b5ff-a4f3c9bac565.png"></div>
+          <div class="ct-body">
+            <div class="ct-letter">C</div>
+            <h3 class="ct-title">Clarity</h3>
+            <p class="ct-desc">Get clear on your purpose and exactly who you are speaking to.</p>
+          </div>
+          <div class="ct-meta">I can do this.</div>
+        </article>
+
+        <!-- R · Respond — curator briefing an assistant (two figures at a desk) -->
+        <article class="ct">
+          <div class="ct-art"><img class="art-scene" loading="lazy" alt="R — Respond" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091718_9e077053-fd1e-4e28-aab1-19122981df2b.png"></div>
+          <div class="ct-body">
+            <div class="ct-letter">R</div>
+            <h3 class="ct-title">Respond</h3>
+            <p class="ct-desc">Talk with AI the way you'd brief a smart assistant — conversationally, in plain language.</p>
+          </div>
+          <div class="ct-meta">I know how to ask.</div>
+        </article>
+
+        <!-- E · Expand — a rack of many framed works multiplying out from one -->
+        <article class="ct">
+          <div class="ct-art"><img class="art-scene" loading="lazy" alt="E — Expand" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091727_9e8f7f6b-8612-4f27-8710-31f9650e50df.png"></div>
+          <div class="ct-body">
+            <div class="ct-letter">E</div>
+            <h3 class="ct-title">Expand</h3>
+            <p class="ct-desc">Turn one idea into many: a book, a course, a year of content.</p>
+          </div>
+          <div class="ct-meta">My ideas are becoming real.</div>
+        </article>
+
+        <!-- A · Apply — an artist at an easel in a working studio -->
+        <article class="ct">
+          <div class="ct-art"><img class="art-scene" loading="lazy" alt="A — Apply" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091739_69289fe9-e38c-4d76-9889-3e79b4350e27.png"></div>
+          <div class="ct-body">
+            <div class="ct-letter">A</div>
+            <h3 class="ct-title">Apply</h3>
+            <p class="ct-desc">Put AI to work inside your actual business, not just your imagination.</p>
+          </div>
+          <div class="ct-meta">How I work now.</div>
+        </article>
+
+        <!-- T · Teach & Tell — gallery opening: figures viewing framed works on a lit wall -->
+        <article class="ct">
+          <div class="ct-art"><img class="art-scene" loading="lazy" alt="T — Teach & Tell" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091747_d8d6b0d9-bca2-480c-94fc-51107691813d.png"></div>
+          <div class="ct-body">
+            <div class="ct-letter">T</div>
+            <h3 class="ct-title">Teach &amp; Tell</h3>
+            <p class="ct-desc">Share what you've made. Build visibility. Build your community.</p>
+          </div>
+          <div class="ct-meta">People are finding me.</div>
+        </article>
+
+        <!-- E · Evolve — a long museum corridor receding to a lit vanishing point -->
+        <article class="ct">
+          <div class="ct-art"><img class="art-scene" loading="lazy" alt="E — Evolve" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091757_8de74051-0a15-470a-96eb-9d8d559a219b.png"></div>
+          <div class="ct-body">
+            <div class="ct-letter">E</div>
+            <h3 class="ct-title">Evolve</h3>
+            <p class="ct-desc">Refine your systems. Keep creating. Protect what you build for the long run.</p>
+          </div>
+          <div class="ct-meta">My work keeps growing.</div>
+        </article>
+      </div>
+
+      <p class="reveal lede" style="max-width:52ch;margin:clamp(2rem,4vw,3rem) auto 0;text-align:center">You remain the storyteller through every step. AI simply moves faster than I ever could by hand.</p>
+    </div>
+  </section>
+
+  <!-- ============ §7 ACTION LABS ============ -->
+  <section class="sec labs-sec" id="labs" style="background:var(--paper)">
+    <div class="wrap">
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='07'"></span><span class="nm">The Action Labs</span><span class="ln"></span></div>
+      <div class="reveal labs-head">
+        <h2 class="h-section" style="margin-bottom:1.1rem">Proof, Live: My Own Legacy Projects</h2>
+        <p class="body">I am not teaching you theory. I am showing you my own work, in progress, in real time. These are three of my Ten Legacy Projects, the ones I can show you live.</p>
+      </div>
+
+      <div class="proj-grid">
+        <article class="proj reveal">
+          <div class="plate plate--sq">
+            <img class="plate-img" loading="lazy" alt="Gordon Parks: Images From the Soul"
+              src="https://dashboard.katalyst-crm.com/files/t1/ChatGPT%20Image%20Aug%2027,%202026,%2003_24_35%20PM.png"
+              onerror="this.style.display='none'">
+            <span class="cap">Legacy Project I</span>
+          </div>
+          <span class="idx">Legacy Project 01</span>
+          <h3>Gordon Parks: Images From the Soul</h3>
+          <p class="body">Preserving and finally sharing his last body of art with the world.</p>
+        </article>
+
+        <article class="proj reveal">
+          <div class="plate plate--sq">
+            <img class="plate-img" loading="lazy" alt="Sacred and Sonic Geometry"
+              src="https://dashboard.katalyst-crm.com/files/t1/ChatGPT%20Image%20Aug%2027,%202026,%2003_24_43%20PM.png"
+              onerror="this.style.display='none'">
+            <span class="cap">Legacy Project II</span>
+          </div>
+          <span class="idx">Legacy Project 02</span>
+          <h3>Sacred &amp; Sonic Geometry</h3>
+          <p class="body">Turning a lifetime of amphitheaters, architectural sound chambers, and my 432Hz sound tour into one living archive.</p>
+        </article>
+
+        <article class="proj reveal">
+          <div class="plate plate--sq">
+            <img class="plate-img" loading="lazy" alt="Pictish Time Walkers"
+              src="https://dashboard.katalyst-crm.com/files/t1/ChatGPT%20Image%20Aug%2027,%202026,%2003_24_50%20PM.png"
+              onerror="this.style.display='none'">
+            <span class="cap">Legacy Project III</span>
+          </div>
+          <span class="idx">Legacy Project 03</span>
+          <h3>Pictish Time Walkers</h3>
+          <p class="body">Carrying ancient storytelling forward through books, exhibitions, and digital media.</p>
+        </article>
+      </div>
+
+      <div class="labcall reveal">
+        <p class="eyebrow">Join a four-hour Interactive Group Lab</p>
+        <p class="body" style="margin-top:.8rem;color:var(--ink)">The method doesn't care what you're building. Mine happened to be museum-grade art. Yours might be a business, a book, a brand. Same six moves. Watch it happen.</p>
+        <div class="hours">
+          <div class="hour">
+            <div class="t">The first hour</div>
+            <p class="body">I demonstrate AI completing real steps on one of these projects.</p>
+          </div>
+          <div class="hour">
+            <div class="t">The second hour is yours</div>
+            <p class="body">Bring your own vision, and we work it together.</p>
+          </div>
+        </div>
+        <div class="btn-row"><a href="#offers" class="btn btn--primary">Join a Lab</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ §8 OFFERS ============ -->
+  <section class="sec" id="offers">
+    <div class="wrap">
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='08'"></span><span class="nm">The Chosen Offers</span><span class="ln"></span></div>
+      <div class="reveal" style="max-width:64ch">
+        <h2 class="h-section" style="margin-bottom:1.1rem">Choose Your Starting Point</h2>
+      </div>
+
+      <div class="steward reveal">
+        <p>“Skip the digital noise. Learn the first ten things that actually matter, and start actualizing your vision in less than an hour.”</p>
+        <cite>Marcia McCoy, Founder AI for Rookies</cite>
+        <p class="note">I still hold Gordon Parks's last unpublished body of work as its steward today. That's the kind of trust I've built a career on, and it's the same trust I'm asking you to place in this system. Every tier here does one job: get you moving today. No scarcity timers. No confusing bundles. Just a clear, fair staircase from your first free step to working directly with me.</p>
+      </div>
+
+      <div class="tiers">
+        <div class="tier tier--feature reveal">
+          <div class="t-head">
+            <h3>Start Free</h3>
+          </div>
+          <div class="t-body"><p class="desc">The Quick Start Sheet, fifteen beginner prompts, and one hundred prompts organized by topic.</p></div>
+          <div class="t-cta">
+            <span class="price">$0</span>
+            <a href="#" class="btn btn--primary">Get the Free Resources</a>
+          </div>
+        </div>
+
+        <div class="tier reveal">
+          <div class="t-head">
+            <h3>The Artist Agent Playbook &amp; Workbook</h3>
+          </div>
+          <div class="t-body"><p class="desc">My core book and its companion workbook. Everything you need to take your first ten steps, plus the one-page contract that protected my own rights for decades — the one I call my Cover Your Ass contract.</p></div>
+          <div class="t-cta">
+            <span class="price">$47</span>
+            <a href="#" class="btn btn--ghost">Get the Playbook Bundle</a>
+          </div>
+        </div>
+
+        <div class="tier reveal">
+          <div class="t-head">
+            <h3>The 1-Hour Mini Course</h3>
+          </div>
+          <div class="t-body"><p class="desc">A fast, guided video walkthrough of the entire system.</p></div>
+          <div class="t-cta">
+            <span class="price">$249</span>
+            <a href="#" class="btn btn--ghost">Start the Course</a>
+          </div>
+        </div>
+
+        <div class="tier reveal">
+          <div class="t-head">
+            <h3>The Complete AI Starter Bundle</h3>
+          </div>
+          <div class="t-body"><p class="desc">Book, workbook, and course together, at ten percent off.</p></div>
+          <div class="t-cta">
+            <span class="price">$266</span>
+            <a href="#" class="btn btn--ghost">Get the Full Bundle</a>
+          </div>
+        </div>
+
+        <div class="tier reveal">
+          <div class="t-head">
+            <h3>Interactive Group Labs</h3>
+          </div>
+          <div class="t-body"><p class="desc">Four hours live. Watch me build. Then build your own, with my help.</p></div>
+          <div class="t-cta">
+            <span class="price">$497</span>
+            <a href="#" class="btn btn--ghost">Join a Lab</a>
+          </div>
+        </div>
+
+        <div class="tier tier--custom reveal">
+          <div class="t-head">
+            <h3>Custom One-on-One</h3>
+          </div>
+          <div class="t-body"><p class="desc">Direct, private work with me. Scope built around your specific project.</p></div>
+          <div class="t-cta">
+            <span class="price">From $2,500</span>
+            <a href="#" class="btn btn--ghost">Apply for a Consultation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ §9 GALLERY FLOOR TEST ============ -->
+  <section class="sec band-dark floor-bg" id="floortest">
+    <div class="wrap">
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='09'"></span><span class="nm">The Gallery Floor Test</span><span class="ln"></span></div>
+      <div class="split split--wideText">
+        <div class="col-text reveal">
+          <h2 class="h-section" style="margin-bottom:1.4rem">Here's How I Decide Who This Is Really For</h2>
+          <div class="body">
+            <p>For years, I curated the openings I was proudest of in a black t-shirt and blue jeans, sweeping the floor before the doors opened. Nobody in the room knew I was the curator. That was the point. The work was never about me.</p>
+            <p>That's still the test I use, and it was never about résumés or how confident you already felt walking in the door. It comes down to one thing: whether you're willing to do the quiet, unglamorous work before anyone is watching, because the work itself is the only thing that ever actually gets you seen. This isn't about the confidence you already have. It's about whether you're willing to start without it.</p>
+            <p>If you're still waiting for permission, a mentor, a committee, the right moment, this isn't your studio yet. If you're ready to start sweeping your own floor today, whether or not you've done it before, AI for Rookies is built for you.</p>
+          </div>
+        </div>
+        <div class="col-media reveal">
+          <p class="pull">There are those who talk the talk, and those who walk the walk. I only work with the second.</p>
+          <div class="body">
+            <p>At my own openings, I was the best kept secret in the room while the artists got the recognition. Not anymore. This is me stepping out from behind the gallery wall, and it's your invitation to do the same, whatever you're building.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ §10 FAQ ============ -->
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='10'"></span><span class="nm">FAQ</span><span class="ln"></span></div>
+      <div class="reveal faq-head">
+        <h2 class="h-section">What Actually Holds When Everything Else Falls Apart</h2>
+      </div>
+      <div class="faq reveal">
+        <details class="faq-item">
+          <summary>“I’m a creator, not a tech person. Can I really do this?” <span class="fq-plus" aria-hidden="true"></span></summary>
+          <p class="a">I wasn’t a tech person either. I hired five teachers and gave myself fourteen-hour days over one Christmas break to learn this the hard way, so you don’t have to. Confidence over coding. No programming required, ever.</p>
+        </details>
+        <details class="faq-item">
+          <summary>“What about protecting my rights and my work?” <span class="fq-plus" aria-hidden="true"></span></summary>
+          <p class="a">When Gordon Parks died in the middle of our launch, the one thing that held was a simple, one-page contract I’d written years earlier, the kind that survives an estate. I call it my Cover Your Ass contract. It’s yours too, built into the Playbook.</p>
+        </details>
+        <details class="faq-item">
+          <summary>“Should I wait until AI settles down?” <span class="fq-plus" aria-hidden="true"></span></summary>
+          <p class="a">I didn’t wait for it to settle. I gave myself four weeks and started anyway, and it still hasn’t settled. The best time to start was yesterday. The next best time is today.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ §11 MIRACLE SCANS ============ -->
+  <section class="sec" id="miracle" style="background:var(--limestone);border-block:1px solid var(--hair)">
+    <div class="wrap">
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='11'"></span><span class="nm">The Miracle Scans</span><span class="ln"></span></div>
+      <div class="split split--wideText">
+        <div class="col-text reveal">
+          <p class="eyebrow">Waking up to a miracle</p>
+          <h2 class="h-section" style="margin:.7rem 0 1.4rem">I told you I would come back to this.</h2>
+          <div class="body">
+            <p>Seventeen years ago, I was semiconscious in intensive care for ten days. In that place between here and gone, I made a promise. I asked to come back and finish what I started, but only if I was granted complete healing.</p>
+            <p>I woke up. The scans were perfect. My doctors had no explanation. I did not need one.</p>
+            <p>That was my first defining moment. My second came more recently, and quietly, one loss at a time. Thirteen people in my inner circle died within a few years of each other, including both of my parents and the mentors who shaped my entire career.</p>
+            <p>I stopped and asked myself a hard question: what do I still want to build, and who am I still meant to help, before my own time runs out?</p>
+            <p>The answer became my Ten Legacy Projects. AI for Rookies is the first one I am giving away, because it is the fastest way to help the most people help themselves.</p>
+          </div>
+          <details class="readmore" style="margin-top:clamp(1.4rem,3vw,2rem);max-width:64ch">
+            <summary class="readmore__btn">
+              <span class="readmore__label--collapsed">Read more</span>
+              <span class="readmore__label--expanded">Read less</span>
+              <span class="readmore__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="readmore__body body">
+              <p>Every person who comes onto this planet has something to bring. Every person has a piece of the puzzle to share. Our greatest loss is when those pieces are lost. Left in a drawer. Boxed up in storage. Never finished, never shared, never seen.</p>
+              <p style="color:var(--ink)">I did not want that for myself. I do not want it for you. This is why I am here. And it's why AI for Rookies is the first step of the ten, not the tenth: your work deserves to be seen while you're still here to see it too.</p>
+            </div>
+          </details>
+        </div>
+        <div class="col-media reveal">
+          <div class="plate plate--tall">
+            <img class="plate-img" loading="lazy" alt="Waking up to a miracle — light returned"
+              src="https://dashboard.katalyst-crm.com/files/t1/113987f5128abfa7b40280c0f4d452e5_LE_upscale_gentle.jpg"
+              onerror="this.style.display='none'">
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal mission-pull">
+        <p class="pull" style="color:var(--ink)">I am spending my last quarter of life on one mission: guiding one million creators onto the fast track I never had.</p>
+        <p class="kicker mission-byline">— Marcia McCoy, Founder AI for Rookies</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ §12 CLOSING ============ -->
+  <section class="sec closing" id="closing">
+    <div class="wrap">
+      <h2 class="closing-heading">
+        <span class="a">You are still the creator.</span>
+        <span class="b">AI is your assistant.</span>
+      </h2>
+      <p class="closing-sub">Everything you have built, and everything you have yet to build, is still yours to finish.</p>
+      <div class="closing-cta">
+        <a href="#offers" class="btn btn--primary">Begin My Ten Steps</a>
+      </div>
+      <p class="closing-sig">— Marcia McCoy</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot">
+    <div class="brand-block brand">
+      <img class="brand__logo brand__logo--white" alt="Marcia McCoy — AI for Rookies"
+        src="https://dashboard.katalyst-crm.com/files/t1/LOGO%20MARCI%CC%87A%20MCCOY.png"
+        onerror="this.closest('.brand').classList.add('logo-failed')">
+      <b>Marcia&nbsp;McCoy</b><span>AI for Rookies</span>
+    </div>
+    <nav class="flinks" aria-label="Footer">
+      <a href="#benchmark">The Benchmark</a>
+      <a href="#create">The Method</a>
+      <a href="#labs">The Labs</a>
+      <a href="#offers">Offers</a>
+      <a href="#miracle">The Mission</a>
+    </nav>
+    <div class="cr">AI for Rookies — the first of Ten Legacy Projects. You are still the creator.</div>
+    <div class="tag-block"><p class="tag">Your work deserves to be seen while you're still here to see it too.</p></div>
+  </div>
+</footer>
+
+<script>
+  // ---- mobile nav ----
+  (function(){
+    var burger = document.getElementById('burger');
+    var sheet  = document.getElementById('sheet');
+    var open = false;
+    function setOpen(v){
+      open = v;
+      sheet.classList.toggle('open', v);
+      burger.classList.toggle('is-open', v);
+      burger.setAttribute('aria-expanded', v ? 'true':'false');
+      document.body.style.overflow = v ? 'hidden' : '';
+    }
+    burger.addEventListener('click', function(){ setOpen(!open); });
+    sheet.addEventListener('click', function(e){ if(e.target.tagName === 'A') setOpen(false); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && open) setOpen(false); });
+    window.addEventListener('resize', function(){ if(window.innerWidth >= 900 && open) setOpen(false); });
+  })();
+
+  // ---- scroll reveal ----
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches){
+      els.forEach(function(el){ el.classList.add('in'); }); return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    els.forEach(function(el){ io.observe(el); });
+  })();
+
+  // ---- nav: transparent over hero, solid after it ----
+  (function(){
+    var nav = document.querySelector('.nav');
+    var hero = document.getElementById('hero');
+    if(!nav || !hero) return;
+    var ticking = false;
+    function update(){
+      var navH = nav.offsetHeight || 66;
+      var threshold = hero.offsetHeight - navH - 24;
+      nav.classList.toggle('is-solid', window.scrollY > threshold);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ requestAnimationFrame(update); ticking = true; }
+    }, {passive:true});
+    window.addEventListener('resize', update, {passive:true});
+    update();
+  })();
+</script>
+</body>
+</html>
