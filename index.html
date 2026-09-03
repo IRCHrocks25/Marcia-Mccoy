@@ -6,7 +6,7 @@
 <title>AI for Rookies — Marcia McCoy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#F5F2EC;
@@ -19,9 +19,10 @@
     --deep:#1B1814;
     --hair:rgba(27,24,19,.16);
     --hair-soft:rgba(27,24,19,.09);
-    --serif:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;      /* body + UI (Monolith uses sans for text) */
-    --display:"Playfair Display",Georgia,"Times New Roman",serif;             /* headings / display */
-    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;        /* labels / nav / data */
+    --serif:'Archivo',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    --display:'Archivo',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    --sans:'Archivo',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    --accent:'Instrument Serif',Georgia,serif;
     --gutter:clamp(1rem,3.4vw,3rem);
     --maxw:1440px;
   }
@@ -29,8 +30,8 @@
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   body{
     margin:0;background:var(--paper);color:var(--ink);
-    font-family:var(--serif);font-size:clamp(1rem,.62rem + .58vw,1.1rem);
-    line-height:1.7;font-weight:400;letter-spacing:0;
+    font-family:var(--serif);font-size:clamp(.94rem,.62rem + .58vw,1.05rem);
+    line-height:1.62;font-weight:400;letter-spacing:0;
     -webkit-font-smoothing:antialiased;overflow-x:hidden;
   }
   img,svg,video{max-width:100%;height:auto;display:block}
@@ -46,26 +47,25 @@
 
   /* ---------- labels / apparatus ---------- */
   .kicker{
-    font-family:var(--sans);font-size:.68rem;font-weight:600;
-    letter-spacing:.3em;text-transform:uppercase;color:var(--gilt);
+    font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--gilt);
   }
   .eyebrow{
-    font-family:var(--display);font-style:italic;font-size:clamp(1.15rem,2.6vw,1.5rem);
-    color:var(--gilt);letter-spacing:.01em;line-height:1.2;
+    font-family:var(--accent);font-style:italic;font-size:clamp(1.15rem,2.6vw,1.5rem);
+    color:var(--gilt);letter-spacing:-.005em;line-height:1.2;
   }
   .plate-label{display:flex;align-items:center;gap:.9rem;margin-bottom:clamp(1.6rem,3.5vw,2.6rem)}
   .plate-label .no{
     display:inline-flex;align-items:center;justify-content:center;
     height:clamp(28px,3vw,34px);width:auto;flex:none;line-height:1;
-    /* legacy numbered pill styling kept for graceful fallback if the emblem img fails */
-    font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.18em;
+    font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.18em;
     color:var(--gilt);
   }
   .plate-label .no img{height:100%;width:auto;display:block}
   /* dark-band variant: invert emblem to bright white on the dark section */
   .band-dark .plate-label .no img{filter:brightness(0) invert(1)}
   .plate-label .nm{
-    font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.26em;
+    font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.2em;
     text-transform:uppercase;color:var(--graphite);white-space:normal;
   }
   .plate-label .ln{flex:1;height:1px;background:var(--hair);min-width:1.5rem}
@@ -73,19 +73,19 @@
   /* ---------- headings ---------- */
   .h-display{
     font-family:var(--display);font-weight:300;
-    font-size:clamp(2.5rem,2rem + 5.4vw,5.4rem);line-height:1.01;letter-spacing:-.008em;
+    font-size:clamp(2.5rem,2rem + 5.4vw,5.4rem);line-height:.94;letter-spacing:-.035em;
   }
   .h-section{
     font-family:var(--display);font-weight:300;
-    font-size:clamp(2rem,1.5rem + 3vw,3.5rem);line-height:1.06;letter-spacing:-.005em;
+    font-size:clamp(2rem,1.5rem + 3vw,3.5rem);line-height:1.0;letter-spacing:-.03em;
   }
   .h-label{
     font-family:var(--display);font-weight:500;text-transform:uppercase;
     font-size:clamp(1.35rem,1rem + 1.7vw,2.1rem);letter-spacing:.09em;line-height:1.12;
   }
   .lede{
-    font-family:var(--display);font-weight:400;color:var(--ink);
-    font-size:clamp(1.3rem,1rem + 1.5vw,1.85rem);line-height:1.4;letter-spacing:0;
+    font-family:var(--display);font-weight:300;color:var(--ink);
+    font-size:clamp(1.15rem,1rem + 1.5vw,1.72rem);line-height:1.42;letter-spacing:-.012em;
   }
   .body{color:var(--graphite);max-width:60ch}
   .body p{margin-bottom:.55em}
@@ -96,7 +96,7 @@
   /* ---------- buttons ---------- */
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
-    font-family:var(--sans);font-size:.74rem;font-weight:600;letter-spacing:.18em;
+    font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.16em;
     text-transform:uppercase;white-space:normal;text-align:center;line-height:1.3;
     padding:1.05rem 1.7rem;border:1px solid var(--ink);border-radius:2px;
     cursor:pointer;transition:background .35s ease,color .35s ease,border-color .35s ease;
@@ -158,8 +158,8 @@
   .nav__right{display:flex;align-items:center;gap:.9rem;justify-self:end}
   .brand{display:flex;align-items:center;gap:.55rem;font-family:var(--display);justify-self:start}
   .brand__logo{height:clamp(38px,4.2vw,50px);width:auto;display:block}
-  .brand__logo--white{filter:brightness(0) invert(1)}
-  .brand__logo--dark{display:none}
+  .brand__logo--white{display:none}
+  .brand__logo--dark{display:block}
   .nav.is-solid .brand__logo--white{display:none}
   .nav.is-solid .brand__logo--dark{display:block}
   .nav .brand > b,.nav .brand > span,
@@ -169,26 +169,27 @@
   .nav .brand.logo-failed > b,.foot .brand.logo-failed > b{display:inline-block}
   .nav .brand.logo-failed > span,.foot .brand.logo-failed > span{display:inline-block}
   .foot .brand__logo{height:clamp(46px,5vw,64px)}
-  .brand b{font-weight:500;font-size:1.12rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;transition:color .4s ease}
-  .brand span{font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gilt-soft);transition:color .4s ease}
+  .foot-logo{filter:brightness(0) invert(1);opacity:.92;display:block}
+  .brand b{font-weight:400;font-size:1.12rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);transition:color .4s ease}
+  .brand span{font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gilt-soft);transition:color .4s ease}
   .nav__links{display:none;align-items:center;gap:clamp(1.4rem,2.6vw,2.6rem);justify-self:center}
   .nav__links a{
-    font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.16em;
-    text-transform:uppercase;color:#fff;position:relative;padding:.4rem 0;transition:color .4s ease;
+    font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink);position:relative;padding:.4rem 0;transition:color .4s ease;
   }
   .nav__links a::after{content:"";position:absolute;left:0;bottom:.1rem;width:0;height:1px;background:var(--gilt-soft);transition:width .3s ease}
   .nav__links a:hover::after{width:100%}
   .nav__cta{
     display:none;font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.16em;
-    text-transform:uppercase;padding:.6rem 1.15rem;border:1px solid rgba(255,255,255,.6);border-radius:2px;color:#fff;
+    text-transform:uppercase;padding:.6rem 1.15rem;border:1px solid var(--ink);border-radius:2px;color:var(--ink);
     transition:background .3s,color .3s,border-color .4s ease;
   }
-  .nav:not(.is-solid) .nav__cta:hover{background:#fff;color:var(--ink);border-color:#fff}
+  .nav:not(.is-solid) .nav__cta:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
   .burger{
     display:inline-flex;flex-direction:column;justify-content:center;gap:5px;
     width:44px;height:44px;background:none;border:0;cursor:pointer;padding:10px;margin-right:-10px;
   }
-  .burger span{display:block;height:1.5px;width:100%;background:#fff;transition:transform .3s,opacity .3s,background .4s ease}
+  .burger span{display:block;height:1.5px;width:100%;background:var(--ink);transition:transform .3s,opacity .3s,background .4s ease}
   /* solid-state colours */
   .nav.is-solid .brand b{color:var(--ink)}
   .nav.is-solid .brand span{color:var(--gilt)}
@@ -197,12 +198,14 @@
   .nav.is-solid .nav__cta{color:var(--ink);border-color:var(--ink)}
   .nav.is-solid .nav__cta:hover{background:var(--ink);color:var(--paper)}
   .nav.is-solid .burger span{background:var(--ink)}
-  /* legibility over the raw image (no overlay) — dropped once the nav goes solid */
-  .nav:not(.is-solid) .nav__links a,
-  .nav:not(.is-solid) .nav__cta,
-  .nav:not(.is-solid) .brand > b{text-shadow:0 1px 10px rgba(0,0,0,.5)}
-  .nav:not(.is-solid) .brand__logo--white{filter:brightness(0) invert(1) drop-shadow(0 1px 5px rgba(0,0,0,.5))}
-  .nav:not(.is-solid) .burger span{filter:drop-shadow(0 1px 5px rgba(0,0,0,.5))}
+  /* nav over hero — dark marks on light image, no text-shadow needed */
+  .nav:not(.is-solid) .nav__links a{color:var(--ink)}
+  .nav:not(.is-solid) .nav__links a::after{background:var(--gilt)}
+  .nav:not(.is-solid) .nav__cta{color:var(--ink);border-color:var(--ink)}
+  .nav:not(.is-solid) .nav__cta:hover{background:var(--ink);color:var(--paper)}
+  .nav:not(.is-solid) .brand__logo--white{display:none}
+  .nav:not(.is-solid) .brand__logo--dark{display:block}
+  .nav:not(.is-solid) .burger span{background:var(--ink)}
   /* when the mobile sheet is open, force dark marks on the burger regardless of scroll */
   .burger.is-open span{background:var(--ink)}
   .burger.is-open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
@@ -223,46 +226,60 @@
   }
   .sheet.open{transform:translateY(0);visibility:visible}
   .sheet a{
-    font-family:var(--display);font-size:1.7rem;font-weight:400;padding:.7rem 0;
+    font-family:var(--display);font-size:1.7rem;font-weight:300;padding:.7rem 0;
     border-bottom:1px solid var(--hair-soft);
   }
   .sheet .btn{margin-top:1.4rem}
   @media(min-width:900px){.sheet{display:none}}
 
   /* ---------- HERO (full-bleed image, nav overlays it) ---------- */
-  .hero{position:relative;isolation:isolate;overflow:hidden;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;
+  .hero{position:relative;isolation:isolate;overflow:hidden;color:var(--ink);display:flex;flex-direction:column;justify-content:center;
     min-height:clamp(580px,92vh,940px);
-    background:linear-gradient(160deg,#2a2620,#16130f)} /* fallback if image is slow/blocked */
-  /* image rotated 90° and sized so it still covers the box (dimensions swap under rotation) */
-  .hero-img{position:absolute;top:50%;left:50%;z-index:-2;
-    width:105vh;height:105vw;max-width:none;max-height:none;object-fit:cover;object-position:center;
-    transform:translate(-50%,-50%) rotate(90deg) scale(1.14);
+    background:var(--paper)} /* fallback if image is slow/blocked */
+  .hero-img{position:absolute;inset:0;z-index:-2;
+    width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center;
+    transform:scale(1.04);
     animation:heroZoomOut 22s ease-out forwards}
   @keyframes heroZoomOut{
-    from{transform:translate(-50%,-50%) rotate(90deg) scale(1.14)}
-    to  {transform:translate(-50%,-50%) rotate(90deg) scale(1)}
+    from{transform:scale(1.04)}
+    to  {transform:scale(1)}
   }
   @media (prefers-reduced-motion: reduce){
-    .hero-img{animation:none;transform:translate(-50%,-50%) rotate(90deg) scale(1)}
+    .hero-img{animation:none;transform:scale(1)}
   }
-  .hero-inner{width:100%;padding-top:clamp(6rem,14vh,9rem);padding-bottom:clamp(2.8rem,7vh,5rem)}
-  .hero-eyebrow{font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.28em;
-    text-transform:uppercase;color:var(--gilt-soft);text-shadow:0 1px 12px rgba(0,0,0,.45)}
-  .hero-title{margin:clamp(1.1rem,2.6vw,1.6rem) 0 0;font-size:clamp(2.5rem,1.6rem + 3.8vw,4.4rem);
-    line-height:1.05;letter-spacing:-.012em;color:#fff;max-width:36ch}
-  .hero-sub{font-family:var(--serif);color:#fff;max-width:64ch;margin-top:1.5rem;
-    font-size:clamp(1rem,.72rem + .48vw,1.14rem);line-height:1.7;text-shadow:0 1px 14px rgba(0,0,0,.5)}
-  .hero .btn-row{margin-top:2.1rem}
+  /* strong left-side vignette for text legibility over the image */
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:linear-gradient(90deg,rgba(245,242,236,.94) 0%,rgba(245,242,236,.82) 30%,rgba(245,242,236,.5) 52%,rgba(245,242,236,.15) 68%,rgba(245,242,236,0) 78%)}
+  /* hero container: OVERRIDE .wrap centering completely — copy hugs the left edge */
+  .hero-inner.wrap{max-width:100% !important;margin-inline:0 !important;
+    padding-left:clamp(1rem,2.5vw,2.5rem) !important;padding-right:clamp(1rem,2.5vw,2.5rem) !important;
+    padding-top:clamp(6rem,14vh,9rem);padding-bottom:clamp(2.8rem,7vh,5rem);
+    display:flex;justify-content:flex-start;align-items:center}
+  .hero-copy{max-width:min(870px,60%);width:100%;text-align:left;margin-left:0}
+  .hero-eyebrow{font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--gilt)}
+  .hero-title{margin:clamp(1.1rem,2.6vw,1.6rem) 0 0;
+    font-size:clamp(2.1rem,1.08rem + 2.88vw,3.48rem);
+    line-height:1.04;letter-spacing:-.028em;color:var(--ink);max-width:38ch;font-weight:300;
+    text-shadow:0 1px 24px rgba(245,242,236,.7)}
+  .hero-sub{font-family:var(--serif);color:var(--ink);max-width:52ch;margin-top:1.5rem;
+    font-size:clamp(1rem,.72rem + .48vw,1.14rem);line-height:1.62;font-weight:400;
+    text-shadow:0 1px 18px rgba(245,242,236,.75)}
+  .hero .btn-row{margin-top:2.1rem;justify-content:flex-start}
   /* slim epigraph row that sits under the spec strip (keeps the hero itself clean, Monolith-style) */
   .epigraph-row{background:var(--paper);padding-block:clamp(2.4rem,5vw,3.6rem)}
   .epigraph-row blockquote{margin:0;max-width:60ch}
-  .epigraph-row p{font-family:var(--display);font-style:italic;font-size:clamp(1.2rem,1rem + 1vw,1.7rem);
+  .epigraph-row p{font-family:var(--accent);font-style:italic;font-size:clamp(1.2rem,1rem + 1vw,1.7rem);
     line-height:1.42;color:var(--ink);margin:0}
   .epigraph-row cite{display:block;margin-top:.9rem;font-family:var(--sans);font-style:normal;
-    font-size:.66rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gilt)}
+    font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gilt)}
   @media(min-width:900px){
-    .hero-title{font-size:clamp(3rem,1rem + 3.4vw,4.4rem);max-width:34ch}
-    .hero-sub{max-width:60ch}
+    .hero-title{font-size:clamp(2.4rem,1.08rem + 2.76vw,3.48rem);max-width:38ch}
+    .hero-sub{max-width:52ch}
+    .hero-inner.wrap{padding-top:clamp(7rem,15vh,10rem)}
+  }
+  @media(max-width:820px){
+    .hero-copy{max-width:96%;width:96%}
   }
 
   /* ---------- generic two-col ---------- */
@@ -270,6 +287,9 @@
   @media(min-width:860px){.split{grid-template-columns:1fr 1fr}
     .split--textFirst .col-media{order:2}
     .split--wideText{grid-template-columns:1.05fr .95fr}
+    .split--mediaFirst{grid-template-columns:.95fr 1.05fr}
+    .split--mediaFirst .col-media{order:1}
+    .split--mediaFirst .col-text{order:2}
   }
   .col-media,.col-text{min-width:0}
 
@@ -279,8 +299,8 @@
   .prov-grid{display:grid;grid-template-columns:1fr;gap:0}
   .prov-grid > div{padding:clamp(1.1rem,2.6vw,1.5rem) 0;border-top:1px solid var(--hair)}
   .prov-grid > div:first-child{border-top:0}
-  .prov-grid .val{font-family:var(--display);font-weight:500;font-size:clamp(1.9rem,1.4rem + 1.4vw,2.5rem);line-height:1;letter-spacing:-.01em}
-  .prov-grid .lab{font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--graphite);margin-top:.7rem}
+  .prov-grid .val{font-family:var(--display);font-weight:300;font-size:clamp(1.9rem,1.4rem + 1.4vw,2.5rem);line-height:1;letter-spacing:-.03em}
+  .prov-grid .lab{font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--graphite);margin-top:.7rem}
   @media(min-width:680px){
     .prov-grid{grid-template-columns:repeat(2,1fr);column-gap:clamp(2rem,6vw,5rem);row-gap:clamp(1.4rem,3vw,2rem)}
     .prov-grid > div{border-top:0;padding-block:0}
@@ -289,56 +309,86 @@
     .prov-grid{grid-template-columns:repeat(4,1fr)}
   }
   .represented{margin-top:clamp(2rem,4vw,3rem);display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:baseline}
-  .represented .who{font-family:var(--display);font-size:clamp(1.05rem,1.5vw,1.35rem);font-style:italic}
+  .represented .who{font-family:var(--accent);font-size:clamp(1.05rem,1.5vw,1.35rem);font-style:italic}
   .represented .sep{color:var(--gilt);font-size:.8rem}
-  /* roster of image-filled circles */
-  .roster{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.6rem,4vw,2.6rem) clamp(1.2rem,3vw,2rem)}
-  .roster__head{grid-column:1/-1;text-align:center;margin-bottom:clamp(.9rem,2.4vw,1.8rem)}
+  /* roster — full-width rectangles, edge-to-edge, no gaps */
+  .roster{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .roster__head{grid-column:1/-1;text-align:center;margin-bottom:0;padding-bottom:clamp(.9rem,2.4vw,1.4rem)}
   .roster .rfig{margin:0}
-  .roster .disc{position:relative;display:block;width:100%;aspect-ratio:1;border-radius:50%;overflow:hidden;
-    background:radial-gradient(120% 120% at 32% 20%,#efe9dd,#d8cdb8);box-shadow:0 24px 54px -26px rgba(27,24,19,.55)}
+  .roster .disc{position:relative;display:block;width:100%;aspect-ratio:4/3;border-radius:0;overflow:hidden;
+    background:linear-gradient(160deg,#efe9dd,#d8cdb8)}
   .roster .disc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-  .roster .disc::after{content:"";position:absolute;inset:0;border-radius:50%;z-index:3;
-    box-shadow:inset 0 0 0 1px rgba(154,123,67,.45);pointer-events:none;transition:box-shadow .4s ease}
-  .roster .rname{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
-    text-align:center;padding:0 14%;color:#fff;font-family:var(--display);font-weight:500;
+  .roster .disc::after{content:none}
+  .roster .rname{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;align-items:flex-end;justify-content:flex-start;
+    text-align:left;padding:clamp(1rem,2.4vw,1.6rem);color:#fff;font-family:var(--display);font-weight:300;
     font-size:clamp(1.05rem,2.2vw,1.7rem);line-height:1.14;letter-spacing:.01em;
-    text-shadow:0 1px 16px rgba(0,0,0,.65),0 1px 3px rgba(0,0,0,.55);
-    background:radial-gradient(circle at 50% 50%,rgba(0,0,0,.52) 0%,rgba(0,0,0,.3) 46%,rgba(0,0,0,.08) 70%,transparent 82%)}
+    text-shadow:0 1px 12px rgba(0,0,0,.65),0 1px 3px rgba(0,0,0,.55);
+    background:linear-gradient(to top,rgba(0,0,0,.55) 0%,rgba(0,0,0,.18) 50%,transparent 100%);top:0}
   .roster .rfig:hover .disc img{transform:scale(1.06)}
-  .roster .rfig:hover .disc::after{box-shadow:inset 0 0 0 2px rgba(154,123,67,.8)}
   .roster .disc.noimg img{display:none}
   .roster .disc.noimg::before{content:"";position:absolute;inset:0;
     background:
       radial-gradient(60% 60% at 50% 42%,rgba(154,123,67,.16),transparent 60%),
       repeating-linear-gradient(45deg,rgba(154,123,67,.10) 0 2px,transparent 2px 12px)}
   @media(min-width:620px){.roster{grid-template-columns:repeat(3,1fr)}}
-  @media(min-width:1000px){.roster{grid-template-columns:repeat(3,1fr);max-width:1080px;margin-inline:auto;
-    column-gap:clamp(1.8rem,3vw,2.6rem);row-gap:clamp(2rem,4vw,3rem)}}
+  @media(min-width:1000px){.roster{grid-template-columns:repeat(3,1fr);max-width:none;margin-inline:calc(var(--gutter) * -1)}}
 
   /* ---------- four jobs (editorial numbered cards) ---------- */
   #architecture .plate-label{justify-content:center}
   #architecture .plate-label .ln{display:none}
+  /* ---------- ARCHITECTURE — cinematic ---------- */
+  .arch{position:relative;isolation:isolate;overflow:hidden;color:#f6f2ea;
+    padding-block:clamp(4.5rem,10vw,7rem)}
+  .arch::before{content:"";position:absolute;inset:0;z-index:-3;
+    background:url('https://dashboard.katalyst-crm.com/files/t1/1ce2ff91451e8acc7941c810833100ae.jpg') center/cover no-repeat;
+    transform:scale(1.05);will-change:transform;
+    animation:archDrift 32s ease-in-out infinite alternate}
+  @keyframes archDrift{
+    from{transform:scale(1.05) translate3d(-.4%,-.3%,0)}
+    to  {transform:scale(1.1)  translate3d(.6%,.4%,0)}
+  }
+  @media(prefers-reduced-motion:reduce){.arch::before{animation:none;transform:scale(1.05)}}
+  /* rich cinematic overlay: warm vignette + directional shadow for legibility */
+  .arch::after{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+    background:
+      radial-gradient(140% 90% at 50% 40%,rgba(12,9,6,0) 0%,rgba(12,9,6,.28) 55%,rgba(8,6,4,.72) 100%),
+      linear-gradient(180deg,rgba(10,7,5,.55) 0%,rgba(10,7,5,.28) 30%,rgba(10,7,5,.35) 65%,rgba(6,4,3,.78) 100%)}
+  /* subtle film grain layer */
+  .arch > .wrap::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.08;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    mix-blend-mode:overlay}
+  .arch > .wrap{position:relative}
+  .arch .plate-label .nm{color:rgba(246,242,234,.7)}
+  .arch .plate-label .ln{background:rgba(246,242,234,.22)}
+  .arch .plate-label .no img{filter:brightness(0) invert(1)}
   .arch-head{max-width:64ch;margin-inline:auto;text-align:center}
-  .arch-head .body{margin-inline:auto}
-  .arch-close{max-width:74ch;margin-inline:auto;text-align:center;margin-top:clamp(2rem,4vw,3rem)}
+  .arch-title{white-space:nowrap;font-size:clamp(1.5rem,4.3vw,3.2rem);letter-spacing:-.032em}
+  .arch-head .h-section{color:#faf5eb;text-shadow:0 2px 34px rgba(0,0,0,.7),0 1px 4px rgba(0,0,0,.55)}
+  .arch-head .body{margin-inline:auto;color:rgba(246,242,234,.85);text-shadow:0 1px 18px rgba(0,0,0,.6)}
+  .arch-close{max-width:74ch;margin-inline:auto;text-align:center;margin-top:clamp(2rem,4vw,3rem);
+    color:rgba(246,242,234,.78);text-shadow:0 1px 14px rgba(0,0,0,.5)}
+  .arch-close p{color:rgba(246,242,234,.78)}
+  .arch-close p:last-child{color:#faf5eb !important}
   .jobs{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.6vw,1.3rem);margin-top:clamp(2.2rem,4.5vw,3.4rem)}
   .job{position:relative;margin:0;padding:clamp(1.6rem,3vw,2.4rem) clamp(1.4rem,2.4vw,2.1rem) clamp(1.6rem,3vw,2.2rem);
-    background:#f8f4ec;border:1px solid var(--hair);border-radius:2px;text-align:left;overflow:hidden;
+    background:rgba(20,15,10,.42);border:1px solid rgba(246,242,234,.14);border-radius:2px;text-align:left;overflow:hidden;
+    -webkit-backdrop-filter:blur(10px) saturate(1.05);backdrop-filter:blur(10px) saturate(1.05);
     transition:background .5s ease,border-color .5s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
   .job::before{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gilt);
     transition:width .5s cubic-bezier(.2,.7,.2,1)}
-  .job:hover{background:var(--paper);border-color:rgba(154,123,67,.4);transform:translateY(-2px)}
+  .job:hover{background:rgba(28,22,15,.58);border-color:rgba(154,123,67,.55);transform:translateY(-2px)}
   .job:hover::before{width:2px}
-  .job__icon{width:clamp(52px,4.8vw,68px);height:clamp(52px,4.8vw,68px);color:var(--gilt);
-    display:block;margin-bottom:clamp(1.2rem,2vw,1.6rem);transition:transform .5s cubic-bezier(.2,.7,.2,1),color .5s ease}
+  .job__icon{width:clamp(52px,4.8vw,68px);height:clamp(52px,4.8vw,68px);color:var(--gilt-soft);
+    display:block;margin-bottom:clamp(1.2rem,2vw,1.6rem);transition:transform .5s cubic-bezier(.2,.7,.2,1),color .5s ease;
+    filter:drop-shadow(0 1px 12px rgba(154,123,67,.3))}
   .job__icon::after{content:""}
-  .job:hover .job__icon{transform:translateY(-2px);color:var(--gilt-soft)}
-  .job h3{font-family:var(--display);font-weight:400;color:var(--ink);letter-spacing:-.005em;
-    font-size:clamp(1.5rem,1rem + 1.2vw,2rem);line-height:1.08;margin:0 0 .8rem;position:relative;padding-bottom:.8rem}
-  .job h3::after{content:"";position:absolute;left:0;bottom:0;width:36px;height:1px;background:var(--hair);transition:width .5s cubic-bezier(.2,.7,.2,1),background .5s ease}
+  .job:hover .job__icon{transform:translateY(-2px);color:var(--gilt)}
+  .job h3{font-family:var(--display);font-weight:300;color:#faf5eb;letter-spacing:-.02em;
+    font-size:clamp(1.5rem,1rem + 1.2vw,2rem);line-height:1.08;margin:0 0 .8rem;position:relative;padding-bottom:.8rem;
+    text-shadow:0 1px 16px rgba(0,0,0,.5)}
+  .job h3::after{content:"";position:absolute;left:0;bottom:0;width:36px;height:1px;background:rgba(246,242,234,.28);transition:width .5s cubic-bezier(.2,.7,.2,1),background .5s ease}
   .job:hover h3::after{width:64px;background:var(--gilt)}
-  .job__desc{color:var(--graphite);max-width:32ch;margin:0;
+  .job__desc{color:rgba(246,242,234,.72);max-width:32ch;margin:0;
     font-size:clamp(.94rem,.7rem + .32vw,1.02rem);line-height:1.55}
   @media(min-width:600px){.jobs{grid-template-columns:repeat(2,1fr);gap:clamp(1.1rem,2vw,1.5rem)}}
   @media(min-width:1080px){.jobs{grid-template-columns:repeat(4,1fr)}
@@ -367,104 +417,230 @@
     .tl-row .body{max-width:none}
   }
 
-  /* ---------- CREATE tiles (URS-style vertical image cards) ---------- */
-  .create-tiles{margin-top:clamp(2rem,5vw,3.5rem);
-    width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
-    display:grid;grid-template-columns:1fr;gap:0}
-  .ct{position:relative;aspect-ratio:3/4;overflow:hidden;display:block;isolation:isolate;
-    color:#fff}
-  .ct-art{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
-  .ct::before{content:"";position:absolute;inset:0;z-index:1;
-    background:linear-gradient(180deg,rgba(43,71,124,.62) 0%,rgba(35,58,102,.58) 55%,rgba(23,36,66,.72) 100%);
-    mix-blend-mode:multiply}
-  .ct::after{content:"";position:absolute;inset:0;z-index:1;
-    background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.02) 40%,rgba(0,0,0,.55) 100%)}
-  .ct-body{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-start;
-    padding:clamp(1.6rem,3vw,2.4rem)}
-  .ct-letter{font-family:var(--display);font-weight:500;font-size:clamp(1rem,1.4vw,1.15rem);
-    letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:.9rem}
-  .ct-title{font-family:var(--display);font-weight:400;color:#fff;letter-spacing:-.005em;
-    font-size:clamp(2rem,1.4rem + 2.4vw,3rem);line-height:1.02;margin:0 0 1.1rem;text-shadow:0 2px 24px rgba(0,0,0,.35)}
-  .ct-title::after{content:"";display:block;width:44px;height:1px;background:rgba(255,255,255,.7);margin-top:1rem}
-  .ct-desc{font-family:var(--sans);font-size:clamp(.86rem,.7rem + .3vw,.98rem);line-height:1.55;
-    color:rgba(255,255,255,.9);max-width:32ch;margin:0}
-  .ct-meta{position:absolute;left:clamp(1.6rem,3vw,2.4rem);bottom:clamp(1.2rem,2.4vw,1.8rem);z-index:2;
-    font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
-    color:rgba(255,255,255,.82);display:flex;align-items:center;gap:.55rem}
-  .ct-meta::before{content:"";width:6px;height:6px;border:1px solid rgba(255,255,255,.7);border-radius:50%}
-  .ct:hover .ct-art > .art-scene{transform:scale(1.04)}
-  .art-scene{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
-  @media(min-width:640px){.create-tiles{grid-template-columns:repeat(2,1fr)}}
-  @media(min-width:1000px){.create-tiles{grid-template-columns:repeat(3,1fr)}}
-  @media(min-width:1300px){.create-tiles{grid-template-columns:repeat(6,1fr)}
-    .ct{aspect-ratio:2/5}
-    .ct-title{font-size:clamp(1.6rem,1.6vw,2rem)}
-    .ct-desc{font-size:.84rem}
+  /* ---------- CREATE — cinematic grid layout ---------- */
+  .create-sec{position:relative;isolation:isolate;overflow:hidden;color:#f6f2ea;padding:0}
+  .create-sec::before{content:"";position:absolute;inset:0;z-index:-3;
+    background:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091709_c48371e3-7a5d-4134-b5ff-a4f3c9bac565.png') center/cover no-repeat;
+    transform:scale(1.06);will-change:transform;
+    animation:createDrift 40s ease-in-out infinite alternate}
+  @keyframes createDrift{
+    from{transform:scale(1.06) translate3d(-.5%,-.3%,0)}
+    to  {transform:scale(1.12) translate3d(.5%,.5%,0)}
+  }
+  @media(prefers-reduced-motion:reduce){.create-sec::before{animation:none}}
+  .create-sec::after{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+    background:
+      radial-gradient(140% 90% at 40% 40%,rgba(10,7,5,.0) 0%,rgba(10,7,5,.32) 55%,rgba(6,4,3,.78) 100%),
+      linear-gradient(180deg,rgba(8,6,4,.72) 0%,rgba(8,6,4,.42) 30%,rgba(8,6,4,.5) 70%,rgba(4,3,2,.82) 100%)}
+  .create-plate{padding:clamp(2.6rem,5vw,4rem) var(--gutter) 0;position:relative;z-index:2;justify-content:center}
+  .create-plate .nm{color:rgba(246,242,234,.7)}
+  .create-plate .ln{background:rgba(246,242,234,.22)}
+  .create-plate .no img{filter:brightness(0) invert(1)}
+
+  /* 4-col × 2-row grid: heading spans left column both rows, 6 cells fill the right */
+  .create-grid{position:relative;z-index:2;
+    display:grid;grid-template-columns:1fr;gap:0;
+    margin-top:clamp(2rem,4.5vw,3.4rem);
+    border-top:1px solid rgba(246,242,234,.18)}
+  .create-grid > *{
+    padding:clamp(2rem,3.6vw,3rem) clamp(1.5rem,3vw,2.6rem);
+    border-bottom:1px solid rgba(246,242,234,.18)}
+  .cg-head{display:flex;flex-direction:column;justify-content:center;text-align:left}
+  .cg-head .eyebrow{color:var(--gilt-soft);margin-bottom:.9rem}
+  .create-title{color:#faf5eb;font-size:clamp(1.9rem,1.4rem + 2.6vw,3.2rem);
+    line-height:1.0;letter-spacing:-.032em;margin:0;white-space:nowrap;
+    text-shadow:0 2px 30px rgba(0,0,0,.7),0 1px 4px rgba(0,0,0,.55)}
+  .cg-intro{margin-top:clamp(1rem,2vw,1.4rem);color:rgba(246,242,234,.82);
+    font-size:clamp(.94rem,.7rem + .32vw,1.02rem);line-height:1.6;max-width:36ch;
+    text-shadow:0 1px 14px rgba(0,0,0,.5)}
+  .cg-cell{display:flex;flex-direction:column;text-align:left;
+    background:rgba(10,7,5,.18);transition:background .55s ease}
+  .cg-cell:hover{background:rgba(20,15,10,.36)}
+  .cg-letter{display:inline-block;font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);
+    font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gilt-soft);margin-bottom:.9rem}
+  .cg-title{font-family:var(--display);font-weight:300;color:#faf5eb;
+    font-size:clamp(1.3rem,.9rem + 1.1vw,1.75rem);line-height:1.1;letter-spacing:-.02em;
+    margin:0 0 .9rem;text-shadow:0 1px 18px rgba(0,0,0,.55)}
+  .cg-desc{color:rgba(246,242,234,.75);font-size:clamp(.9rem,.7rem + .28vw,.98rem);
+    line-height:1.55;margin:0;max-width:34ch;text-shadow:0 1px 12px rgba(0,0,0,.45)}
+
+  .create-close{position:relative;z-index:2;padding:clamp(2.4rem,4.5vw,3.6rem) var(--gutter) clamp(3rem,6vw,4.5rem);
+    text-align:center;margin:0 auto;max-width:52ch;color:#faf5eb;
+    font-family:var(--display);font-weight:300;letter-spacing:-.012em;
+    font-size:clamp(1.15rem,1rem + 1.2vw,1.6rem);line-height:1.42;
+    text-shadow:0 1px 20px rgba(0,0,0,.6)}
+
+  /* tablet: 2 columns for cells, heading full-width */
+  @media(min-width:640px){
+    .create-grid{grid-template-columns:1fr 1fr;grid-auto-rows:auto}
+    .cg-head{grid-column:1 / -1;text-align:center;align-items:center}
+    .cg-head .cg-intro{margin-inline:auto;text-align:center}
+    .create-grid > *:nth-child(2n){border-left:1px solid rgba(246,242,234,.18)}
+  }
+  /* desktop: 4 cols, heading spans left column both rows, 6 cells in the other 3 cols x 2 rows */
+  @media(min-width:1000px){
+    .create-grid{grid-template-columns:1.15fr 1fr 1fr 1fr;grid-template-rows:auto auto}
+    .cg-head{grid-column:1;grid-row:1 / span 2;text-align:left;align-items:flex-start}
+    .cg-head .cg-intro{margin-inline:0;text-align:left}
+    .create-grid > *{border-left:1px solid rgba(246,242,234,.18)}
+    .create-grid > .cg-head{border-left:0}
   }
 
   /* ---------- labs (project cards) ---------- */
   .proj-grid{display:grid;grid-template-columns:1fr;gap:clamp(1.6rem,3vw,2.2rem);margin-top:clamp(2rem,4vw,3rem)}
   @media(min-width:760px){.proj-grid{grid-template-columns:repeat(3,1fr)}}
-  .proj h3{font-family:var(--display);font-weight:500;font-size:clamp(1.2rem,1.4vw,1.5rem);margin:1rem 0 .4rem}
-  .proj .idx{font-family:var(--sans);font-size:.64rem;font-weight:600;letter-spacing:.2em;color:var(--gilt);text-transform:uppercase}
+  .proj h3{font-family:var(--display);font-weight:300;font-size:clamp(1.2rem,1.4vw,1.5rem);margin:1rem 0 .4rem}
+  .proj .idx{font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.2em;color:var(--gilt);text-transform:uppercase}
   /* show the full book covers inside the square plate (no cropping) */
   .proj .plate-img{object-fit:contain;object-position:50% 50%;padding:clamp(.6rem,1.4vw,1.1rem)}
   /* clean white frame, no in-plate caption, no under-image label */
   .proj .plate{background:#fff;box-shadow:inset 0 0 0 1px var(--hair-soft)}
   .proj .cap,.proj .idx{display:none}
+  /* ---------- Interactive Group Lab — modern block ---------- */
   .labcall{position:relative;overflow:hidden;color:var(--ink);
     margin-top:clamp(2.4rem,5vw,4rem);
-    background:var(--limestone) url('https://dashboard.katalyst-crm.com/files/t1/bggg.png') center/cover no-repeat;
-    border:1px solid var(--hair);border-radius:2px;padding:clamp(1.8rem,4vw,3rem)}
-  .labcall .eyebrow{color:var(--gilt)}
-  .labcall > .body{color:var(--ink) !important}
-  .labcall .hours{display:grid;grid-template-columns:1fr;gap:clamp(1.2rem,2.4vw,1.8rem);margin-top:1.4rem;max-width:52ch}
-  .labcall .hour .t{font-family:var(--display);font-style:italic;color:var(--gilt);font-size:1.15rem;margin-bottom:.3rem}
-  .labcall .hour .body{color:var(--graphite)}
-  .labcall .btn--primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .labcall .btn--primary:hover{background:var(--gilt);color:#fff;border-color:var(--gilt)}
+    background:var(--limestone);border-radius:2px;
+    padding:clamp(2.2rem,4.5vw,3.6rem) clamp(1.8rem,4vw,3rem)}
+  .labcall::before{content:"";position:absolute;top:0;left:0;height:1px;width:100%;background:var(--hair)}
+  .labcall::after{content:"";position:absolute;top:0;right:clamp(1.8rem,4vw,3rem);width:1px;height:clamp(48px,7vw,90px);background:var(--gilt)}
 
-  /* ---------- offers / price sheet ---------- */
-  .steward{background:var(--deep);color:var(--paper);border-radius:2px;
-    padding:clamp(1.8rem,4vw,3rem);margin-bottom:clamp(2.4rem,5vw,3.6rem)}
-  .steward p{font-family:var(--display);font-style:italic;font-size:clamp(1.2rem,1rem + 1vw,1.7rem);
-    line-height:1.45;color:rgba(245,242,236,.9);margin:0}
-  .steward cite{display:block;margin-top:1rem;font-family:var(--sans);font-style:normal;font-size:.64rem;
-    font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gilt-soft)}
-  .steward .note{font-family:var(--serif);font-style:normal;font-size:1.02rem;color:rgba(245,242,236,.72);margin-top:1.4rem}
-  .tiers{border-top:1px solid var(--hair)}
-  .tier{display:grid;grid-template-columns:1fr;gap:.9rem;padding:clamp(1.6rem,3.4vw,2.3rem) 0;border-bottom:1px solid var(--hair);align-items:start}
-  .tier .t-head{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
-  .tier h3{font-family:var(--display);font-weight:500;font-size:clamp(1.3rem,1rem + 1.1vw,1.85rem);letter-spacing:.01em}
-  .tier .price{font-family:var(--display);font-weight:300;font-size:clamp(1.5rem,1.2rem + 1.4vw,2.4rem);white-space:nowrap;color:var(--ink);line-height:1}
-  .tier .desc{color:var(--graphite);max-width:62ch}
-  .tier .t-cta{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;margin-top:.6rem}
-  .tier .t-cta .btn{margin-top:0}
-  .tier--feature{background:var(--limestone);margin-inline:calc(-1 * var(--gutter));padding-inline:var(--gutter);border-bottom:1px solid var(--hair)}
-  /* Custom One-on-One tier: photo background, no dark overlay */
-  .tier--custom{position:relative;isolation:isolate;overflow:hidden;color:#fff;
-    background:var(--limestone);
-    margin-inline:calc(-1 * var(--gutter));padding-inline:var(--gutter);padding-block:clamp(1.9rem,3.6vw,2.6rem);
-    border-bottom:1px solid var(--hair);border-top:1px solid var(--hair)}
-  .tier--custom::before{content:"";position:absolute;inset:0;z-index:-2;
-    background:url('https://dashboard.katalyst-crm.com/files/t1/ChatGPT%20Image%20Aug%2026,%202026,%2008_19_56%20PM.png') center/cover no-repeat}
-  /* dark overlay removed per request — legibility carried by text-shadow only */
-  .tier--custom h3{color:#fff;text-shadow:0 1px 18px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.65)}
-  .tier--custom .price{color:#fff;text-shadow:0 1px 18px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.65)}
-  .tier--custom .desc{color:#fff;text-shadow:0 1px 18px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.65)}
-  .tier--custom .btn{background:transparent;color:#fff;border-color:rgba(255,255,255,.85);text-shadow:0 1px 6px rgba(0,0,0,.5)}
-  .tier--custom .btn:hover{background:#fff;color:var(--ink);border-color:#fff;text-shadow:none}
+  .labcall__head{position:relative;display:grid;grid-template-columns:1fr;gap:clamp(1.2rem,2.4vw,1.8rem);
+    margin-bottom:clamp(1.8rem,3.6vw,2.6rem);align-items:end;
+    padding-bottom:clamp(1.8rem,3.6vw,2.4rem);border-bottom:1px solid var(--hair)}
+  .labcall__kicker{font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;
+    letter-spacing:.24em;text-transform:uppercase;color:var(--gilt);margin:0}
+  .labcall__title{font-family:var(--sans);font-weight:400;color:var(--ink);
+    font-size:clamp(1.6rem,1.1rem + 1.8vw,2.4rem);line-height:1.1;letter-spacing:-.028em;margin:.8rem 0 0;max-width:22ch}
+  .labcall__lede{font-family:var(--sans);font-weight:400;color:var(--graphite);
+    font-size:clamp(.98rem,.7rem + .32vw,1.08rem);line-height:1.65;margin:0;max-width:44ch}
+
+  .labcall__hours{position:relative;display:grid;grid-template-columns:1fr;
+    gap:clamp(2rem,4vw,3rem);margin:0 0 clamp(2rem,4vw,2.8rem)}
+  .lab-hour{position:relative;padding:0;display:grid;grid-template-columns:auto 1fr;column-gap:clamp(1.2rem,2.4vw,2rem);row-gap:.35rem;align-items:baseline}
+  .lab-hour__no{grid-column:1;grid-row:1 / span 3;font-family:var(--sans);font-size:clamp(2.6rem,1.6rem + 3.4vw,4.2rem);font-weight:200;letter-spacing:-.04em;line-height:.9;color:var(--ink);margin:0;align-self:start}
+  .lab-hour__t{grid-column:2;grid-row:1;font-family:var(--sans);font-weight:500;color:var(--ink);
+    font-size:clamp(.68rem,.75vw,.78rem);letter-spacing:.22em;text-transform:uppercase;line-height:1;margin:0 0 .3rem}
+  .lab-hour__d{grid-column:2;grid-row:2;font-family:var(--sans);font-weight:400;color:var(--graphite);
+    font-size:clamp(.94rem,.7rem + .3vw,1rem);line-height:1.6;margin:0;max-width:36ch}
+
+  .labcall__cta{position:relative;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
+    padding-top:clamp(1.8rem,3.6vw,2.4rem);border-top:1px solid var(--hair)}
+  .labcall__cta::before{content:"Watch it happen, then build your own.";font-family:var(--sans);font-size:clamp(.85rem,.7rem + .3vw,.98rem);color:var(--graphite);letter-spacing:.005em}
+  .labcall .btn{width:auto;background:var(--ink);color:var(--paper);border-color:var(--ink);padding:1.05rem 2rem}
+  .labcall .btn:hover{background:var(--gilt);color:#fff;border-color:var(--gilt)}
+  @media(min-width:820px){
+    .labcall{padding:clamp(2.8rem,5.5vw,4.4rem) clamp(2.4rem,5vw,4rem)}
+    .labcall__head{grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3.5rem)}
+    .labcall__hours{grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3.5rem)}
+  }
+  @media(max-width:560px){
+    .labcall__cta::before{display:none}
+    .labcall__cta{justify-content:flex-start}
+  }
+
+  /* ---------- OFFERS — process-rows layout ---------- */
+  .offers-sec{background:var(--paper);position:relative}
+  .offers-plate{justify-content:center;margin-bottom:clamp(1.6rem,3vw,2.4rem)}
+  .offers-head{max-width:none;margin:0 auto;text-align:center}
+  .offers-title{font-size:clamp(2rem,1.4rem + 2.6vw,3.4rem);margin:0 auto clamp(1.6rem,3vw,2.2rem);max-width:20ch;white-space:normal}
+  .offers-quote{margin:clamp(1.4rem,3vw,2rem) auto clamp(1.6rem,3vw,2.2rem);max-width:min(1100px,92%);text-align:center;position:relative;padding-top:clamp(1.2rem,2.4vw,1.8rem)}
+  .offers-quote::before{content:"";display:block;position:absolute;top:0;left:50%;transform:translateX(-50%);width:38px;height:1px;background:var(--gilt)}
+  .offers-quote p{font-family:var(--accent);font-style:italic;font-weight:400;
+    font-size:clamp(1.25rem,1rem + 1.2vw,1.9rem);line-height:1.32;color:var(--ink);margin:0;letter-spacing:-.008em}
+  .offers-quote cite{display:block;margin-top:1.1rem;font-family:var(--sans);font-style:normal;
+    font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gilt)}
+  .offers-intro{color:var(--graphite);max-width:min(1200px,96%);margin:0 auto;
+    font-size:clamp(.94rem,.7rem + .32vw,1.02rem);line-height:1.7}
+
+  .offer-rows{margin-top:clamp(3rem,6vw,5rem);display:flex;flex-direction:column;gap:0}
+  .offer-row{
+    display:grid;grid-template-columns:1fr;gap:clamp(1.4rem,3vw,2.4rem);
+    padding-block:clamp(2.4rem,5vw,3.8rem);
+    border-top:1px solid var(--hair);align-items:center}
+  .offer-row:last-child{border-bottom:1px solid var(--hair)}
+  .offer-text{display:flex;flex-direction:column;align-items:flex-start;text-align:left}
+  .offer-num{display:inline-flex;align-items:center;justify-content:center;
+    width:36px;height:36px;border:1px solid var(--hair);border-radius:50%;
+    margin-bottom:clamp(1rem,2vw,1.4rem);flex:none;
+    font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.06em;color:var(--graphite)}
+  .offer-label{font-family:var(--sans);font-size:clamp(.7rem,.55rem + .3vw,.82rem);font-weight:500;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--ink);margin:0 0 clamp(1rem,2vw,1.4rem);line-height:1.3}
+  .offer-desc{color:var(--graphite);max-width:52ch;margin:0;
+    font-size:clamp(.94rem,.7rem + .32vw,1.02rem);line-height:1.7}
+  .offer-foot{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(1rem,2.4vw,1.8rem);margin-top:clamp(1.4rem,3vw,2rem)}
+  .offer-price{font-family:var(--display);font-weight:300;font-size:clamp(1.6rem,1.2rem + 1.4vw,2.4rem);
+    line-height:1;letter-spacing:-.02em;color:var(--ink);white-space:nowrap}
+  .offer-btn{width:auto;min-width:16rem;padding:1rem 1.8rem}
+  .offer-img{position:relative;overflow:hidden;margin:0;aspect-ratio:4/3;background:var(--limestone)}
+  .offer-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+  .offer-row:hover .offer-img img{transform:scale(1.04)}
+
+  /* desktop: alternate photo/text placement */
+  @media(min-width:820px){
+    .offer-row{grid-template-columns:.9fr 1.1fr;gap:clamp(3rem,6vw,5rem)}
+    .offer-row .offer-text{grid-column:2;order:2}
+    .offer-row .offer-img{grid-column:1;order:1}
+    .offer-row--flip .offer-text{grid-column:1;order:1}
+    .offer-row--flip .offer-img{grid-column:2;order:2}
+  }
+
   /* §7 Action Labs: centered wider header */
   .labs-sec .plate-label{justify-content:center}
   .labs-sec .plate-label .ln{display:none}
   .labs-head{max-width:none;text-align:center}
   .labs-head .body{margin-inline:auto;max-width:64ch}
+
+  /* ---------- §9 GALLERY FLOOR TEST — editorial layout ---------- */
+  .floortest-sec{background:var(--paper);position:relative}
+  .floortest-plate{margin-bottom:clamp(2rem,4vw,3rem)}
+  .ft-top{display:grid;grid-template-columns:1fr;gap:clamp(1.6rem,3.4vw,2.4rem);
+    padding-block:clamp(1.4rem,3vw,2.2rem);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);align-items:start}
+  .ft-top__quote{position:relative;padding-right:0}
+  .ft-top__quote p{font-family:var(--accent);font-style:italic;font-weight:400;color:var(--ink);
+    font-size:clamp(1.35rem,1rem + 1.4vw,2rem);line-height:1.24;letter-spacing:-.012em;margin:0}
+  .ft-top__quote-tail{margin-top:.35em !important;color:var(--gilt) !important}
+  .ft-top__intro{padding-left:0}
+  .ft-top__title{font-size:clamp(1.35rem,3.2vw,2.2rem);letter-spacing:-.03em;line-height:1.05;margin:0 0 clamp(.9rem,2vw,1.3rem);color:var(--ink);white-space:nowrap}
+  @media(max-width:820px){.ft-top__title{white-space:normal;font-size:clamp(1.6rem,5.5vw,2.2rem)}}
+  .ft-top__intro p{color:var(--graphite);font-size:clamp(.94rem,.7rem + .32vw,1.02rem);line-height:1.7;margin:0;max-width:52ch}
+
+  .ft-main{display:grid;grid-template-columns:1fr;gap:clamp(1.4rem,3vw,2.2rem);margin-top:clamp(2.4rem,5vw,3.6rem);align-items:stretch;position:relative}
+  .ft-photo{position:relative;margin:0;overflow:hidden;aspect-ratio:3/4;background:var(--limestone)}
+  .ft-photo img{width:100%;height:100%;object-fit:cover;display:block;
+    filter:grayscale(.6) contrast(1.02) brightness(.94);transition:transform 1.4s cubic-bezier(.2,.7,.2,1),filter .6s ease}
+  .ft-main:hover .ft-photo img{transform:scale(1.03);filter:grayscale(.35) contrast(1.05) brightness(.98)}
+
+  .ft-card{background:#EDE7DD;position:relative;
+    padding:clamp(2rem,4vw,3.2rem) clamp(1.6rem,3.4vw,2.6rem) clamp(1.6rem,3vw,2.2rem);
+    display:flex;flex-direction:column}
+  .ft-card__eyebrow{font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--gilt);margin:0 0 clamp(1.4rem,3vw,2rem)}
+  .ft-card__body{color:var(--graphite);font-size:clamp(.92rem,.7rem + .3vw,1rem);line-height:1.7;max-width:44ch;margin-inline:auto}
+  .ft-card__body p+p{margin-top:1em}
+  .ft-card__foot{margin-top:auto;padding-top:clamp(1.6rem,3vw,2.2rem);
+    display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:.35rem}
+  .ft-card__foot-label{font-family:var(--sans);font-size:clamp(.58rem,.68vw,.68rem);font-weight:500;
+    letter-spacing:.24em;text-transform:uppercase;color:var(--gilt)}
+  .ft-card__foot-value{font-family:var(--accent);font-style:italic;font-weight:400;color:var(--ink);
+    font-size:clamp(1.05rem,.9rem + .8vw,1.4rem);line-height:1.2;letter-spacing:-.008em}
+
   @media(min-width:820px){
-    .tier{grid-template-columns:minmax(0,1fr) auto;column-gap:clamp(2rem,5vw,4rem);row-gap:1rem}
-    .tier .t-body{grid-column:1;grid-row:2}
-    .tier .t-head{grid-column:1;grid-row:1}
-    .tier .t-cta{grid-column:2;grid-row:1 / span 2;align-self:center;justify-self:center;margin-top:0;text-align:center}
-    .tier .t-cta .btn{min-width:14rem}
+    .ft-top{grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,5rem);padding-block:clamp(1.8rem,3.6vw,2.6rem)}
+    .ft-top__quote{padding-right:clamp(1rem,2vw,1.6rem);border-right:1px solid var(--hair)}
+    .ft-top__intro{padding-left:clamp(1rem,2vw,1.6rem)}
+
+    /* PHOTO OVERLAPS CARD — reference layout */
+    .ft-main{grid-template-columns:42fr 58fr;gap:0;align-items:center;
+      padding-block:clamp(2.4rem,4.5vw,3.5rem)}
+    .ft-photo{grid-column:1;grid-row:1;z-index:2;
+      aspect-ratio:4/5;
+      margin-right:clamp(-14%,-16vw,-18%);
+      align-self:stretch}
+    .ft-card{grid-column:2;grid-row:1;z-index:1;
+      align-self:center;
+      min-height:80%;
+      padding:clamp(2.4rem,4.5vw,3.4rem) clamp(2rem,3.4vw,2.8rem) clamp(1.8rem,3.2vw,2.4rem) clamp(5rem,12vw,8.5rem)}
+    .ft-card__body{margin-inline:0;max-width:none}
   }
 
   /* ---------- dark band (floor test) ---------- */
@@ -473,14 +649,22 @@
   .band-dark .plate-label .ln{background:rgba(245,242,236,.2)}
   .band-dark .h-section{color:#f6f2ea}
   .band-dark .body{color:rgba(245,242,236,.72)}
+
+  /* §3 Dilemma — dark theme with subtle warm accent */
+  .dilemma-sec{position:relative;isolation:isolate;overflow:hidden;border-block:1px solid rgba(246,242,234,.1)}
+  .dilemma-sec::before{content:"";position:absolute;top:0;right:0;width:55%;height:100%;z-index:-1;pointer-events:none;
+    background:radial-gradient(70% 100% at 100% 25%,rgba(154,123,67,.11),transparent 65%)}
+  .dilemma-sec > .wrap{position:relative;z-index:1}
+  .dilemma-emph{color:#faf5eb !important;position:relative;padding-left:clamp(.9rem,1.6vw,1.2rem);border-left:2px solid var(--gilt);font-family:var(--display);font-weight:400;font-size:clamp(1.05rem,.85rem + .6vw,1.22rem);line-height:1.5;letter-spacing:-.008em;margin-block:.4em}
+  .dilemma-plate{background:linear-gradient(160deg,#2a2620,#16130f);box-shadow:0 30px 70px -30px rgba(0,0,0,.7),inset 0 0 0 1px rgba(246,242,234,.08)}
   /* §9 floor test: background image */
   .floor-bg{position:relative;overflow:hidden}
   .floor-bg::before{content:"";position:absolute;inset:0;z-index:0;
-    background:url('https://dashboard.katalyst-crm.com/files/t1/f8832bec70dea88c89db6db27aa8d17f_LE_upscale_gentle.jpg') center/cover no-repeat}
+    background:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260902_083006_f6e3e46d-9c5a-4200-888c-3975cc7b165c.png') center/cover no-repeat}
   .floor-bg::after{content:"";position:absolute;inset:0;z-index:1;
     background:linear-gradient(180deg,rgba(21,18,14,.82) 0%,rgba(21,18,14,.72) 50%,rgba(21,18,14,.84) 100%)}
   .floor-bg > .wrap{position:relative;z-index:2}
-  .pull{font-family:var(--display);font-style:italic;font-weight:400;
+  .pull{font-family:var(--accent);font-style:italic;font-weight:400;
     font-size:clamp(1.5rem,1.1rem + 2vw,2.6rem);line-height:1.28;color:#f6f2ea;
     max-width:24ch;margin:clamp(1.8rem,4vw,2.8rem) 0}
   .band-dark .pull{color:var(--gilt-soft)}
@@ -491,7 +675,7 @@
   .readmore{padding:0;border:0;background:transparent}
   .readmore > summary{list-style:none;cursor:pointer;
     display:inline-flex;align-items:center;gap:.7rem;
-    font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;
     color:var(--ink);padding:.9rem 1.5rem;border:1px solid var(--ink);border-radius:2px;
     transition:background .3s ease,color .3s ease}
   .readmore > summary::-webkit-details-marker{display:none}
@@ -539,44 +723,40 @@
     background:linear-gradient(160deg,#26221c,#0f0d0a);color:#f7f3ec;text-align:center;
     padding-block:clamp(4rem,10vw,7.5rem)}
   .closing::before{content:"";position:absolute;inset:0;z-index:-2;
-    background:url('https://dashboard.katalyst-crm.com/files/t1/d00aac267c1e363c6312e3371b6ae0ba.jpg') center/cover no-repeat}
+    background:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260902_083028_c4537aee-9d6a-4a69-a0af-d45e1ad6f0a3.png') center/cover no-repeat}
   .closing::after{content:"";position:absolute;inset:0;z-index:-1;
     background:
       radial-gradient(120% 80% at 50% 50%,rgba(14,11,8,.12) 0%,rgba(14,11,8,.32) 70%,rgba(14,11,8,.46) 100%),
       linear-gradient(180deg,rgba(14,11,8,.22) 0%,rgba(14,11,8,.10) 40%,rgba(14,11,8,.38) 100%)}
-  .closing .wrap{max-width:900px}
-  .closing-mark{font-family:var(--sans);font-size:.66rem;font-weight:600;letter-spacing:.4em;
+  .closing .wrap{max-width:1360px}
+  .closing-mark{font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.2em;
     text-transform:uppercase;color:var(--gilt-soft);display:inline-flex;align-items:center;gap:1rem;margin:0 auto}
   .closing-mark::before,.closing-mark::after{content:"";width:38px;height:1px;background:rgba(183,154,99,.5)}
-  .closing-heading{margin:0 auto;font-family:var(--display);font-weight:400;
-    color:#faf5eb;line-height:1.06;letter-spacing:-.008em;
+  .closing-heading{margin:0 auto;font-family:var(--display);font-weight:300;
+    color:#faf5eb;line-height:1.02;letter-spacing:-.03em;
     font-size:clamp(2.2rem,1.4rem + 3.6vw,4rem);max-width:22ch;
     text-shadow:0 2px 30px rgba(0,0,0,.85),0 1px 4px rgba(0,0,0,.7)}
-  .closing-heading span{display:block}
+  .closing-heading span{display:block;padding:0;border:0}
   .closing-heading .a{font-style:normal}
-  .closing-heading .b{font-style:italic;color:#faf5eb;margin-top:.35em;position:relative;padding-top:.6em}
-  .closing-heading .b::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
-    width:56px;height:1px;background:rgba(255,255,255,.55)}
+  .closing-heading .b{font-family:var(--accent);font-style:italic;font-weight:400;color:#faf5eb;margin-top:.2em}
   .closing-sub{font-family:var(--sans);font-style:normal;color:#faf5eb;
-    font-size:clamp(1rem,.75rem + .55vw,1.18rem);line-height:1.6;letter-spacing:.005em;
-    max-width:52ch;margin:clamp(2rem,4vw,2.8rem) auto 0;text-shadow:0 1px 18px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.6)}
+    font-size:clamp(.92rem,.7rem + .42vw,1.08rem);line-height:1.6;letter-spacing:.005em;
+    max-width:none;margin:clamp(2rem,4vw,2.8rem) auto 0;text-shadow:0 1px 18px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.6);white-space:nowrap;overflow:visible}
   .closing-cta{margin:clamp(2rem,4vw,2.8rem) auto 0;display:inline-flex}
   .closing-cta .btn{background:#faf5eb;color:var(--ink);border-color:#faf5eb;padding:1.15rem 2.4rem;letter-spacing:.22em}
   .closing-cta .btn:hover{background:var(--gilt-soft);border-color:var(--gilt-soft);color:var(--deep)}
-  .closing-sig{margin-top:clamp(3rem,6vw,4.2rem);font-family:var(--display);font-style:italic;
-    color:#faf5eb;font-size:1.05rem;letter-spacing:.02em;text-shadow:0 1px 14px rgba(0,0,0,.7)}
-  .closing-sig::before{content:"";display:block;width:1px;height:24px;background:rgba(255,255,255,.55);margin:0 auto 1.1rem}
+  @media(max-width:900px){.closing-sub{white-space:normal;max-width:52ch}}
 
   /* ---------- footer ---------- */
   footer{background:var(--deep);color:rgba(245,242,236,.72);border-top:1px solid rgba(245,242,236,.12)}
   .foot{display:grid;gap:1.6rem;padding-block:clamp(2.4rem,5vw,3.4rem)}
   .foot .brand b{color:#f7f3ec}
   .foot .brand span{color:var(--gilt-soft)}
-  .foot .tag{font-family:var(--display);font-style:italic;font-size:1.2rem;color:rgba(245,242,236,.86);max-width:34ch}
-  .foot .flinks{display:flex;flex-wrap:wrap;gap:1.2rem;font-family:var(--sans);font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+  .foot .tag{font-family:var(--accent);font-style:italic;font-size:1.2rem;color:rgba(245,242,236,.86);max-width:34ch}
+  .foot .flinks{display:flex;flex-wrap:wrap;gap:1.2rem;font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);font-weight:500;letter-spacing:.14em;text-transform:uppercase}
   .foot .flinks a{color:rgba(245,242,236,.7)}
   .foot .flinks a:hover{color:var(--gilt-soft)}
-  .foot .cr{font-family:var(--sans);font-size:.66rem;letter-spacing:.06em;color:rgba(245,242,236,.42)}
+  .foot .cr{font-family:var(--sans);font-size:clamp(.62rem,.72vw,.72rem);letter-spacing:.06em;color:rgba(245,242,236,.42)}
   @media(min-width:820px){
     .foot{grid-template-columns:1fr auto;align-items:end;column-gap:3rem}
     .foot .brand-block{grid-column:1}
@@ -606,10 +786,10 @@
   <div class="nav__in">
     <a class="brand" href="#top" aria-label="Marcia McCoy — AI for Rookies">
       <img class="brand__logo brand__logo--white" alt="Marcia McCoy — AI for Rookies"
-        src="https://dashboard.katalyst-crm.com/files/t1/LOGO%20MARCI%CC%87A%20MCCOY.png"
+        src="https://dashboard.katalyst-crm.com/files/t1/logomarcia.png"
         onerror="this.closest('.brand').classList.add('logo-failed')">
       <img class="brand__logo brand__logo--dark" alt="" aria-hidden="true"
-        src="https://dashboard.katalyst-crm.com/files/t1/LOGO%20MARCI%CC%87A%20MCCOY.png"
+        src="https://dashboard.katalyst-crm.com/files/t1/logomarcia.png"
         onerror="this.closest('.brand').classList.add('logo-failed')">
       <b>Marcia&nbsp;McCoy</b><span>AI for Rookies</span>
     </a>
@@ -643,14 +823,14 @@
 
   <!-- ============ §1 HERO (full-bleed image) ============ -->
   <section class="hero" id="hero">
-    <img class="hero-img" src="https://dashboard.katalyst-crm.com/files/t1/ChatGPT%20Image%20Aug%2026,%202026,%2008_19_56%20PM.png" alt="" loading="eager" onerror="this.style.display='none'">
+    <img class="hero-img" src="https://dashboard.katalyst-crm.com/files/t1/ChatGPT%20Image%20Sep%201,%202026,%2001_23_01%20PM%201.png" alt="" loading="eager" onerror="this.style.display='none'">
     <div class="hero-inner wrap">
       <div class="hero-copy reveal">
         <h1 class="hero-title h-display">You've Built a Career on Your Craft.<br>Don't Let AI Make You Invisible.</h1>
         <p class="hero-sub">AI for Rookies is ten steps to get started in one hour: the confidence to use AI as your assistant, without becoming a programmer. You are still the creator. AI is your assistant.</p>
         <div class="btn-row">
-          <a href="#offers" class="btn btn--primary btn--onDark">Begin My Ten Steps</a>
-          <a href="#offers" class="btn btn--ghost btn--onDark">Get the Free Quick Start Sheet</a>
+          <a href="#offers" class="btn btn--primary">Begin My Ten Steps</a>
+          <a href="#offers" class="btn btn--ghost">Get the Free Quick Start Sheet</a>
         </div>
       </div>
     </div>
@@ -757,7 +937,7 @@
   </section>
 
   <!-- ============ §3 DILEMMA ============ -->
-  <section class="sec" id="dilemma" style="background:var(--limestone);border-block:1px solid var(--hair)">
+  <section class="sec band-dark dilemma-sec" id="dilemma">
     <div class="wrap">
       <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='03'"></span><span class="nm">The Visualizer's Dilemma</span><span class="ln"></span></div>
       <div class="split split--textFirst">
@@ -768,12 +948,12 @@
             <p>I have sat across from hundreds of visionaries with exactly this fear. It is never a lack of talent. It is never a lack of ideas. It is a lack of confidence.</p>
             <p>When I stepped back from agenting full time, the calls didn't stop. People I'd worked with for decades still wanted me representing them. That's where this began: I realized I could teach them to do for themselves what I used to do for them.</p>
             <p>Here is the truth I learned agenting: great work sitting in a studio that no one sees serves no one. By my own count, more than half the collections I watched over four decades ended up in storage, or worse, the dump, because no one built a system to share them while there was still time.</p>
-            <p style="color:var(--ink)">People do not need more technology. They need more confidence. That is what AI for Rookies gives you first.</p>
+            <p class="dilemma-emph">People do not need more technology. They need more confidence. That is what AI for Rookies gives you first.</p>
             <p>I did not learn that lesson in a workshop. I learned it seventeen years ago, in a hospital bed, and I will tell you that story before we are through. For now, know this: confidence is not something you are born with. I have watched people build it in real time. I built mine the same way.</p>
           </div>
         </div>
         <div class="col-media reveal">
-          <div class="plate plate--tall">
+          <div class="plate plate--tall dilemma-plate">
             <img class="plate-img" loading="lazy" alt="The visualizer's dilemma — work sitting in the studio"
               src="https://dashboard.katalyst-crm.com/files/t1/26a3a783e3b7963cea5c421ac7a91f68_LE_upscale_gentle.jpg"
               onerror="this.style.display='none'">
@@ -827,11 +1007,11 @@
   </section>
 
   <!-- ============ §5 ARCHITECTURE ============ -->
-  <section class="sec arch" id="architecture" style="background:var(--limestone);border-block:1px solid var(--hair)">
+  <section class="sec arch" id="architecture">
     <div class="wrap">
       <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='05'"></span><span class="nm">The Agent's Architecture</span><span class="ln"></span></div>
       <div class="reveal arch-head">
-        <h2 class="h-section" style="margin-bottom:1.2rem">Your Automated Agent Team</h2>
+        <h2 class="h-section arch-title" style="margin-bottom:1.2rem">Your Automated Agent Team</h2>
         <p class="body">For forty years, my job had four parts. I used to do all four by hand: hundreds of calls, plane tickets, contracts drafted at midnight. AI for Rookies teaches you to agent for yourself. The same four jobs, automated.</p>
       </div>
 
@@ -884,92 +1064,57 @@
 
       <div class="reveal arch-close body">
         <p>Not a marketing agency. Not a technical platform. Call it a gallery assistant, an ops team, a chief of staff, whatever your world calls the person who handles everything so you don't have to. The four jobs don't change. It works in the background while you stay focused on the one thing no software can do: create.</p>
-        <p style="color:var(--ink)">That is your automated agent team, built to make sure your work is never invisible again. Here is exactly how it works.</p>
+        <p>That is your automated agent team, built to make sure your work is never invisible again. Here is exactly how it works.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ §6 CREATE (timeline) ============ -->
-  <section class="sec" id="create">
-    <div class="wrap">
-      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='06'"></span><span class="nm">The C.R.E.A.T.E. System</span><span class="ln"></span></div>
-      <div class="reveal" style="max-width:66ch">
+  <!-- ============ §6 CREATE (cinematic grid) ============ -->
+  <section class="sec create-sec" id="create">
+    <div class="plate-label reveal create-plate"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='06'"></span><span class="nm">The C.R.E.A.T.E. System</span><span class="ln"></span></div>
+
+    <div class="create-grid">
+      <!-- Left column: heading (spans both rows) -->
+      <div class="cg-head reveal">
         <p class="eyebrow">The same six moves I make every time</p>
-        <h2 class="h-section" style="margin:.7rem 0 1.1rem">The C.R.E.A.T.E. Framework</h2>
-        <p class="body">Six steps, condensed into an order anyone can follow. No coding. No jargon you have to decode alone, because I already decoded it for you.</p>
+        <h2 class="h-section create-title">The C.R.E.A.T.E. Framework</h2>
+        <p class="cg-intro">Six steps, condensed into an order anyone can follow. No coding. No jargon you have to decode alone, because I already decoded it for you.</p>
       </div>
 
-      <div class="create-tiles reveal">
-
-        <!-- C · Clarity — a curator standing before a single spotlit framed work -->
-        <article class="ct">
-          <div class="ct-art"><img class="art-scene" loading="lazy" alt="C — Clarity" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091709_c48371e3-7a5d-4134-b5ff-a4f3c9bac565.png"></div>
-          <div class="ct-body">
-            <div class="ct-letter">C</div>
-            <h3 class="ct-title">Clarity</h3>
-            <p class="ct-desc">Get clear on your purpose and exactly who you are speaking to.</p>
-          </div>
-          <div class="ct-meta">I can do this.</div>
-        </article>
-
-        <!-- R · Respond — curator briefing an assistant (two figures at a desk) -->
-        <article class="ct">
-          <div class="ct-art"><img class="art-scene" loading="lazy" alt="R — Respond" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091718_9e077053-fd1e-4e28-aab1-19122981df2b.png"></div>
-          <div class="ct-body">
-            <div class="ct-letter">R</div>
-            <h3 class="ct-title">Respond</h3>
-            <p class="ct-desc">Talk with AI the way you'd brief a smart assistant — conversationally, in plain language.</p>
-          </div>
-          <div class="ct-meta">I know how to ask.</div>
-        </article>
-
-        <!-- E · Expand — a rack of many framed works multiplying out from one -->
-        <article class="ct">
-          <div class="ct-art"><img class="art-scene" loading="lazy" alt="E — Expand" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091727_9e8f7f6b-8612-4f27-8710-31f9650e50df.png"></div>
-          <div class="ct-body">
-            <div class="ct-letter">E</div>
-            <h3 class="ct-title">Expand</h3>
-            <p class="ct-desc">Turn one idea into many: a book, a course, a year of content.</p>
-          </div>
-          <div class="ct-meta">My ideas are becoming real.</div>
-        </article>
-
-        <!-- A · Apply — an artist at an easel in a working studio -->
-        <article class="ct">
-          <div class="ct-art"><img class="art-scene" loading="lazy" alt="A — Apply" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091739_69289fe9-e38c-4d76-9889-3e79b4350e27.png"></div>
-          <div class="ct-body">
-            <div class="ct-letter">A</div>
-            <h3 class="ct-title">Apply</h3>
-            <p class="ct-desc">Put AI to work inside your actual business, not just your imagination.</p>
-          </div>
-          <div class="ct-meta">How I work now.</div>
-        </article>
-
-        <!-- T · Teach & Tell — gallery opening: figures viewing framed works on a lit wall -->
-        <article class="ct">
-          <div class="ct-art"><img class="art-scene" loading="lazy" alt="T — Teach & Tell" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091747_d8d6b0d9-bca2-480c-94fc-51107691813d.png"></div>
-          <div class="ct-body">
-            <div class="ct-letter">T</div>
-            <h3 class="ct-title">Teach &amp; Tell</h3>
-            <p class="ct-desc">Share what you've made. Build visibility. Build your community.</p>
-          </div>
-          <div class="ct-meta">People are finding me.</div>
-        </article>
-
-        <!-- E · Evolve — a long museum corridor receding to a lit vanishing point -->
-        <article class="ct">
-          <div class="ct-art"><img class="art-scene" loading="lazy" alt="E — Evolve" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091757_8de74051-0a15-470a-96eb-9d8d559a219b.png"></div>
-          <div class="ct-body">
-            <div class="ct-letter">E</div>
-            <h3 class="ct-title">Evolve</h3>
-            <p class="ct-desc">Refine your systems. Keep creating. Protect what you build for the long run.</p>
-          </div>
-          <div class="ct-meta">My work keeps growing.</div>
-        </article>
+      <!-- 6 cells: C R E · A T E -->
+      <div class="cg-cell reveal">
+        <span class="cg-letter">C</span>
+        <h3 class="cg-title">Clarity</h3>
+        <p class="cg-desc">Get clear on your purpose and exactly who you are speaking to.</p>
       </div>
-
-      <p class="reveal lede" style="max-width:52ch;margin:clamp(2rem,4vw,3rem) auto 0;text-align:center">You remain the storyteller through every step. AI simply moves faster than I ever could by hand.</p>
+      <div class="cg-cell reveal">
+        <span class="cg-letter">R</span>
+        <h3 class="cg-title">Respond</h3>
+        <p class="cg-desc">Talk with AI the way you'd brief a smart assistant — conversationally, in plain language.</p>
+      </div>
+      <div class="cg-cell reveal">
+        <span class="cg-letter">E</span>
+        <h3 class="cg-title">Expand</h3>
+        <p class="cg-desc">Turn one idea into many: a book, a course, a year of content.</p>
+      </div>
+      <div class="cg-cell reveal">
+        <span class="cg-letter">A</span>
+        <h3 class="cg-title">Apply</h3>
+        <p class="cg-desc">Put AI to work inside your actual business, not just your imagination.</p>
+      </div>
+      <div class="cg-cell reveal">
+        <span class="cg-letter">T</span>
+        <h3 class="cg-title">Teach &amp; Tell</h3>
+        <p class="cg-desc">Share what you've made. Build visibility. Build your community.</p>
+      </div>
+      <div class="cg-cell reveal">
+        <span class="cg-letter">E</span>
+        <h3 class="cg-title">Evolve</h3>
+        <p class="cg-desc">Refine your systems. Keep creating. Protect what you build for the long run.</p>
+      </div>
     </div>
+
+    <p class="reveal create-close">You remain the storyteller through every step. AI simply moves faster than I ever could by hand.</p>
   </section>
 
   <!-- ============ §7 ACTION LABS ============ -->
@@ -1020,126 +1165,191 @@
       </div>
 
       <div class="labcall reveal">
-        <p class="eyebrow">Join a four-hour Interactive Group Lab</p>
-        <p class="body" style="margin-top:.8rem;color:var(--ink)">The method doesn't care what you're building. Mine happened to be museum-grade art. Yours might be a business, a book, a brand. Same six moves. Watch it happen.</p>
-        <div class="hours">
-          <div class="hour">
-            <div class="t">The first hour</div>
-            <p class="body">I demonstrate AI completing real steps on one of these projects.</p>
+        <div class="labcall__head">
+          <div>
+            <p class="labcall__kicker">Join a four-hour Interactive Group Lab</p>
+            <h3 class="labcall__title">The method doesn't care what you're building.</h3>
           </div>
-          <div class="hour">
-            <div class="t">The second hour is yours</div>
-            <p class="body">Bring your own vision, and we work it together.</p>
+          <p class="labcall__lede">Mine happened to be museum-grade art. Yours might be a business, a book, a brand. Same six moves. Watch it happen.</p>
+        </div>
+        <div class="labcall__hours">
+          <div class="lab-hour">
+            <p class="lab-hour__no">01</p>
+            <h4 class="lab-hour__t">The first hour</h4>
+            <p class="lab-hour__d">I demonstrate AI completing real steps on one of these projects.</p>
+          </div>
+          <div class="lab-hour">
+            <p class="lab-hour__no">02</p>
+            <h4 class="lab-hour__t">The second hour is yours</h4>
+            <p class="lab-hour__d">Bring your own vision, and we work it together.</p>
           </div>
         </div>
-        <div class="btn-row"><a href="#offers" class="btn btn--primary">Join a Lab</a></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ §8 OFFERS ============ -->
-  <section class="sec" id="offers">
-    <div class="wrap">
-      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='08'"></span><span class="nm">The Chosen Offers</span><span class="ln"></span></div>
-      <div class="reveal" style="max-width:64ch">
-        <h2 class="h-section" style="margin-bottom:1.1rem">Choose Your Starting Point</h2>
-      </div>
-
-      <div class="steward reveal">
-        <p>“Skip the digital noise. Learn the first ten things that actually matter, and start actualizing your vision in less than an hour.”</p>
-        <cite>Marcia McCoy, Founder AI for Rookies</cite>
-        <p class="note">I still hold Gordon Parks's last unpublished body of work as its steward today. That's the kind of trust I've built a career on, and it's the same trust I'm asking you to place in this system. Every tier here does one job: get you moving today. No scarcity timers. No confusing bundles. Just a clear, fair staircase from your first free step to working directly with me.</p>
-      </div>
-
-      <div class="tiers">
-        <div class="tier tier--feature reveal">
-          <div class="t-head">
-            <h3>Start Free</h3>
-          </div>
-          <div class="t-body"><p class="desc">The Quick Start Sheet, fifteen beginner prompts, and one hundred prompts organized by topic.</p></div>
-          <div class="t-cta">
-            <span class="price">$0</span>
-            <a href="#" class="btn btn--primary">Get the Free Resources</a>
-          </div>
-        </div>
-
-        <div class="tier reveal">
-          <div class="t-head">
-            <h3>The Artist Agent Playbook &amp; Workbook</h3>
-          </div>
-          <div class="t-body"><p class="desc">My core book and its companion workbook. Everything you need to take your first ten steps, plus the one-page contract that protected my own rights for decades — the one I call my Cover Your Ass contract.</p></div>
-          <div class="t-cta">
-            <span class="price">$47</span>
-            <a href="#" class="btn btn--ghost">Get the Playbook Bundle</a>
-          </div>
-        </div>
-
-        <div class="tier reveal">
-          <div class="t-head">
-            <h3>The 1-Hour Mini Course</h3>
-          </div>
-          <div class="t-body"><p class="desc">A fast, guided video walkthrough of the entire system.</p></div>
-          <div class="t-cta">
-            <span class="price">$249</span>
-            <a href="#" class="btn btn--ghost">Start the Course</a>
-          </div>
-        </div>
-
-        <div class="tier reveal">
-          <div class="t-head">
-            <h3>The Complete AI Starter Bundle</h3>
-          </div>
-          <div class="t-body"><p class="desc">Book, workbook, and course together, at ten percent off.</p></div>
-          <div class="t-cta">
-            <span class="price">$266</span>
-            <a href="#" class="btn btn--ghost">Get the Full Bundle</a>
-          </div>
-        </div>
-
-        <div class="tier reveal">
-          <div class="t-head">
-            <h3>Interactive Group Labs</h3>
-          </div>
-          <div class="t-body"><p class="desc">Four hours live. Watch me build. Then build your own, with my help.</p></div>
-          <div class="t-cta">
-            <span class="price">$497</span>
-            <a href="#" class="btn btn--ghost">Join a Lab</a>
-          </div>
-        </div>
-
-        <div class="tier tier--custom reveal">
-          <div class="t-head">
-            <h3>Custom One-on-One</h3>
-          </div>
-          <div class="t-body"><p class="desc">Direct, private work with me. Scope built around your specific project.</p></div>
-          <div class="t-cta">
-            <span class="price">From $2,500</span>
-            <a href="#" class="btn btn--ghost">Apply for a Consultation</a>
-          </div>
+        <div class="labcall__cta">
+          <a href="#offers" class="btn">Join a Lab</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ §9 GALLERY FLOOR TEST ============ -->
-  <section class="sec band-dark floor-bg" id="floortest">
+  <!-- ============ §8 OFFERS — alternating process rows ============ -->
+  <section class="sec offers-sec" id="offers">
     <div class="wrap">
-      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='09'"></span><span class="nm">The Gallery Floor Test</span><span class="ln"></span></div>
-      <div class="split split--wideText">
-        <div class="col-text reveal">
-          <h2 class="h-section" style="margin-bottom:1.4rem">Here's How I Decide Who This Is Really For</h2>
-          <div class="body">
-            <p>For years, I curated the openings I was proudest of in a black t-shirt and blue jeans, sweeping the floor before the doors opened. Nobody in the room knew I was the curator. That was the point. The work was never about me.</p>
-            <p>That's still the test I use, and it was never about résumés or how confident you already felt walking in the door. It comes down to one thing: whether you're willing to do the quiet, unglamorous work before anyone is watching, because the work itself is the only thing that ever actually gets you seen. This isn't about the confidence you already have. It's about whether you're willing to start without it.</p>
-            <p>If you're still waiting for permission, a mentor, a committee, the right moment, this isn't your studio yet. If you're ready to start sweeping your own floor today, whether or not you've done it before, AI for Rookies is built for you.</p>
+      <div class="plate-label reveal offers-plate">
+        <span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='08'"></span>
+        <span class="nm">The Chosen Offers</span>
+        <span class="ln"></span>
+      </div>
+
+      <div class="offers-head reveal">
+        <h2 class="h-section offers-title">Choose Your Starting Point</h2>
+        <blockquote class="offers-quote">
+          <p>"Skip the digital noise. Learn the first ten things that actually matter, and start actualizing your vision in less than an hour."</p>
+          <cite>Marcia McCoy, Founder AI for Rookies</cite>
+        </blockquote>
+        <p class="offers-intro">I still hold Gordon Parks's last unpublished body of work as its steward today. That's the kind of trust I've built a career on, and it's the same trust I'm asking you to place in this system. Every tier here does one job: get you moving today. No scarcity timers. No confusing bundles. Just a clear, fair staircase from your first free step to working directly with me.</p>
+      </div>
+
+      <div class="offer-rows">
+
+        <!-- 01 · Start Free -->
+        <article class="offer-row reveal">
+          <div class="offer-text">
+            <div class="offer-num" aria-hidden="true"><span>01</span></div>
+            <p class="offer-label">Start Free</p>
+            <p class="offer-desc">The Quick Start Sheet, fifteen beginner prompts, and one hundred prompts organized by topic.</p>
+            <div class="offer-foot">
+              <span class="offer-price">$0</span>
+              <a href="#" class="btn btn--primary offer-btn">Get the Free Resources</a>
+            </div>
           </div>
+          <figure class="offer-img">
+            <img loading="lazy" alt="Start Free" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260902_184636_82b831dd-7672-498f-a1e0-e30d2c1bd9c4.png">
+          </figure>
+        </article>
+
+        <!-- 02 · The Artist Agent Playbook & Workbook -->
+        <article class="offer-row offer-row--flip reveal">
+          <div class="offer-text">
+            <div class="offer-num" aria-hidden="true"><span>02</span></div>
+            <p class="offer-label">The Artist Agent Playbook &amp; Workbook</p>
+            <p class="offer-desc">My core book and its companion workbook. Everything you need to take your first ten steps, plus the one-page contract that protected my own rights for decades — the one I call my Cover Your Ass contract.</p>
+            <div class="offer-foot">
+              <span class="offer-price">$47</span>
+              <a href="#" class="btn btn--ghost offer-btn">Get the Playbook Bundle</a>
+            </div>
+          </div>
+          <figure class="offer-img">
+            <img loading="lazy" alt="The Artist Agent Playbook" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091718_9e077053-fd1e-4e28-aab1-19122981df2b.png">
+          </figure>
+        </article>
+
+        <!-- 03 · The 1-Hour Mini Course -->
+        <article class="offer-row reveal">
+          <div class="offer-text">
+            <div class="offer-num" aria-hidden="true"><span>03</span></div>
+            <p class="offer-label">The 1-Hour Mini Course</p>
+            <p class="offer-desc">A fast, guided video walkthrough of the entire system.</p>
+            <div class="offer-foot">
+              <span class="offer-price">$249</span>
+              <a href="#" class="btn btn--ghost offer-btn">Start the Course</a>
+            </div>
+          </div>
+          <figure class="offer-img">
+            <img loading="lazy" alt="1-Hour Mini Course" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091727_9e8f7f6b-8612-4f27-8710-31f9650e50df.png">
+          </figure>
+        </article>
+
+        <!-- 04 · The Complete AI Starter Bundle -->
+        <article class="offer-row offer-row--flip reveal">
+          <div class="offer-text">
+            <div class="offer-num" aria-hidden="true"><span>04</span></div>
+            <p class="offer-label">The Complete AI Starter Bundle</p>
+            <p class="offer-desc">Book, workbook, and course together, at ten percent off.</p>
+            <div class="offer-foot">
+              <span class="offer-price">$266</span>
+              <a href="#" class="btn btn--ghost offer-btn">Get the Full Bundle</a>
+            </div>
+          </div>
+          <figure class="offer-img">
+            <img loading="lazy" alt="Complete Bundle" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091739_69289fe9-e38c-4d76-9889-3e79b4350e27.png">
+          </figure>
+        </article>
+
+        <!-- 05 · Interactive Group Labs -->
+        <article class="offer-row reveal">
+          <div class="offer-text">
+            <div class="offer-num" aria-hidden="true"><span>05</span></div>
+            <p class="offer-label">Interactive Group Labs</p>
+            <p class="offer-desc">Four hours live. Watch me build. Then build your own, with my help.</p>
+            <div class="offer-foot">
+              <span class="offer-price">$497</span>
+              <a href="#" class="btn btn--ghost offer-btn">Join a Lab</a>
+            </div>
+          </div>
+          <figure class="offer-img">
+            <img loading="lazy" alt="Interactive Group Labs" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091747_d8d6b0d9-bca2-480c-94fc-51107691813d.png">
+          </figure>
+        </article>
+
+        <!-- 06 · Custom One-on-One -->
+        <article class="offer-row offer-row--flip reveal">
+          <div class="offer-text">
+            <div class="offer-num" aria-hidden="true"><span>06</span></div>
+            <p class="offer-label">Custom One-on-One</p>
+            <p class="offer-desc">Direct, private work with me. Scope built around your specific project.</p>
+            <div class="offer-foot">
+              <span class="offer-price">From $2,500</span>
+              <a href="#" class="btn btn--primary offer-btn">Apply for a Consultation</a>
+            </div>
+          </div>
+          <figure class="offer-img">
+            <img loading="lazy" alt="Custom One-on-One" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091757_8de74051-0a15-470a-96eb-9d8d559a219b.png">
+          </figure>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ §9 GALLERY FLOOR TEST — editorial layout ============ -->
+  <section class="sec floortest-sec" id="floortest">
+    <div class="wrap">
+      <div class="plate-label reveal floortest-plate">
+        <span class="no" aria-hidden="true"><img src="https://dashboard.katalyst-crm.com/files/t1/logo%20emblem%20.png" alt="" onerror="this.parentNode.textContent='09'"></span>
+        <span class="nm">The Gallery Floor Test</span>
+        <span class="ln"></span>
+      </div>
+
+      <!-- Top split: italic pull quote (left) + intro paragraph (right) -->
+      <div class="ft-top reveal">
+        <div class="ft-top__quote">
+          <p>there are those who talk the talk,<br>and those who walk the walk.</p>
+          <p class="ft-top__quote-tail">I only work with the second.</p>
         </div>
-        <div class="col-media reveal">
-          <p class="pull">There are those who talk the talk, and those who walk the walk. I only work with the second.</p>
-          <div class="body">
+        <div class="ft-top__intro">
+          <h2 class="h-section ft-top__title">Here's How I Decide Who This Is Really For</h2>
+          <p>For years, I curated the openings I was proudest of in a black t-shirt and blue jeans, sweeping the floor before the doors opened. Nobody in the room knew I was the curator. That was the point. The work was never about me.</p>
+        </div>
+      </div>
+
+      <!-- Main editorial block: photo OVERLAPS cream card -->
+      <div class="ft-main reveal">
+        <figure class="ft-photo">
+          <img loading="lazy" alt="The gallery before the doors open" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260902_184622_ea0fa2cf-1d0d-480e-b6e3-5b54bd98e7a8.png">
+        </figure>
+
+        <aside class="ft-card">
+          <p class="ft-card__eyebrow">the test itself</p>
+          <div class="ft-card__body">
+            <p>That's still the test I use, and it was never about résumés or how confident you already felt walking in the door. It comes down to one thing: whether you're willing to do the quiet, unglamorous work before anyone is watching, because the work itself is the only thing that ever actually gets you seen.</p>
+            <p>This isn't about the confidence you already have. It's about whether you're willing to start without it. If you're still waiting for permission, a mentor, a committee, the right moment, this isn't your studio yet. If you're ready to start sweeping your own floor today, whether or not you've done it before, AI for Rookies is built for you.</p>
             <p>At my own openings, I was the best kept secret in the room while the artists got the recognition. Not anymore. This is me stepping out from behind the gallery wall, and it's your invitation to do the same, whatever you're building.</p>
           </div>
-        </div>
+          <div class="ft-card__foot">
+            <span class="ft-card__foot-label">the invitation</span>
+            <span class="ft-card__foot-value">Step out from behind the wall</span>
+          </div>
+        </aside>
       </div>
     </div>
   </section>
@@ -1153,16 +1363,16 @@
       </div>
       <div class="faq reveal">
         <details class="faq-item">
-          <summary>“I’m a creator, not a tech person. Can I really do this?” <span class="fq-plus" aria-hidden="true"></span></summary>
-          <p class="a">I wasn’t a tech person either. I hired five teachers and gave myself fourteen-hour days over one Christmas break to learn this the hard way, so you don’t have to. Confidence over coding. No programming required, ever.</p>
+          <summary>"I'm a creator, not a tech person. Can I really do this?" <span class="fq-plus" aria-hidden="true"></span></summary>
+          <p class="a">I wasn't a tech person either. I hired five teachers and gave myself fourteen-hour days over one Christmas break to learn this the hard way, so you don't have to. Confidence over coding. No programming required, ever.</p>
         </details>
         <details class="faq-item">
-          <summary>“What about protecting my rights and my work?” <span class="fq-plus" aria-hidden="true"></span></summary>
-          <p class="a">When Gordon Parks died in the middle of our launch, the one thing that held was a simple, one-page contract I’d written years earlier, the kind that survives an estate. I call it my Cover Your Ass contract. It’s yours too, built into the Playbook.</p>
+          <summary>"What about protecting my rights and my work?" <span class="fq-plus" aria-hidden="true"></span></summary>
+          <p class="a">When Gordon Parks died in the middle of our launch, the one thing that held was a simple, one-page contract I'd written years earlier, the kind that survives an estate. I call it my Cover Your Ass contract. It's yours too, built into the Playbook.</p>
         </details>
         <details class="faq-item">
-          <summary>“Should I wait until AI settles down?” <span class="fq-plus" aria-hidden="true"></span></summary>
-          <p class="a">I didn’t wait for it to settle. I gave myself four weeks and started anyway, and it still hasn’t settled. The best time to start was yesterday. The next best time is today.</p>
+          <summary>"Should I wait until AI settles down?" <span class="fq-plus" aria-hidden="true"></span></summary>
+          <p class="a">I didn't wait for it to settle. I gave myself four weeks and started anyway, and it still hasn't settled. The best time to start was yesterday. The next best time is today.</p>
         </details>
       </div>
     </div>
@@ -1222,7 +1432,6 @@
       <div class="closing-cta">
         <a href="#offers" class="btn btn--primary">Begin My Ten Steps</a>
       </div>
-      <p class="closing-sig">— Marcia McCoy</p>
     </div>
   </section>
 
@@ -1232,7 +1441,7 @@
 <footer>
   <div class="wrap foot">
     <div class="brand-block brand">
-      <img class="brand__logo brand__logo--white" alt="Marcia McCoy — AI for Rookies"
+      <img class="brand__logo foot-logo" alt="Marcia McCoy — AI for Rookies"
         src="https://dashboard.katalyst-crm.com/files/t1/LOGO%20MARCI%CC%87A%20MCCOY.png"
         onerror="this.closest('.brand').classList.add('logo-failed')">
       <b>Marcia&nbsp;McCoy</b><span>AI for Rookies</span>
