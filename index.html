@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#F5F2EC;
@@ -333,6 +334,108 @@
   @media(min-width:620px){.roster{grid-template-columns:repeat(3,1fr)}}
   @media(min-width:1000px){.roster{grid-template-columns:repeat(3,1fr);max-width:none;margin-inline:calc(var(--gutter) * -1)}}
 
+  /* ---------- ROSTER BAND — full-width image on right, hierarchical text on left ---------- */
+  /* Kill the parent section's bottom padding so the band sits flush with the next section */
+  #benchmark{padding-bottom:0}
+  .roster-band{
+    position:relative;isolation:isolate;overflow:hidden;
+    margin-top:clamp(3rem,6vw,4.5rem);
+    width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
+    color:#f6f2ea;background:#1c1812;
+    padding:clamp(3rem,6vw,5rem) clamp(1.25rem,4vw,3rem);
+    min-height:clamp(420px,60vw,680px);
+    display:flex;align-items:center;
+  }
+  /* Full-width cover fill with the new image */
+  .roster-band::before{
+    content:"";position:absolute;inset:0;z-index:-3;
+    background:
+      url('https://cdn.katalyst-crm.com/a/a8565bcf-ea5f-702b-cd03-0b621264fd8b')
+      center center / cover no-repeat,
+      #1c1812;
+  }
+  /* Stronger dark gradient from the left — text side deeply shaded, right side stays clear */
+  .roster-band::after{
+    content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+    background:linear-gradient(
+      90deg,
+      rgba(8,6,4,.94) 0%,
+      rgba(8,6,4,.88) 18%,
+      rgba(8,6,4,.72) 34%,
+      rgba(8,6,4,.45) 50%,
+      rgba(8,6,4,.20) 66%,
+      rgba(8,6,4,.05) 80%,
+      transparent 92%
+    );
+  }
+  .roster-band__inner{
+    position:relative;z-index:2;
+    max-width:1200px;margin:0 auto;width:100%;
+    text-align:left;
+  }
+  .roster-band__col{max-width:clamp(320px,46vw,560px)}
+  .roster-band__kicker{
+    font-family:var(--sans);font-size:clamp(.62rem,.72vw,.75rem);font-weight:500;
+    letter-spacing:.24em;text-transform:uppercase;
+    color:var(--gilt-soft);
+    margin:0 0 clamp(1.1rem,2.4vw,1.6rem);
+    text-shadow:0 1px 10px rgba(0,0,0,.55);
+  }
+  .roster-band__heading{
+    font-family:var(--display);font-weight:300;
+    font-size:clamp(1.6rem,1.1rem + 2.2vw,2.9rem);
+    line-height:1.08;letter-spacing:-.024em;
+    color:#faf5eb;margin:0 0 clamp(1.4rem,2.6vw,2rem);
+    text-shadow:0 2px 22px rgba(0,0,0,.55),0 1px 4px rgba(0,0,0,.45);
+    max-width:22ch;
+  }
+  .roster-band__heading em{font-family:var(--accent);font-style:italic;color:var(--gilt-soft);font-weight:400}
+  .roster-band__names{
+    font-family:var(--sans);font-weight:400;font-style:normal;
+    font-size:clamp(1rem,.85rem + .35vw,1.15rem);
+    line-height:1.7;letter-spacing:.005em;
+    color:rgba(246,242,234,.92);
+    margin:0;
+    text-shadow:0 1px 14px rgba(0,0,0,.55);
+  }
+  .roster-band__names .roster-band__dot{
+    display:inline;color:var(--gilt-soft);opacity:.9;margin:0 .5em;font-weight:300;
+  }
+  .roster-band__rule{
+    width:clamp(44px,5vw,72px);height:1px;
+    background:rgba(246,242,234,.32);
+    margin:clamp(1.6rem,3vw,2.2rem) 0 0;padding:0;
+  }
+  .roster-band__note{
+    margin:clamp(1rem,1.8vw,1.3rem) 0 0;
+    font-family:var(--accent);font-style:italic;font-weight:400;
+    font-size:clamp(1rem,.85rem + .38vw,1.2rem);
+    line-height:1.4;letter-spacing:-.005em;
+    color:#faf5eb;
+    text-shadow:0 1px 14px rgba(0,0,0,.55);
+    max-width:28ch;
+  }
+  /* On narrow screens the image goes behind the whole panel; overlay covers more so text stays legible */
+  @media(max-width:760px){
+    .roster-band{min-height:auto;padding:clamp(2.8rem,7vw,4rem) clamp(1.25rem,5vw,2rem)}
+    .roster-band::before{
+      background:
+        url('https://cdn.katalyst-crm.com/a/a8565bcf-ea5f-702b-cd03-0b621264fd8b')
+        center center / cover no-repeat,
+        #1c1812;
+    }
+    .roster-band::after{
+      background:linear-gradient(
+        180deg,
+        rgba(15,11,7,.15) 0%,
+        rgba(15,11,7,.55) 45%,
+        rgba(15,11,7,.75) 100%
+      );
+    }
+    .roster-band__col{max-width:none}
+    .roster-band__heading{max-width:none}
+  }
+
   /* ---------- four jobs (editorial numbered cards) ---------- */
   #architecture .plate-label{justify-content:center}
   #architecture .plate-label .ln{display:none}
@@ -420,7 +523,7 @@
   /* ---------- CREATE — cinematic grid layout ---------- */
   .create-sec{position:relative;isolation:isolate;overflow:hidden;color:#f6f2ea;padding:0}
   .create-sec::before{content:"";position:absolute;inset:0;z-index:-3;
-    background:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091709_c48371e3-7a5d-4134-b5ff-a4f3c9bac565.png') center/cover no-repeat;
+    background:url('https://cdn.katalyst-crm.com/a/ced1d8f2-4fdc-6704-0a40-2061d29907c6') center/cover no-repeat;
     transform:scale(1.06);will-change:transform;
     animation:createDrift 40s ease-in-out infinite alternate}
   @keyframes createDrift{
@@ -429,9 +532,7 @@
   }
   @media(prefers-reduced-motion:reduce){.create-sec::before{animation:none}}
   .create-sec::after{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
-    background:
-      radial-gradient(140% 90% at 40% 40%,rgba(10,7,5,.0) 0%,rgba(10,7,5,.32) 55%,rgba(6,4,3,.78) 100%),
-      linear-gradient(180deg,rgba(8,6,4,.72) 0%,rgba(8,6,4,.42) 30%,rgba(8,6,4,.5) 70%,rgba(4,3,2,.82) 100%)}
+    background:transparent}
   .create-plate{padding:clamp(2.6rem,5vw,4rem) var(--gutter) 0;position:relative;z-index:2;justify-content:center}
   .create-plate .nm{color:rgba(246,242,234,.7)}
   .create-plate .ln{background:rgba(246,242,234,.22)}
@@ -723,7 +824,7 @@
     background:linear-gradient(160deg,#26221c,#0f0d0a);color:#f7f3ec;text-align:center;
     padding-block:clamp(4rem,10vw,7.5rem)}
   .closing::before{content:"";position:absolute;inset:0;z-index:-2;
-    background:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260902_083028_c4537aee-9d6a-4a69-a0af-d45e1ad6f0a3.png') center/cover no-repeat}
+    background:url('https://cdn.katalyst-crm.com/a/4c17f25c-090a-044f-2608-d5b15c9eedd1') center/cover no-repeat}
   .closing::after{content:"";position:absolute;inset:0;z-index:-1;
     background:
       radial-gradient(120% 80% at 50% 50%,rgba(14,11,8,.12) 0%,rgba(14,11,8,.32) 70%,rgba(14,11,8,.46) 100%),
@@ -776,6 +877,158 @@
   }
   /* JS-off safety net: never hide content */
   .no-js .reveal{opacity:1 !important;transform:none !important}
+
+  /* ==========================================================================
+     THEME OVERRIDE — "Cosmic Watercolor"  (artist-forward retheme, v1)
+     Palette drawn from the watercolor reference; energy from the AI-for-Rookies
+     cosmic promo. Appended last so it wins the cascade. No beige survives.
+     ========================================================================== */
+  :root{
+    --paper:#FCF8FF;          /* soft near-white, a whisper of lilac */
+    --limestone:#F3E9FF;      /* pale lilac wash */
+    --stone:#E9D8FF;
+    --ink:#241436;            /* deep plum-black: text + dark grounds */
+    --deep:#170627;           /* deeper cosmic plum (footer / bands) */
+    --graphite:#6E5B84;       /* muted plum-grey secondary text */
+    --gilt:#E5177B;           /* HOT MAGENTA — primary accent */
+    --gilt-soft:#9B2FE0;      /* electric violet — secondary accent */
+    --hair:rgba(122,31,162,.22);
+    --hair-soft:rgba(122,31,162,.11);
+    --display:'Fraunces',Georgia,'Times New Roman',serif;
+    --accent:'Fraunces',Georgia,serif;
+    --marigold:#F6B01E; --teal:#12BBA6; --coral:#FF6F61; --indigo:#2B0F63; --sky:#3DB6E6;
+    --cosmos:linear-gradient(155deg,#E11D5B 0%,#C21C8A 32%,#7A1FA2 64%,#2E1370 100%);
+  }
+
+  /* Watercolor wash across the whole page — the single biggest change */
+  body{
+    background:
+      radial-gradient(58% 42% at 10% 6%,  rgba(229,23,123,.16), transparent 60%),
+      radial-gradient(52% 38% at 94% 3%,  rgba(246,176,30,.18), transparent 60%),
+      radial-gradient(60% 48% at 90% 97%, rgba(18,187,166,.15), transparent 62%),
+      radial-gradient(58% 46% at 4% 94%,  rgba(155,47,224,.17), transparent 62%),
+      var(--paper) !important;
+    background-attachment:fixed;
+  }
+  ::selection{background:rgba(229,23,123,.24);color:var(--ink)}
+
+  /* Big light sections: let the wash show through instead of flat paper */
+  .offers-sec, .floortest-sec, .labs-sec, .epigraph-row{background:transparent !important}
+  .provenance{background:linear-gradient(180deg,rgba(243,233,255,.72),rgba(233,216,255,.55)) !important;
+              border-block:1px solid var(--hair) !important}
+  .ft-card{background:linear-gradient(160deg,#FFFFFF,#F3E9FF) !important;
+           box-shadow:0 24px 60px -34px rgba(122,31,162,.5), inset 0 0 0 1px rgba(122,31,162,.10) !important}
+  #miracle{background:linear-gradient(180deg,rgba(243,233,255,.8),rgba(233,216,255,.6)) !important}
+
+  /* Display type polish for Fraunces */
+  .h-display,.hero-title,.h-section,.closing-heading,.create-title,.cg-title,.job h3,.arch-head .h-section{
+    letter-spacing:-.018em;
+  }
+
+  /* Sticky nav: frosted white-lilac, not cream */
+  .nav.is-solid{background:rgba(252,248,255,.9) !important;border-bottom-color:var(--hair) !important}
+
+  /* ---- Hero: retint left fade to white-lilac + add cosmic glow ---- */
+  .hero::after{
+    background:linear-gradient(90deg,rgba(252,248,255,.95) 0%,rgba(252,248,255,.82) 30%,rgba(252,248,255,.5) 52%,rgba(252,248,255,.14) 68%,rgba(252,248,255,0) 78%) !important;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(40% 48% at 20% 26%, rgba(229,23,123,.20), transparent 62%),
+      radial-gradient(30% 40% at 6% 6%,   rgba(246,176,30,.16), transparent 60%);
+  }
+
+  /* ---- Dark sections → deep cosmic (plum/indigo) instead of warm brown ---- */
+  .plate--dark{
+    background:
+      radial-gradient(130% 100% at 50% -10%,rgba(229,23,123,.28),transparent 60%),
+      var(--cosmos) !important;
+  }
+  .arch::after{
+    background:
+      radial-gradient(140% 90% at 50% 40%,rgba(23,6,39,0) 0%,rgba(23,6,39,.34) 55%,rgba(15,4,30,.78) 100%),
+      linear-gradient(180deg,rgba(43,15,99,.55) 0%,rgba(23,6,39,.30) 30%,rgba(23,6,39,.40) 65%,rgba(12,4,26,.82) 100%) !important;
+  }
+  .create-sec::after{
+    background:linear-gradient(90deg,rgba(23,6,39,.82) 0%,rgba(23,6,39,.60) 28%,rgba(23,6,39,.20) 52%,transparent 70%) !important;
+  }
+  .dilemma-plate{
+    background:linear-gradient(160deg,#3A0F5E,#170627) !important;
+    box-shadow:0 30px 70px -30px rgba(20,4,40,.75),inset 0 0 0 1px rgba(229,23,123,.18) !important;
+  }
+  .dilemma-sec::before{
+    background:radial-gradient(70% 100% at 100% 25%,rgba(229,23,123,.18),transparent 65%) !important;
+  }
+  .floor-bg::after{
+    background:linear-gradient(180deg,rgba(23,6,39,.82) 0%,rgba(43,15,99,.66) 50%,rgba(23,6,39,.86) 100%) !important;
+  }
+  .closing{background:linear-gradient(160deg,#3A0F5E,#0E0320) !important}
+  .closing::after{
+    background:linear-gradient(180deg,rgba(14,3,32,.30) 0%,rgba(14,3,32,.08) 44%,rgba(14,3,32,.66) 100%) !important;
+  }
+  .closing-mark::before,.closing-mark::after{
+    background:linear-gradient(90deg,var(--gilt),var(--gilt-soft)) !important;opacity:.95;height:2px !important;
+  }
+  .closing-sub{white-space:normal !important}   /* fix mobile overflow */
+
+  /* dark job cards: magenta hover edge */
+  .job:hover{border-color:rgba(229,23,123,.55) !important}
+
+  /* ---- CTAs → neon glowing pills (the promo button) ---- */
+  .btn--primary{
+    background:var(--cosmos) !important;color:#fff !important;border:0 !important;border-radius:999px !important;
+    box-shadow:0 8px 26px -8px rgba(229,23,123,.65), inset 0 0 0 1px rgba(255,255,255,.20);
+  }
+  .btn--primary:hover{filter:brightness(1.07) saturate(1.05);
+    box-shadow:0 12px 34px -8px rgba(229,23,123,.82) !important;color:#fff !important}
+  .btn--ghost{border-radius:999px}
+  .btn--ghost:hover{background:var(--gilt-soft) !important;color:#fff !important;border-color:var(--gilt-soft) !important}
+  .labcall .btn{background:var(--cosmos) !important;color:#fff !important;border:0 !important;border-radius:999px !important;
+    box-shadow:0 8px 26px -8px rgba(229,23,123,.6)}
+  .labcall .btn:hover{filter:brightness(1.07);color:#fff !important}
+  .nav__cta{border-radius:999px}
+  .nav:not(.is-solid) .nav__cta:hover,.nav.is-solid .nav__cta:hover{
+    background:var(--cosmos) !important;color:#fff !important;border-color:transparent !important}
+  .closing-cta .btn{background:#fff !important;color:#7A1FA2 !important;border:0 !important;border-radius:999px !important;
+    box-shadow:0 12px 34px -10px rgba(0,0,0,.5)}
+  .closing-cta .btn:hover{background:var(--cosmos) !important;color:#fff !important}
+  .btn--onDark.btn--primary{background:#fff !important;color:#7A1FA2 !important}
+  .btn--onDark.btn--primary:hover{background:var(--cosmos) !important;color:#fff !important}
+
+  /* Floor Test photo: show full image, no crop */
+  .ft-photo{aspect-ratio:auto !important}
+  .ft-photo img{object-fit:contain !important;height:auto !important}
+
+  /* CREATE section: all text pure white, no overlay */
+  .create-sec, .create-sec *{color:#fff !important}
+  .create-sec .eyebrow{color:#fff !important}
+  .create-plate .nm{color:#fff !important}
+  .create-plate .ln{background:rgba(255,255,255,.3) !important}
+  .create-title{color:#fff !important; text-shadow:0 2px 20px rgba(0,0,0,.6) !important}
+  .cg-title{color:#fff !important; text-shadow:0 1px 14px rgba(0,0,0,.5) !important}
+  .cg-desc{color:rgba(255,255,255,.9) !important; text-shadow:0 1px 10px rgba(0,0,0,.4) !important}
+  .cg-intro{color:rgba(255,255,255,.92) !important; text-shadow:0 1px 12px rgba(0,0,0,.5) !important}
+  .create-close{color:#fff !important; text-shadow:0 1px 16px rgba(0,0,0,.6) !important}
+  .cg-cell{background:rgba(0,0,0,.22) !important; backdrop-filter:blur(4px)}
+  .cg-cell:hover{background:rgba(0,0,0,.38) !important}
+
+  /* Roster band: mobile reinforcement — keep the image visible, lift text contrast only */
+  .roster-band__kicker{color:#e6c88a !important; letter-spacing:.22em !important}
+  .roster-band__heading{color:#ffffff !important; text-shadow:0 2px 20px rgba(0,0,0,.65) !important}
+  .roster-band__heading em{color:#e6c88a !important}
+  .roster-band__names{color:rgba(255,255,255,.94) !important; text-shadow:0 1px 14px rgba(0,0,0,.6) !important}
+  .roster-band__dot{color:rgba(230,200,138,.9) !important}
+  .roster-band__note{color:#ffffff !important; text-shadow:0 1px 14px rgba(0,0,0,.6) !important}
+
+  /* Benchmark section: solid white, no watercolor blurs */
+  #benchmark{background:var(--paper) !important}
+
+  /* Remove line under last offer + tighten space */
+  .offer-row:last-child{border-bottom:none !important}
+  .offers-sec{padding-bottom:0 !important}
+  .offer-rows{margin-bottom:0 !important; padding-bottom:0 !important}
+
 </style>
 <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
@@ -786,10 +1039,10 @@
   <div class="nav__in">
     <a class="brand" href="#top" aria-label="Marcia McCoy — AI for Rookies">
       <img class="brand__logo brand__logo--white" alt="Marcia McCoy — AI for Rookies"
-        src="https://dashboard.katalyst-crm.com/files/t1/logomarcia.png"
+        src="https://cdn.katalyst-crm.com/a/21e00aaa-15c1-4c17-45bb-78d923634d8b"
         onerror="this.closest('.brand').classList.add('logo-failed')">
       <img class="brand__logo brand__logo--dark" alt="" aria-hidden="true"
-        src="https://dashboard.katalyst-crm.com/files/t1/logomarcia.png"
+        src="https://cdn.katalyst-crm.com/a/21e00aaa-15c1-4c17-45bb-78d923634d8b"
         onerror="this.closest('.brand').classList.add('logo-failed')">
       <b>Marcia&nbsp;McCoy</b><span>AI for Rookies</span>
     </a>
@@ -866,72 +1119,26 @@
         <div class="col-media reveal">
           <div class="plate plate--tall">
             <img class="plate-img" loading="lazy" alt="Forty years at the top of the art world"
-              src="https://dashboard.katalyst-crm.com/files/t1/c33db137-e541-47e5-859d-a6d58c374741.png"
+              src="https://cdn.katalyst-crm.com/a/3c0d4570-1bb9-b0c1-b896-8d23ae9493d2"
               onerror="this.style.display='none'">
           </div>
         </div>
       </div>
 
-      <!-- ROSTER: one circle per artist. Name is inside the circle; swap an image by changing its src.
-           Confident: Henry Moore (reclining figure), Duane Hanson (Flea Market Lady), Gordon Parks (portrait).
-           BEST-GUESS (verify): Miró & Calder (now swapped per request), Nevelson.
-           Spare Duane Hanson image: .../142946-duane-hanson-housepainter-i-1984-1988.jpg -->
-      <div class="roster reveal" style="margin-top:clamp(2.4rem,5vw,3.4rem)">
-        <p class="kicker roster__head">Represented, curated &amp; promoted</p>
+    </div>
 
-        <figure class="rfig">
-          <span class="disc">
-            <img loading="lazy" alt="Work attributed to Joan Miró"
-              src="https://dashboard.katalyst-crm.com/files/t1/72.2020_ph_web_2.jpg"
-              onerror="this.closest('.disc').classList.add('noimg')">
-            <span class="rname">Joan Miró</span>
-          </span>
-        </figure>
-
-        <figure class="rfig">
-          <span class="disc">
-            <img loading="lazy" alt="Henry Moore, Large Reclining Figure"
-              src="https://dashboard.katalyst-crm.com/files/t1/BLOG-large-reclining-figure-HMS-BANNER-THIS-ONE-JYZ9532.webp"
-              onerror="this.closest('.disc').classList.add('noimg')">
-            <span class="rname">Henry Moore</span>
-          </span>
-        </figure>
-
-        <figure class="rfig">
-          <span class="disc">
-            <img loading="lazy" alt="Work attributed to Alexander Calder"
-              src="https://dashboard.katalyst-crm.com/files/t1/ad115b8d1200c27baa0720e83455e9fd52ae15ef-1926x1284.jpg"
-              onerror="this.closest('.disc').classList.add('noimg')">
-            <span class="rname">Alexander Calder</span>
-          </span>
-        </figure>
-
-        <figure class="rfig">
-          <span class="disc">
-            <img loading="lazy" alt="The Golden Pearl, 1962 — Louise Nevelson"
-              src="https://dashboard.katalyst-crm.com/files/t1/the-golden-pearl-1962.webp"
-              onerror="this.closest('.disc').classList.add('noimg')">
-            <span class="rname">Louise Nevelson</span>
-          </span>
-        </figure>
-
-        <figure class="rfig">
-          <span class="disc">
-            <img loading="lazy" alt="Duane Hanson, Flea Market Lady, 1990"
-              src="https://dashboard.katalyst-crm.com/files/t1/Flea-Market-Lady-filler-oil-media-Duane-1990.webp"
-              onerror="this.closest('.disc').classList.add('noimg')">
-            <span class="rname">Duane Hanson</span>
-          </span>
-        </figure>
-
-        <figure class="rfig">
-          <span class="disc">
-            <img loading="lazy" alt="Marcia McCoy and Kirk Sharp"
-              src="https://dashboard.katalyst-crm.com/files/t1/Marcia-McCoy-and-Kirk-Sharp.jpg"
-              onerror="this.closest('.disc').classList.add('noimg')">
-            <span class="rname">Gordon Parks</span>
-          </span>
-        </figure>
+    <!-- ROSTER: cinematic full-width band, text on the left -->
+    <div class="roster-band reveal" aria-label="Artists represented by Marcia McCoy">
+      <div class="roster-band__inner">
+        <div class="roster-band__col">
+          <p class="roster-band__kicker">The Roster</p>
+          <h3 class="roster-band__heading">Represented, curated &amp; promoted <em>by Marcia McCoy</em></h3>
+          <p class="roster-band__names">
+            Joan Miró<span class="roster-band__dot" aria-hidden="true">·</span>Henry Moore<span class="roster-band__dot" aria-hidden="true">·</span>Alexander Calder<span class="roster-band__dot" aria-hidden="true">·</span>Louise Nevelson<span class="roster-band__dot" aria-hidden="true">·</span>Duane Hanson<span class="roster-band__dot" aria-hidden="true">·</span>Gordon Parks
+          </p>
+          <p class="roster-band__rule" aria-hidden="true"></p>
+          <p class="roster-band__note">Four decades. Six legacies. One method.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -955,7 +1162,7 @@
         <div class="col-media reveal">
           <div class="plate plate--tall dilemma-plate">
             <img class="plate-img" loading="lazy" alt="The visualizer's dilemma — work sitting in the studio"
-              src="https://dashboard.katalyst-crm.com/files/t1/26a3a783e3b7963cea5c421ac7a91f68_LE_upscale_gentle.jpg"
+              src="https://cdn.katalyst-crm.com/a/2414a426-bfb5-a66b-64b3-66a2a35d66b2"
               onerror="this.style.display='none'">
           </div>
         </div>
@@ -980,6 +1187,12 @@
             <p>When his retrospective catalog, Half Past Autumn, came out, it ran three hundred sixty pages. His fine art got twelve of them.</p>
             <p>I spent twenty-three years and seven hundred thousand dollars of my own money trying to change that. Contracts. Gallery meetings. Museum pitches, one slow negotiation at a time. Gordon passed at ninety-three, in the middle of our launch, still believing the world had never fully accepted him as an artist.</p>
             <p>I could not move fast enough back then. Every step was manual, and manual takes decades.</p>
+            <figure class="gp-add reveal" style="margin:clamp(1.4rem,3vw,2rem) 0 0">
+              <img loading="lazy" alt="The Gordon Parks legacy"
+                src="https://cdn.katalyst-crm.com/a/bcb7c699-c714-cdb3-9a5e-77013e600ce8"
+                style="width:100%;height:auto;display:block;border-radius:6px;box-shadow:0 24px 60px -30px rgba(122,31,162,.5)"
+                onerror="this.closest('figure').style.display='none'">
+            </figure>
           </div>
         </div>
         <div class="col-media reveal">
@@ -1223,7 +1436,7 @@
             </div>
           </div>
           <figure class="offer-img">
-            <img loading="lazy" alt="Start Free" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260902_184636_82b831dd-7672-498f-a1e0-e30d2c1bd9c4.png">
+            <img loading="lazy" alt="Start Free" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260911_091936_c738a4f8-2e8e-4d52-99db-8f62e836015c.png">
           </figure>
         </article>
 
@@ -1239,7 +1452,7 @@
             </div>
           </div>
           <figure class="offer-img">
-            <img loading="lazy" alt="The Artist Agent Playbook" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091718_9e077053-fd1e-4e28-aab1-19122981df2b.png">
+            <img loading="lazy" alt="The Artist Agent Playbook" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260911_091944_7ce0af94-2110-4733-b6cb-34240aad9304.png">
           </figure>
         </article>
 
@@ -1255,7 +1468,7 @@
             </div>
           </div>
           <figure class="offer-img">
-            <img loading="lazy" alt="1-Hour Mini Course" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091727_9e8f7f6b-8612-4f27-8710-31f9650e50df.png">
+            <img loading="lazy" alt="1-Hour Mini Course" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260911_091955_af48cc54-3977-4a80-8f23-03c39cb1c1b0.png">
           </figure>
         </article>
 
@@ -1271,7 +1484,7 @@
             </div>
           </div>
           <figure class="offer-img">
-            <img loading="lazy" alt="Complete Bundle" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091739_69289fe9-e38c-4d76-9889-3e79b4350e27.png">
+            <img loading="lazy" alt="Complete Bundle" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260911_092001_11dbc87a-b9b5-48f0-91d2-62c66fb924ac.png">
           </figure>
         </article>
 
@@ -1287,7 +1500,7 @@
             </div>
           </div>
           <figure class="offer-img">
-            <img loading="lazy" alt="Interactive Group Labs" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091747_d8d6b0d9-bca2-480c-94fc-51107691813d.png">
+            <img loading="lazy" alt="Interactive Group Labs" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260911_092008_de75c96a-c291-44df-bb2d-a240051c85b3.png">
           </figure>
         </article>
 
@@ -1303,7 +1516,7 @@
             </div>
           </div>
           <figure class="offer-img">
-            <img loading="lazy" alt="Custom One-on-One" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260827_091757_8de74051-0a15-470a-96eb-9d8d559a219b.png">
+            <img loading="lazy" alt="Custom One-on-One" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260911_092015_8fba52e0-1caf-4803-914e-2f406d20a28f.png">
           </figure>
         </article>
 
@@ -1335,7 +1548,7 @@
       <!-- Main editorial block: photo OVERLAPS cream card -->
       <div class="ft-main reveal">
         <figure class="ft-photo">
-          <img loading="lazy" alt="The gallery before the doors open" src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260902_184622_ea0fa2cf-1d0d-480e-b6e3-5b54bd98e7a8.png">
+          <img loading="lazy" alt="The gallery before the doors open" src="https://cdn.katalyst-crm.com/a/fd75cd13-99e6-2d6d-a93d-5ca01aef78d4">
         </figure>
 
         <aside class="ft-card">
@@ -1408,7 +1621,7 @@
         <div class="col-media reveal">
           <div class="plate plate--tall">
             <img class="plate-img" loading="lazy" alt="Waking up to a miracle — light returned"
-              src="https://dashboard.katalyst-crm.com/files/t1/113987f5128abfa7b40280c0f4d452e5_LE_upscale_gentle.jpg"
+              src="https://cdn.katalyst-crm.com/a/0118ad27-9d6c-627c-ec15-a169996c59ff"
               onerror="this.style.display='none'">
           </div>
         </div>
