@@ -282,6 +282,11 @@
   @media(max-width:820px){
     .hero-copy{max-width:96%;width:96%}
   }
+  /* Mobile: anchor the hero copy to the top instead of vertically centering it */
+  @media(max-width:760px){
+    .hero{justify-content:flex-start}
+    .hero-inner.wrap{align-items:flex-start;padding-top:clamp(6rem,26vw,7.5rem)}
+  }
 
   /* ---------- generic two-col ---------- */
   .split{display:grid;gap:clamp(2rem,5vw,4rem);align-items:start}
@@ -350,8 +355,8 @@
   .roster-band::before{
     content:"";position:absolute;inset:0;z-index:-3;
     background:
-      url('https://cdn.katalyst-crm.com/a/212ad1b3-d70a-e0ad-24a2-b371b66288ed')
-      center center / cover no-repeat,
+      url('https://cdn.katalyst-crm.com/a/a8565bcf-ea5f-702b-cd03-0b621264fd8b')
+      center 28% / cover no-repeat,
       #1c1812;
   }
   /* Stronger dark gradient from the left — text side deeply shaded, right side stays clear */
@@ -420,7 +425,7 @@
     .roster-band{min-height:auto;padding:clamp(2.8rem,7vw,4rem) clamp(1.25rem,5vw,2rem)}
     .roster-band::before{
       background:
-        url('https://cdn.katalyst-crm.com/a/212ad1b3-d70a-e0ad-24a2-b371b66288ed')
+        url('https://cdn.katalyst-crm.com/a/a8565bcf-ea5f-702b-cd03-0b621264fd8b')
         center center / cover no-repeat,
         #1c1812;
     }
@@ -443,7 +448,7 @@
   .arch{position:relative;isolation:isolate;overflow:hidden;color:#f6f2ea;
     padding-block:clamp(4.5rem,10vw,7rem)}
   .arch::before{content:"";position:absolute;inset:0;z-index:-3;
-    background:url('https://cdn.katalyst-crm.com/a/6531557a-f0e2-98cb-18ae-a468566c6674') center/cover no-repeat;
+    background:url('https://cdn.katalyst-crm.com/a/552307ac-77cf-c186-9520-a9b87bdb88a7') center/cover no-repeat;
     transform:scale(1.05);will-change:transform;
     animation:archDrift 32s ease-in-out infinite alternate}
   @keyframes archDrift{
@@ -523,14 +528,7 @@
   /* ---------- CREATE — cinematic grid layout ---------- */
   .create-sec{position:relative;isolation:isolate;overflow:hidden;color:#f6f2ea;padding:0}
   .create-sec::before{content:"";position:absolute;inset:0;z-index:-3;
-    background:url('https://cdn.katalyst-crm.com/a/42cc647c-e33e-a4a5-aa20-d6a79133e162') center/cover no-repeat;
-    transform:scale(1.06);will-change:transform;
-    animation:createDrift 40s ease-in-out infinite alternate}
-  @keyframes createDrift{
-    from{transform:scale(1.06) translate3d(-.5%,-.3%,0)}
-    to  {transform:scale(1.12) translate3d(.5%,.5%,0)}
-  }
-  @media(prefers-reduced-motion:reduce){.create-sec::before{animation:none}}
+    background:var(--paper);}
   .create-sec::after{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
     background:transparent}
   .create-plate{padding:clamp(2.6rem,5vw,4rem) var(--gutter) 0;position:relative;z-index:2;justify-content:center}
@@ -542,10 +540,10 @@
   .create-grid{position:relative;z-index:2;
     display:grid;grid-template-columns:1fr;gap:0;
     margin-top:clamp(2rem,4.5vw,3.4rem);
-    border-top:1px solid rgba(246,242,234,.18)}
+    border-top:1px solid var(--hair)}
   .create-grid > *{
     padding:clamp(2rem,3.6vw,3rem) clamp(1.5rem,3vw,2.6rem);
-    border-bottom:1px solid rgba(246,242,234,.18)}
+    border-bottom:1px solid var(--hair)}
   .cg-head{display:flex;flex-direction:column;justify-content:center;text-align:left}
   .cg-head .eyebrow{color:var(--gilt-soft);margin-bottom:.9rem}
   .create-title{color:#faf5eb;font-size:clamp(1.9rem,1.4rem + 2.6vw,3.2rem);
@@ -576,14 +574,14 @@
     .create-grid{grid-template-columns:1fr 1fr;grid-auto-rows:auto}
     .cg-head{grid-column:1 / -1;text-align:center;align-items:center}
     .cg-head .cg-intro{margin-inline:auto;text-align:center}
-    .create-grid > *:nth-child(2n){border-left:1px solid rgba(246,242,234,.18)}
+    .create-grid > *:nth-child(2n){border-left:1px solid var(--hair)}
   }
   /* desktop: 4 cols, heading spans left column both rows, 6 cells in the other 3 cols x 2 rows */
   @media(min-width:1000px){
     .create-grid{grid-template-columns:1.15fr 1fr 1fr 1fr;grid-template-rows:auto auto}
     .cg-head{grid-column:1;grid-row:1 / span 2;text-align:left;align-items:flex-start}
     .cg-head .cg-intro{margin-inline:0;text-align:left}
-    .create-grid > *{border-left:1px solid rgba(246,242,234,.18)}
+    .create-grid > *{border-left:1px solid var(--hair)}
     .create-grid > .cg-head{border-left:0}
   }
 
@@ -824,7 +822,7 @@
     background:linear-gradient(160deg,#26221c,#0f0d0a);color:#f7f3ec;text-align:center;
     padding-block:clamp(4rem,10vw,7.5rem)}
   .closing::before{content:"";position:absolute;inset:0;z-index:-2;
-    background:url('https://cdn.katalyst-crm.com/a/bce4dbeb-8f84-5b38-7cec-790d1d74ac4d') center/cover no-repeat}
+    background:url('https://cdn.katalyst-crm.com/a/552307ac-77cf-c186-9520-a9b87bdb88a7') center/cover no-repeat}
   .closing::after{content:"";position:absolute;inset:0;z-index:-1;
     background:
       radial-gradient(120% 80% at 50% 50%,rgba(14,11,8,.12) 0%,rgba(14,11,8,.32) 70%,rgba(14,11,8,.46) 100%),
@@ -951,7 +949,7 @@
       linear-gradient(180deg,rgba(43,15,99,.55) 0%,rgba(23,6,39,.30) 30%,rgba(23,6,39,.40) 65%,rgba(12,4,26,.82) 100%) !important;
   }
   .create-sec::after{
-    background:linear-gradient(90deg,rgba(23,6,39,.82) 0%,rgba(23,6,39,.60) 28%,rgba(23,6,39,.20) 52%,transparent 70%) !important;
+    background:transparent !important;
   }
   .dilemma-plate{
     background:linear-gradient(160deg,#3A0F5E,#170627) !important;
@@ -1000,18 +998,20 @@
   .ft-photo{aspect-ratio:auto !important}
   .ft-photo img{object-fit:contain !important;height:auto !important}
 
-  /* CREATE section: all text pure white, no overlay */
-  .create-sec, .create-sec *{color:#fff !important}
-  .create-sec .eyebrow{color:#fff !important}
-  .create-plate .nm{color:#fff !important}
-  .create-plate .ln{background:rgba(255,255,255,.3) !important}
-  .create-title{color:#fff !important; text-shadow:0 2px 20px rgba(0,0,0,.6) !important}
-  .cg-title{color:#fff !important; text-shadow:0 1px 14px rgba(0,0,0,.5) !important}
-  .cg-desc{color:rgba(255,255,255,.9) !important; text-shadow:0 1px 10px rgba(0,0,0,.4) !important}
-  .cg-intro{color:rgba(255,255,255,.92) !important; text-shadow:0 1px 12px rgba(0,0,0,.5) !important}
-  .create-close{color:#fff !important; text-shadow:0 1px 16px rgba(0,0,0,.6) !important}
-  .cg-cell{background:rgba(0,0,0,.22) !important; backdrop-filter:blur(4px)}
-  .cg-cell:hover{background:rgba(0,0,0,.38) !important}
+  /* CREATE section: light theme — dark ink text on paper, gilt accents */
+  .create-sec, .create-sec *{color:var(--ink) !important}
+  .create-sec .eyebrow{color:var(--gilt) !important}
+  .cg-letter{color:var(--gilt) !important}
+  .create-plate .nm{color:var(--graphite) !important}
+  .create-plate .ln{background:var(--hair) !important}
+  .create-plate .no img{filter:none !important}
+  .create-title{color:var(--ink) !important; text-shadow:none !important}
+  .cg-title{color:var(--ink) !important; text-shadow:none !important}
+  .cg-desc{color:var(--graphite) !important; text-shadow:none !important}
+  .cg-intro{color:var(--graphite) !important; text-shadow:none !important}
+  .create-close{color:var(--ink) !important; text-shadow:none !important}
+  .cg-cell{background:transparent !important; transition:box-shadow .4s ease}
+  .cg-cell:hover{background:transparent !important; box-shadow:inset 0 2px 0 0 var(--gilt)}
 
   /* Roster band: mobile reinforcement — keep the image visible, lift text contrast only */
   .roster-band__kicker{color:#e6c88a !important; letter-spacing:.22em !important}
@@ -1076,7 +1076,10 @@
 
   <!-- ============ §1 HERO (full-bleed image) ============ -->
   <section class="hero" id="hero">
-    <img class="hero-img" src="https://cdn.katalyst-crm.com/a/2ce6b858-90d2-e582-b5d6-af88aa5c9e35" alt="" loading="eager" onerror="this.style.display='none'">
+    <picture>
+      <source media="(max-width:760px)" srcset="https://cdn.katalyst-crm.com/a/693758fc-4eb9-23cf-34e5-a9472f659413">
+      <img class="hero-img" src="https://cdn.katalyst-crm.com/a/8a783683-ce9b-0fc8-93be-569c9b878d54" alt="" loading="eager" onerror="this.style.display='none'">
+    </picture>
     <div class="hero-inner wrap">
       <div class="hero-copy reveal">
         <h1 class="hero-title h-display">You've Built a Career on Your Craft.<br>Don't Let AI Make You Invisible.</h1>
@@ -1108,18 +1111,19 @@
       <div class="split split--wideText">
         <div class="col-text reveal">
           <p class="eyebrow">Forty years at the top of the art world</p>
-          <h2 class="h-section" style="margin:.7rem 0 1.4rem">I spent four decades as a global art agent.</h2>
+          <h2 class="h-section" style="margin:.7rem 0 1.4rem">I invested four decades as a global art agent.</h2>
           <div class="body">
-            <p>I spent four decades as a global art agent, working at the highest level the art world offers. I represented, curated, and promoted work by Joan Miró, Henry Moore, Alexander Calder, Louise Nevelson, Duane Hanson, and my lifelong friend, Gordon Parks.</p>
+            <p>I invested four decades as a global art agent, working at the highest level the art world offers. I represented, curated, and promoted work by Joan Miró, Henry Moore, Alexander Calder, Louise Nevelson, Duane Hanson, and my lifelong friend, Gordon Parks.</p>
             <p>I built collections for Chase Manhattan Bank, Citicorp, and Prudential. I recommended exhibitions to institutions including the Smithsonian. My galleries and exhibitions have been covered in THE Magazine, Pasatiempo, and Journal North.</p>
             <p>Along the way, I founded FATE, Fine Art Traveling Exhibitions, ran my own gallery in Santa Fe, and self-published fifteen books.</p>
             <p style="color:var(--ink)">I am not a certified AI coach. I am the person these artists trusted with their legacy. Art is simply where I proved the method first.</p>
           </div>
         </div>
         <div class="col-media reveal">
-          <div class="plate plate--tall">
-            <img class="plate-img" loading="lazy" alt="Forty years at the top of the art world"
-              src="https://cdn.katalyst-crm.com/a/3ef580b1-a0e7-0737-8afe-b6474735964a"
+          <div class="plate plate--tall" style="aspect-ratio:1290/1970">
+            <img class="plate-img" loading="lazy" alt="Marcia McCoy in her studio"
+              style="object-position:center"
+              src="https://cdn.katalyst-crm.com/a/d788b388-3778-f137-a5b6-1bf38e4ac7ca"
               onerror="this.style.display='none'">
           </div>
         </div>
@@ -1162,7 +1166,8 @@
         <div class="col-media reveal">
           <div class="plate plate--tall dilemma-plate">
             <img class="plate-img" loading="lazy" alt="The visualizer's dilemma — work sitting in the studio"
-              src="https://cdn.katalyst-crm.com/a/329b8ae5-d266-a7fa-e344-da8f9c3d8a72"
+              style="object-position:50% 72%"
+              src="https://cdn.katalyst-crm.com/a/cd01c77f-55a2-722d-976b-0e1aff19ce5d"
               onerror="this.style.display='none'">
           </div>
         </div>
@@ -1182,14 +1187,14 @@
       <div class="split split--wideText" style="margin-top:clamp(1rem,2.4vw,1.7rem)">
         <div class="col-text reveal">
           <div class="body">
-            <p>For thirty-three years, Gordon Parks was my friend. I built his first traveling exhibition, two hundred photographs that toured and sold out to museums for twenty-three years straight. He never finished high school. He became the first African American photographer to document the Civil Rights Movement for Life magazine, and the first Black director Hollywood ever commissioned, for The Learning Tree and then Shaft.</p>
+            <p>For thirty-three years, Gordon Parks was my friend. I marketed his first traveling exhibition, two hundred photographs that toured and sold out to museums for twenty-three years straight. He never finished high school. He became the first African American photographer to document the Civil Rights Movement for Life magazine, and the first Black director Hollywood ever commissioned, for The Learning Tree and then Shaft.</p>
             <p>But Gordon had a second life the world refused to see. In his final thirty years, once he finally had the means to stop shooting on the street, he made fine art. Paintings. Drawings. A body of work he considered his truest voice.</p>
             <p>When his retrospective catalog, Half Past Autumn, came out, it ran three hundred sixty pages. His fine art got twelve of them.</p>
             <p>I spent twenty-three years and seven hundred thousand dollars of my own money trying to change that. Contracts. Gallery meetings. Museum pitches, one slow negotiation at a time. Gordon passed at ninety-three, in the middle of our launch, still believing the world had never fully accepted him as an artist.</p>
             <p>I could not move fast enough back then. Every step was manual, and manual takes decades.</p>
             <figure class="gp-add reveal" style="margin:clamp(1.4rem,3vw,2rem) 0 0">
-              <img loading="lazy" alt="The Gordon Parks legacy"
-                src="https://cdn.katalyst-crm.com/a/1cd97fb9-cb40-433f-d1d2-09e30f4be74d"
+              <img loading="lazy" alt="Gordon Parks: Images From The Soul. Marcia McCoy, Curator"
+                src="https://cdn.katalyst-crm.com/a/88f08ce2-269e-75fd-c8b5-ee5678d94752"
                 style="width:100%;height:auto;display:block;border-radius:6px;box-shadow:0 24px 60px -30px rgba(122,31,162,.5)"
                 onerror="this.closest('figure').style.display='none'">
             </figure>
@@ -1202,6 +1207,7 @@
               src="https://dashboard.katalyst-crm.com/files/t1/Portrait-of-Gordon-Parks-and-Marcia-McCoy-c.-Courtesy-of-Robert-Hale.jpg"
               onerror="this.style.display='none'">
           </div>
+          <p class="kicker parks-credit" style="color:var(--graphite);margin-top:.6rem;text-align:right">Photo &copy; Robert Hale</p>
           <div style="display:flex;gap:clamp(1.5rem,4vw,2.5rem);margin-top:clamp(1.4rem,3vw,2rem);flex-wrap:wrap">
             <div>
               <div class="h-section" style="font-size:clamp(2rem,3.6vw,3rem);color:var(--gilt)">23 yrs</div>
@@ -1419,7 +1425,7 @@
           <p>"Skip the digital noise. Learn the first ten things that actually matter, and start actualizing your vision in less than an hour."</p>
           <cite>Marcia McCoy, Founder AI for Rookies</cite>
         </blockquote>
-        <p class="offers-intro">I still hold Gordon Parks's last unpublished body of work as its steward today. That's the kind of trust I've built a career on, and it's the same trust I'm asking you to place in this system. Every tier here does one job: get you moving today. No scarcity timers. No confusing bundles. Just a clear, fair staircase from your first free step to working directly with me.</p>
+        <p class="offers-intro">I still hold Gordon Parks's last unpublished body of work as its steward today. That's the kind of trust I've built a career on, and it's the same trust I'm asking you to place in this system. Every tier here does one job: get you moving today. No scarcity timers. Just a clear, fair staircase from your first free step to working directly with me.</p>
       </div>
 
       <div class="offer-rows">
@@ -1429,70 +1435,86 @@
           <div class="offer-text">
             <div class="offer-num" aria-hidden="true"><span>01</span></div>
             <p class="offer-label">Start Free</p>
-            <p class="offer-desc">The Quick Start Sheet, fifteen beginner prompts, and one hundred prompts organized by topic.</p>
+            <p class="offer-desc">The 1-Page Quick Start, fifteen beginner prompts, and one hundred curated prompts.</p>
             <div class="offer-foot">
               <span class="offer-price">$0</span>
               <a href="#" class="btn btn--primary offer-btn">Get the Free Resources</a>
             </div>
           </div>
           <figure class="offer-img">
-            <img loading="lazy" alt="Start Free" src="https://cdn.katalyst-crm.com/a/87c05a2e-b41d-4682-ebbb-0adbb48dfe1f">
+            <img loading="lazy" alt="Start Free" src="https://cdn.katalyst-crm.com/a/74608af1-7857-e385-b8bb-162bf6fc72e7">
           </figure>
         </article>
 
-        <!-- 02 · The Artist Agent Playbook & Workbook -->
+        <!-- 02 · AI for Rookies: 10 Lessons to Start Fast -->
         <article class="offer-row offer-row--flip reveal">
           <div class="offer-text">
             <div class="offer-num" aria-hidden="true"><span>02</span></div>
-            <p class="offer-label">The Artist Agent Playbook &amp; Workbook</p>
-            <p class="offer-desc">My core book and its companion workbook. Everything you need to take your first ten steps, plus the one-page contract that protected my own rights for decades — the one I call my Cover Your Ass contract.</p>
+            <p class="offer-label">AI for Rookies: 10 Lessons to Start Fast</p>
+            <p class="offer-desc">My core book, plus its Companion Workbook. Everything you need to take your first ten steps.</p>
             <div class="offer-foot">
               <span class="offer-price">$47</span>
-              <a href="#" class="btn btn--ghost offer-btn">Get the Playbook Bundle</a>
+              <a href="#" class="btn btn--ghost offer-btn">Get the Book &amp; Workbook</a>
             </div>
           </div>
           <figure class="offer-img">
-            <img loading="lazy" alt="The Artist Agent Playbook" src="https://cdn.katalyst-crm.com/a/debc8811-0f64-5dd2-d373-ac183af0b4c8">
+            <img loading="lazy" alt="AI for Rookies: 10 Lessons to Start Fast" src="https://cdn.katalyst-crm.com/a/d533a0f4-3471-3691-5b8d-d6926edd93d0">
           </figure>
         </article>
 
-        <!-- 03 · The 1-Hour Mini Course -->
+        <!-- 03 · AI for Rookies: The Artist Agent Playbook -->
         <article class="offer-row reveal">
           <div class="offer-text">
             <div class="offer-num" aria-hidden="true"><span>03</span></div>
-            <p class="offer-label">The 1-Hour Mini Course</p>
+            <p class="offer-label">AI for Rookies: The Artist Agent Playbook</p>
+            <p class="offer-desc">The playbook for agenting your own work, including the one-page contract that protected my own rights for decades, the one I call my Cover Your Ass contract.</p>
+            <div class="offer-foot">
+              <span class="offer-price">$47</span>
+              <a href="#" class="btn btn--ghost offer-btn">Get the Playbook</a>
+            </div>
+          </div>
+          <figure class="offer-img">
+            <img loading="lazy" alt="AI for Rookies: The Artist Agent Playbook" src="https://cdn.katalyst-crm.com/a/c506d16e-9b6b-0c5e-a26f-75a152a5c1d3">
+          </figure>
+        </article>
+
+        <!-- 04 · The 1-Hour Action Course -->
+        <article class="offer-row offer-row--flip reveal">
+          <div class="offer-text">
+            <div class="offer-num" aria-hidden="true"><span>04</span></div>
+            <p class="offer-label">The 1-Hour Action Course</p>
             <p class="offer-desc">A fast, guided video walkthrough of the entire system.</p>
             <div class="offer-foot">
-              <span class="offer-price">$249</span>
+              <span class="offer-price">$297</span>
               <a href="#" class="btn btn--ghost offer-btn">Start the Course</a>
             </div>
           </div>
           <figure class="offer-img">
-            <img loading="lazy" alt="1-Hour Mini Course" src="https://cdn.katalyst-crm.com/a/4b23f4e9-451f-f698-a351-1141ccb5c67f">
+            <img loading="lazy" alt="1-Hour Action Course" src="https://cdn.katalyst-crm.com/a/5d98b0b7-6807-2209-0539-2e9ead7de884">
           </figure>
         </article>
 
-        <!-- 04 · The Complete AI Starter Bundle -->
-        <article class="offer-row offer-row--flip reveal">
-          <div class="offer-text">
-            <div class="offer-num" aria-hidden="true"><span>04</span></div>
-            <p class="offer-label">The Complete AI Starter Bundle</p>
-            <p class="offer-desc">Book, workbook, and course together, at ten percent off.</p>
-            <div class="offer-foot">
-              <span class="offer-price">$266</span>
-              <a href="#" class="btn btn--ghost offer-btn">Get the Full Bundle</a>
-            </div>
-          </div>
-          <figure class="offer-img">
-            <img loading="lazy" alt="Complete Bundle" src="https://cdn.katalyst-crm.com/a/6c7ef1bc-1ad3-bd81-0457-c8631d5faca4">
-          </figure>
-        </article>
-
-        <!-- 05 · Interactive Group Labs -->
+        <!-- 05 · The AI for Rookies Bundle -->
         <article class="offer-row reveal">
           <div class="offer-text">
             <div class="offer-num" aria-hidden="true"><span>05</span></div>
-            <p class="offer-label">Interactive Group Labs</p>
+            <p class="offer-label">The AI for Rookies Bundle</p>
+            <p class="offer-desc">The book, the Companion Workbook, The Artist Agent Playbook, and the 1-Hour Action Course, plus the Quick Start, fifteen prompts, and one hundred curated prompts.</p>
+            <div class="offer-foot">
+              <span class="offer-price">$333</span>
+              <a href="#" class="btn btn--ghost offer-btn">Get the Bundle</a>
+            </div>
+          </div>
+          <figure class="offer-img">
+            <img loading="lazy" alt="AI for Rookies Bundle" src="https://cdn.katalyst-crm.com/a/02971980-1eb4-a1bc-9273-8f91f3084425">
+          </figure>
+        </article>
+
+        <!-- 06 · 4-Hour Labs -->
+        <article class="offer-row offer-row--flip reveal">
+          <div class="offer-text">
+            <div class="offer-num" aria-hidden="true"><span>06</span></div>
+            <p class="offer-label">4-Hour Labs</p>
             <p class="offer-desc">Four hours live. Watch me build. Then build your own, with my help.</p>
             <div class="offer-foot">
               <span class="offer-price">$497</span>
@@ -1500,23 +1522,39 @@
             </div>
           </div>
           <figure class="offer-img">
-            <img loading="lazy" alt="Interactive Group Labs" src="https://cdn.katalyst-crm.com/a/c5a8ce31-3507-7773-5cf1-963a942dc677">
+            <img loading="lazy" alt="4-Hour Labs" src="https://cdn.katalyst-crm.com/a/927f7d81-3946-499e-a9bf-970665cdd46c">
           </figure>
         </article>
 
-        <!-- 06 · Custom One-on-One -->
-        <article class="offer-row offer-row--flip reveal">
+        <!-- 07 · The Complete Bundle with a Lab -->
+        <article class="offer-row reveal">
           <div class="offer-text">
-            <div class="offer-num" aria-hidden="true"><span>06</span></div>
-            <p class="offer-label">Custom One-on-One</p>
-            <p class="offer-desc">Direct, private work with me. Scope built around your specific project.</p>
+            <div class="offer-num" aria-hidden="true"><span>07</span></div>
+            <p class="offer-label">The Complete Bundle with a Lab</p>
+            <p class="offer-desc">Everything in the AI for Rookies Bundle, plus a seat in one 4-Hour Lab.</p>
             <div class="offer-foot">
-              <span class="offer-price">From $2,500</span>
-              <a href="#" class="btn btn--primary offer-btn">Apply for a Consultation</a>
+              <span class="offer-price">$888</span>
+              <a href="#" class="btn btn--ghost offer-btn">Get the Complete Bundle</a>
             </div>
           </div>
           <figure class="offer-img">
-            <img loading="lazy" alt="Custom One-on-One" src="https://cdn.katalyst-crm.com/a/3eab3d99-43c3-f265-7e09-221e8c9cbe85">
+            <img loading="lazy" alt="Complete Bundle with a 4-Hour Lab" src="https://cdn.katalyst-crm.com/a/e81f585d-ce93-f08a-9f45-2ea73a05d6a0">
+          </figure>
+        </article>
+
+        <!-- 08 · Custom One-on-One with Marcia McCoy -->
+        <article class="offer-row offer-row--flip reveal">
+          <div class="offer-text">
+            <div class="offer-num" aria-hidden="true"><span>08</span></div>
+            <p class="offer-label">Custom One-on-One with Marcia McCoy</p>
+            <p class="offer-desc">Direct, private work with me. Scope built around your specific project. By application, with a waitlist.</p>
+            <div class="offer-foot">
+              <span class="offer-price">From $2,500</span>
+              <a href="#" class="btn btn--primary offer-btn">Apply for the Waitlist</a>
+            </div>
+          </div>
+          <figure class="offer-img">
+            <img loading="lazy" alt="Custom One-on-One" src="https://cdn.katalyst-crm.com/a/801c6a0a-261a-6655-acc1-520bec05e960">
           </figure>
         </article>
 
@@ -1604,7 +1642,7 @@
             <p>I woke up. The scans were perfect. My doctors had no explanation. I did not need one.</p>
             <p>That was my first defining moment. My second came more recently, and quietly, one loss at a time. Thirteen people in my inner circle died within a few years of each other, including both of my parents and the mentors who shaped my entire career.</p>
             <p>I stopped and asked myself a hard question: what do I still want to build, and who am I still meant to help, before my own time runs out?</p>
-            <p>The answer became my Ten Legacy Projects. AI for Rookies is the first one I am giving away, because it is the fastest way to help the most people help themselves.</p>
+            <p>The answer became my Ten Legacy Projects. AI for Rookies is the first one I am offering in service, because it is the fastest way to help the most people help themselves.</p>
           </div>
           <details class="readmore" style="margin-top:clamp(1.4rem,3vw,2rem);max-width:64ch">
             <summary class="readmore__btn">
@@ -1621,14 +1659,14 @@
         <div class="col-media reveal">
           <div class="plate plate--tall">
             <img class="plate-img" loading="lazy" alt="Waking up to a miracle — light returned"
-              src="https://cdn.katalyst-crm.com/a/0a049759-b4c4-e3dc-7ebc-6c2d2ee9d010"
+              src="https://cdn.katalyst-crm.com/a/c9af2215-f1b6-bae4-576a-5acb02bf652e"
               onerror="this.style.display='none'">
           </div>
         </div>
       </div>
 
       <div class="reveal mission-pull">
-        <p class="pull" style="color:var(--ink)">I am spending my last quarter of life on one mission: guiding one million creators onto the fast track I never had.</p>
+        <p class="pull" style="color:var(--ink)">I am investing my last quarter of life on one mission: guiding one million creators onto the fast track I never had.</p>
         <p class="kicker mission-byline">— Marcia McCoy, Founder AI for Rookies</p>
       </div>
     </div>
