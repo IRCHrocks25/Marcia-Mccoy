@@ -944,9 +944,9 @@
   @media(max-width:760px){
     .hero{min-height:0}
     .hero::after{display:none}
-    .hero-inner.wrap{padding-bottom:clamp(1.2rem,5vw,2rem)}
+    .hero-inner.wrap{padding-bottom:0;position:relative;z-index:2}
     .hero-copy{max-width:100%;width:100%}
-    .hero picture{order:2;display:block;position:relative}
+    .hero picture{order:2;display:block;position:relative;z-index:1;margin-top:-2.6rem}
     .hero picture::after{content:"";position:absolute;inset:0;pointer-events:none;
       background:linear-gradient(180deg,var(--paper) 0%,rgba(252,248,255,0) 26%)}
     .hero-img{position:relative;inset:auto;z-index:0;width:100%;height:auto;
