@@ -15,8 +15,8 @@
     --stone:#DED6C6;
     --ink:#1B1813;
     --graphite:#6C665B;
-    --gilt:#9A7B43;
-    --gilt-soft:#B79A63;
+    --gilt:#1B44D8;
+    --gilt-soft:#2F6BFF;
     --deep:#1B1814;
     --hair:rgba(27,24,19,.16);
     --hair-soft:rgba(27,24,19,.09);
@@ -248,6 +248,14 @@
   }
   @media (prefers-reduced-motion: reduce){
     .hero-img{animation:none;transform:scale(1)}
+  }
+  /* Mobile hero crop: pin focal point low-centre so the upper wall artwork
+     and the sculpture above her stay out of frame on phones (both orientations) */
+  @media(max-width:760px){
+    .hero-img{object-position:50% 82% !important}
+  }
+  @media(max-width:760px) and (orientation:landscape){
+    .hero-img{object-position:50% 72% !important}
   }
   /* strong left-side vignette for text legibility over the image */
   .hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
@@ -887,59 +895,56 @@
      cosmic promo. Appended last so it wins the cascade. No beige survives.
      ========================================================================== */
   :root{
-    --paper:#FCF8FF;          /* soft near-white, a whisper of lilac */
-    --limestone:#F3E9FF;      /* pale lilac wash */
-    --stone:#E9D8FF;
-    --ink:#241436;            /* deep plum-black: text + dark grounds */
-    --deep:#170627;           /* deeper cosmic plum (footer / bands) */
-    --graphite:#6E5B84;       /* muted plum-grey secondary text */
-    --gilt:#E5177B;           /* HOT MAGENTA — primary accent */
-    --gilt-soft:#9B2FE0;      /* electric violet — secondary accent */
-    --hair:rgba(122,31,162,.22);
-    --hair-soft:rgba(122,31,162,.11);
+    --paper:#FBFCFF;          /* soft near-white, a whisper of cobalt */
+    --limestone:#EAF0FF;      /* pale cobalt wash */
+    --stone:#DCE6FF;
+    --ink:#141B33;            /* deep navy-ink: text + dark grounds */
+    --deep:#0C1124;           /* deeper navy (footer / bands) */
+    --graphite:#566079;       /* muted slate-grey secondary text */
+    --gilt:#1B44D8;           /* COBALT BLUE — primary accent */
+    --gilt-soft:#2F6BFF;      /* brighter cobalt — secondary accent */
+    --hair:rgba(27,54,104,.18);
+    --hair-soft:rgba(27,54,104,.09);
     --display:'Fraunces',Georgia,'Times New Roman',serif;
     --accent:'Fraunces',Georgia,serif;
-    --marigold:#F6B01E; --teal:#12BBA6; --coral:#FF6F61; --indigo:#2B0F63; --sky:#3DB6E6;
-    --cosmos:linear-gradient(155deg,#E11D5B 0%,#C21C8A 32%,#7A1FA2 64%,#2E1370 100%);
+    --pop:#F5177B;            /* single warm pop, reserved for CTAs */
+    --marigold:#F6B01E; --teal:#12BBA6; --coral:#FF6F61; --indigo:#13205C; --sky:#3DB6E6;
+    --cosmos:linear-gradient(150deg,#2F6BFF 0%,#1B44D8 55%,#13205C 100%);
   }
 
-  /* Watercolor wash across the whole page — the single biggest change */
+  /* Restrained cobalt wash — energy without the rainbow */
   body{
     background:
-      radial-gradient(58% 42% at 10% 6%,  rgba(229,23,123,.16), transparent 60%),
-      radial-gradient(52% 38% at 94% 3%,  rgba(246,176,30,.18), transparent 60%),
-      radial-gradient(60% 48% at 90% 97%, rgba(18,187,166,.15), transparent 62%),
-      radial-gradient(58% 46% at 4% 94%,  rgba(155,47,224,.17), transparent 62%),
+      radial-gradient(60% 44% at 8% 4%,   rgba(47,107,255,.12), transparent 62%),
+      radial-gradient(56% 42% at 96% 98%, rgba(27,68,216,.10),  transparent 64%),
       var(--paper) !important;
     background-attachment:fixed;
   }
-  ::selection{background:rgba(229,23,123,.24);color:var(--ink)}
+  ::selection{background:rgba(27,68,216,.22);color:var(--ink)}
 
   /* Big light sections: let the wash show through instead of flat paper */
   .offers-sec, .floortest-sec, .labs-sec, .epigraph-row{background:transparent !important}
-  .provenance{background:linear-gradient(180deg,rgba(243,233,255,.72),rgba(233,216,255,.55)) !important;
+  .provenance{background:linear-gradient(180deg,rgba(234,240,255,.78),rgba(220,230,255,.6)) !important;
               border-block:1px solid var(--hair) !important}
-  .ft-card{background:linear-gradient(160deg,#FFFFFF,#F3E9FF) !important;
-           box-shadow:0 24px 60px -34px rgba(122,31,162,.5), inset 0 0 0 1px rgba(122,31,162,.10) !important}
-  #miracle{background:linear-gradient(180deg,rgba(243,233,255,.8),rgba(233,216,255,.6)) !important}
+  .ft-card{background:linear-gradient(160deg,#FFFFFF,#EAF0FF) !important;
+           box-shadow:0 24px 60px -34px rgba(27,54,104,.42), inset 0 0 0 1px rgba(27,54,104,.10) !important}
+  #miracle{background:linear-gradient(180deg,rgba(234,240,255,.85),rgba(220,230,255,.62)) !important}
 
   /* Display type polish for Fraunces */
   .h-display,.hero-title,.h-section,.closing-heading,.create-title,.cg-title,.job h3,.arch-head .h-section{
     letter-spacing:-.018em;
   }
 
-  /* Sticky nav: frosted white-lilac, not cream */
-  .nav.is-solid{background:rgba(252,248,255,.9) !important;border-bottom-color:var(--hair) !important}
+  /* Sticky nav: frosted white-cobalt, not cream */
+  .nav.is-solid{background:rgba(251,252,255,.9) !important;border-bottom-color:var(--hair) !important}
 
-  /* ---- Hero: retint left fade to white-lilac + add cosmic glow ---- */
+  /* ---- Hero: retint left fade to white + a soft cobalt glow ---- */
   .hero::after{
-    background:linear-gradient(90deg,rgba(252,248,255,.95) 0%,rgba(252,248,255,.82) 30%,rgba(252,248,255,.5) 52%,rgba(252,248,255,.14) 68%,rgba(252,248,255,0) 78%) !important;
+    background:linear-gradient(90deg,rgba(251,252,255,.95) 0%,rgba(251,252,255,.82) 30%,rgba(251,252,255,.5) 52%,rgba(251,252,255,.14) 68%,rgba(251,252,255,0) 78%) !important;
   }
   .hero::before{
     content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-    background:
-      radial-gradient(40% 48% at 20% 26%, rgba(229,23,123,.20), transparent 62%),
-      radial-gradient(30% 40% at 6% 6%,   rgba(246,176,30,.16), transparent 60%);
+    background:radial-gradient(42% 50% at 18% 28%, rgba(47,107,255,.18), transparent 64%);
   }
   /* Mobile hero: stack copy above the photo so text never sits on the busy image */
   @media(max-width:760px){
@@ -949,67 +954,67 @@
     .hero-copy{max-width:100%;width:100%}
     .hero picture{order:2;display:block;position:relative;z-index:1;margin-top:-2.6rem}
     .hero picture::after{content:"";position:absolute;inset:0;pointer-events:none;
-      background:linear-gradient(180deg,var(--paper) 0%,rgba(252,248,255,0) 26%)}
+      background:linear-gradient(180deg,var(--paper) 0%,rgba(251,252,255,0) 26%)}
     .hero-img{position:relative;inset:auto;z-index:0;width:100%;height:auto;
       aspect-ratio:4/5;object-fit:cover;object-position:50% 100%;animation:none;transform:none}
   }
 
-  /* ---- Dark sections → deep cosmic (plum/indigo) instead of warm brown ---- */
+  /* ---- Dark sections → deep cobalt/navy ---- */
   .plate--dark{
     background:
-      radial-gradient(130% 100% at 50% -10%,rgba(229,23,123,.28),transparent 60%),
+      radial-gradient(130% 100% at 50% -10%,rgba(47,107,255,.30),transparent 60%),
       var(--cosmos) !important;
   }
   .arch::after{
     background:
-      radial-gradient(140% 90% at 50% 40%,rgba(23,6,39,0) 0%,rgba(23,6,39,.34) 55%,rgba(15,4,30,.78) 100%),
-      linear-gradient(180deg,rgba(43,15,99,.55) 0%,rgba(23,6,39,.30) 30%,rgba(23,6,39,.40) 65%,rgba(12,4,26,.82) 100%) !important;
+      radial-gradient(140% 90% at 50% 40%,rgba(10,15,36,0) 0%,rgba(10,15,36,.36) 55%,rgba(8,12,28,.80) 100%),
+      linear-gradient(180deg,rgba(19,32,92,.58) 0%,rgba(10,15,36,.32) 30%,rgba(10,15,36,.42) 65%,rgba(7,10,24,.84) 100%) !important;
   }
   .create-sec::after{
     background:transparent !important;
   }
   .dilemma-plate{
-    background:linear-gradient(160deg,#3A0F5E,#170627) !important;
-    box-shadow:0 30px 70px -30px rgba(20,4,40,.75),inset 0 0 0 1px rgba(229,23,123,.18) !important;
+    background:linear-gradient(160deg,#1B2A6B,#0C1124) !important;
+    box-shadow:0 30px 70px -30px rgba(6,10,28,.75),inset 0 0 0 1px rgba(47,107,255,.20) !important;
   }
   .dilemma-sec::before{
-    background:radial-gradient(70% 100% at 100% 25%,rgba(229,23,123,.18),transparent 65%) !important;
+    background:radial-gradient(70% 100% at 100% 25%,rgba(47,107,255,.16),transparent 65%) !important;
   }
   .floor-bg::after{
-    background:linear-gradient(180deg,rgba(23,6,39,.82) 0%,rgba(43,15,99,.66) 50%,rgba(23,6,39,.86) 100%) !important;
+    background:linear-gradient(180deg,rgba(10,15,36,.82) 0%,rgba(19,32,92,.64) 50%,rgba(10,15,36,.86) 100%) !important;
   }
-  .closing{background:linear-gradient(160deg,#3A0F5E,#0E0320) !important}
+  .closing{background:linear-gradient(160deg,#1B2A6B,#070A1C) !important}
   .closing::after{
-    background:linear-gradient(180deg,rgba(14,3,32,.30) 0%,rgba(14,3,32,.08) 44%,rgba(14,3,32,.66) 100%) !important;
+    background:linear-gradient(180deg,rgba(7,10,28,.30) 0%,rgba(7,10,28,.08) 44%,rgba(7,10,28,.66) 100%) !important;
   }
   .closing-mark::before,.closing-mark::after{
-    background:linear-gradient(90deg,var(--gilt),var(--gilt-soft)) !important;opacity:.95;height:2px !important;
+    background:linear-gradient(90deg,var(--gilt-soft),var(--gilt)) !important;opacity:.95;height:2px !important;
   }
   .closing-sub{white-space:normal !important}   /* fix mobile overflow */
 
-  /* dark job cards: magenta hover edge */
-  .job:hover{border-color:rgba(229,23,123,.55) !important}
+  /* dark job cards: cobalt hover edge */
+  .job:hover{border-color:rgba(47,107,255,.6) !important}
 
-  /* ---- CTAs → neon glowing pills (the promo button) ---- */
+  /* ---- CTAs: primary = one warm magenta pop; secondary = cobalt ---- */
   .btn--primary{
-    background:var(--cosmos) !important;color:#fff !important;border:0 !important;border-radius:999px !important;
-    box-shadow:0 8px 26px -8px rgba(229,23,123,.65), inset 0 0 0 1px rgba(255,255,255,.20);
+    background:var(--pop) !important;color:#fff !important;border:0 !important;border-radius:999px !important;
+    box-shadow:0 8px 26px -8px rgba(245,23,123,.55), inset 0 0 0 1px rgba(255,255,255,.20);
   }
-  .btn--primary:hover{filter:brightness(1.07) saturate(1.05);
-    box-shadow:0 12px 34px -8px rgba(229,23,123,.82) !important;color:#fff !important}
-  .btn--ghost{border-radius:999px}
-  .btn--ghost:hover{background:var(--gilt-soft) !important;color:#fff !important;border-color:var(--gilt-soft) !important}
-  .labcall .btn{background:var(--cosmos) !important;color:#fff !important;border:0 !important;border-radius:999px !important;
-    box-shadow:0 8px 26px -8px rgba(229,23,123,.6)}
-  .labcall .btn:hover{filter:brightness(1.07);color:#fff !important}
-  .nav__cta{border-radius:999px}
+  .btn--primary:hover{filter:brightness(1.06) saturate(1.05);
+    box-shadow:0 12px 34px -8px rgba(245,23,123,.72) !important;color:#fff !important}
+  .btn--ghost{border-radius:999px;border-color:var(--gilt) !important;color:var(--gilt) !important}
+  .btn--ghost:hover{background:var(--gilt) !important;color:#fff !important;border-color:var(--gilt) !important}
+  .labcall .btn{background:var(--pop) !important;color:#fff !important;border:0 !important;border-radius:999px !important;
+    box-shadow:0 8px 26px -8px rgba(245,23,123,.5)}
+  .labcall .btn:hover{filter:brightness(1.06);color:#fff !important}
+  .nav__cta{border-radius:999px;border-color:var(--gilt) !important;color:var(--gilt) !important}
   .nav:not(.is-solid) .nav__cta:hover,.nav.is-solid .nav__cta:hover{
-    background:var(--cosmos) !important;color:#fff !important;border-color:transparent !important}
-  .closing-cta .btn{background:#fff !important;color:#7A1FA2 !important;border:0 !important;border-radius:999px !important;
+    background:var(--gilt) !important;color:#fff !important;border-color:transparent !important}
+  .closing-cta .btn{background:#fff !important;color:var(--gilt) !important;border:0 !important;border-radius:999px !important;
     box-shadow:0 12px 34px -10px rgba(0,0,0,.5)}
-  .closing-cta .btn:hover{background:var(--cosmos) !important;color:#fff !important}
-  .btn--onDark.btn--primary{background:#fff !important;color:#7A1FA2 !important}
-  .btn--onDark.btn--primary:hover{background:var(--cosmos) !important;color:#fff !important}
+  .closing-cta .btn:hover{background:var(--pop) !important;color:#fff !important}
+  .btn--onDark.btn--primary{background:#fff !important;color:var(--gilt) !important}
+  .btn--onDark.btn--primary:hover{background:var(--pop) !important;color:#fff !important}
 
   /* Floor Test photo: show full image, no crop */
   .ft-photo{aspect-ratio:auto !important}
@@ -1031,11 +1036,11 @@
   .cg-cell:hover{background:transparent !important; box-shadow:inset 0 2px 0 0 var(--gilt)}
 
   /* Roster band: mobile reinforcement — keep the image visible, lift text contrast only */
-  .roster-band__kicker{color:#e6c88a !important; letter-spacing:.22em !important}
+  .roster-band__kicker{color:#AFC6FF !important; letter-spacing:.22em !important}
   .roster-band__heading{color:#ffffff !important; text-shadow:0 2px 20px rgba(0,0,0,.65) !important}
-  .roster-band__heading em{color:#e6c88a !important}
+  .roster-band__heading em{color:#AFC6FF !important}
   .roster-band__names{color:rgba(255,255,255,.94) !important; text-shadow:0 1px 14px rgba(0,0,0,.6) !important}
-  .roster-band__dot{color:rgba(230,200,138,.9) !important}
+  .roster-band__dot{color:rgba(175,198,255,.95) !important}
   .roster-band__note{color:#ffffff !important; text-shadow:0 1px 14px rgba(0,0,0,.6) !important}
 
   /* Benchmark section: solid white, no watercolor blurs */
@@ -1056,10 +1061,10 @@
   <div class="nav__in">
     <a class="brand" href="#top" aria-label="Marcia McCoy — AI for Rookies">
       <img class="brand__logo brand__logo--white" alt="Marcia McCoy — AI for Rookies"
-        src="https://cdn.katalyst-crm.com/a/d50a38c3-d70d-96d6-206a-2a7312cb1117"
+        src="https://cdn.katalyst-crm.com/a/03129e09-0db1-d05e-0b5d-2a1fa275409b"
         onerror="this.closest('.brand').classList.add('logo-failed')">
       <img class="brand__logo brand__logo--dark" alt="" aria-hidden="true"
-        src="https://cdn.katalyst-crm.com/a/d50a38c3-d70d-96d6-206a-2a7312cb1117"
+        src="https://cdn.katalyst-crm.com/a/03129e09-0db1-d05e-0b5d-2a1fa275409b"
         onerror="this.closest('.brand').classList.add('logo-failed')">
       <b>Marcia&nbsp;McCoy</b><span>AI for Rookies</span>
     </a>
@@ -1124,7 +1129,7 @@
   <!-- ============ §2 BENCHMARK ============ -->
   <section class="sec" id="benchmark">
     <div class="wrap">
-      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7059a9df-0d86-dc1e-21ba-80717dc4b8e2" alt="" onerror="this.parentNode.textContent='02'"></span><span class="nm">The Blue-Chip Benchmark</span><span class="ln"></span></div>
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7b51998d-f3ba-7704-5b86-25ee23920179" alt="" onerror="this.parentNode.textContent='02'"></span><span class="nm">The Blue-Chip Benchmark</span><span class="ln"></span></div>
       <div class="split split--wideText">
         <div class="col-text reveal">
           <p class="eyebrow">Forty years at the top of the art world</p>
@@ -1167,7 +1172,7 @@
   <!-- ============ §3 DILEMMA ============ -->
   <section class="sec band-dark dilemma-sec" id="dilemma">
     <div class="wrap">
-      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7059a9df-0d86-dc1e-21ba-80717dc4b8e2" alt="" onerror="this.parentNode.textContent='03'"></span><span class="nm">The Visualizer's Dilemma</span><span class="ln"></span></div>
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7b51998d-f3ba-7704-5b86-25ee23920179" alt="" onerror="this.parentNode.textContent='03'"></span><span class="nm">The Visualizer's Dilemma</span><span class="ln"></span></div>
       <div class="split split--textFirst">
         <div class="col-text reveal">
           <h2 class="h-section" style="margin-bottom:1.4rem">Your Work Is Brilliant. Why Is It Still Sitting in Your Studio?</h2>
@@ -1195,7 +1200,7 @@
   <!-- ============ §4 GORDON PARKS ============ -->
   <section class="sec" id="parks">
     <div class="wrap">
-      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7059a9df-0d86-dc1e-21ba-80717dc4b8e2" alt="" onerror="this.parentNode.textContent='04'"></span><span class="nm">The Gordon Parks Legacy</span><span class="ln"></span></div>
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7b51998d-f3ba-7704-5b86-25ee23920179" alt="" onerror="this.parentNode.textContent='04'"></span><span class="nm">The Gordon Parks Legacy</span><span class="ln"></span></div>
       <div class="reveal" style="max-width:70ch">
         <p class="eyebrow">The lesson behind everything I teach</p>
         <h2 class="h-section" style="margin:.7rem 0 0">What Twenty-Three Years and Seven Hundred Thousand Dollars Taught Me</h2>
@@ -1245,7 +1250,7 @@
   <!-- ============ §5 ARCHITECTURE ============ -->
   <section class="sec arch" id="architecture">
     <div class="wrap">
-      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7059a9df-0d86-dc1e-21ba-80717dc4b8e2" alt="" onerror="this.parentNode.textContent='05'"></span><span class="nm">The Agent's Architecture</span><span class="ln"></span></div>
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7b51998d-f3ba-7704-5b86-25ee23920179" alt="" onerror="this.parentNode.textContent='05'"></span><span class="nm">The Agent's Architecture</span><span class="ln"></span></div>
       <div class="reveal arch-head">
         <h2 class="h-section arch-title" style="margin-bottom:1.2rem">Your Automated Agent Team</h2>
         <p class="body">For forty years, my job had four parts. I used to do all four by hand: hundreds of calls, plane tickets, contracts drafted at midnight. AI for Rookies teaches you to agent for yourself. The same four jobs, automated.</p>
@@ -1307,7 +1312,7 @@
 
   <!-- ============ §6 CREATE (cinematic grid) ============ -->
   <section class="sec create-sec" id="create">
-    <div class="plate-label reveal create-plate"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7059a9df-0d86-dc1e-21ba-80717dc4b8e2" alt="" onerror="this.parentNode.textContent='06'"></span><span class="nm">The C.R.E.A.T.E. System</span><span class="ln"></span></div>
+    <div class="plate-label reveal create-plate"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7b51998d-f3ba-7704-5b86-25ee23920179" alt="" onerror="this.parentNode.textContent='06'"></span><span class="nm">The C.R.E.A.T.E. System</span><span class="ln"></span></div>
 
     <div class="create-grid">
       <!-- Left column: heading (spans both rows) -->
@@ -1356,7 +1361,7 @@
   <!-- ============ §7 ACTION LABS ============ -->
   <section class="sec labs-sec" id="labs" style="background:var(--paper)">
     <div class="wrap">
-      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7059a9df-0d86-dc1e-21ba-80717dc4b8e2" alt="" onerror="this.parentNode.textContent='07'"></span><span class="nm">The Action Labs</span><span class="ln"></span></div>
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7b51998d-f3ba-7704-5b86-25ee23920179" alt="" onerror="this.parentNode.textContent='07'"></span><span class="nm">The Action Labs</span><span class="ln"></span></div>
       <div class="reveal labs-head">
         <h2 class="h-section" style="margin-bottom:1.1rem">Proof, Live: My Own Legacy Projects</h2>
         <p class="body">I am not teaching you theory. I am showing you my own work, in progress, in real time. These are three of my Ten Legacy Projects, the ones I can show you live.</p>
@@ -1411,13 +1416,13 @@
         <div class="labcall__hours">
           <div class="lab-hour">
             <p class="lab-hour__no">01</p>
-            <h4 class="lab-hour__t">The first hour</h4>
-            <p class="lab-hour__d">I demonstrate AI completing real steps on one of these projects.</p>
+            <h4 class="lab-hour__t">Live demonstration</h4>
+            <p class="lab-hour__d">I work live in front of you, running AI through real steps on one of these projects so you see exactly how each move is made.</p>
           </div>
           <div class="lab-hour">
             <p class="lab-hour__no">02</p>
-            <h4 class="lab-hour__t">The second hour is yours</h4>
-            <p class="lab-hour__d">Bring your own vision, and we work it together.</p>
+            <h4 class="lab-hour__t">Guided work on your project</h4>
+            <p class="lab-hour__d">You bring your own real project and we build it together, hands-on, with my direct feedback and your questions answered throughout the full four hours.</p>
           </div>
         </div>
         <div class="labcall__cta">
@@ -1431,7 +1436,7 @@
   <section class="sec offers-sec" id="offers">
     <div class="wrap">
       <div class="plate-label reveal offers-plate">
-        <span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7059a9df-0d86-dc1e-21ba-80717dc4b8e2" alt="" onerror="this.parentNode.textContent='08'"></span>
+        <span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7b51998d-f3ba-7704-5b86-25ee23920179" alt="" onerror="this.parentNode.textContent='08'"></span>
         <span class="nm">The Chosen Offers</span>
         <span class="ln"></span>
       </div>
@@ -1532,7 +1537,7 @@
           <div class="offer-text">
             <div class="offer-num" aria-hidden="true"><span>06</span></div>
             <p class="offer-label">4-Hour Labs</p>
-            <p class="offer-desc">Four hours live. Watch me build. Then build your own, with my help.</p>
+            <p class="offer-desc">Four hours live and interactive, start to finish. Watch me demonstrate. Work on your own real project, in real time, with my guidance. Ask me questions directly, throughout.</p>
             <div class="offer-foot">
               <span class="offer-price">$497</span>
               <a href="#" class="btn btn--ghost offer-btn">Join a Lab</a>
@@ -1583,7 +1588,7 @@
   <section class="sec floortest-sec" id="floortest">
     <div class="wrap">
       <div class="plate-label reveal floortest-plate">
-        <span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7059a9df-0d86-dc1e-21ba-80717dc4b8e2" alt="" onerror="this.parentNode.textContent='09'"></span>
+        <span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7b51998d-f3ba-7704-5b86-25ee23920179" alt="" onerror="this.parentNode.textContent='09'"></span>
         <span class="nm">The Gallery Floor Test</span>
         <span class="ln"></span>
       </div>
@@ -1625,7 +1630,7 @@
   <!-- ============ §10 FAQ ============ -->
   <section class="sec" id="faq">
     <div class="wrap">
-      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7059a9df-0d86-dc1e-21ba-80717dc4b8e2" alt="" onerror="this.parentNode.textContent='10'"></span><span class="nm">FAQ</span><span class="ln"></span></div>
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7b51998d-f3ba-7704-5b86-25ee23920179" alt="" onerror="this.parentNode.textContent='10'"></span><span class="nm">FAQ</span><span class="ln"></span></div>
       <div class="reveal faq-head">
         <h2 class="h-section">What Actually Holds When Everything Else Falls Apart</h2>
       </div>
@@ -1649,7 +1654,7 @@
   <!-- ============ §11 MIRACLE SCANS ============ -->
   <section class="sec" id="miracle" style="background:var(--limestone);border-block:1px solid var(--hair)">
     <div class="wrap">
-      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7059a9df-0d86-dc1e-21ba-80717dc4b8e2" alt="" onerror="this.parentNode.textContent='11'"></span><span class="nm">The Miracle Scans</span><span class="ln"></span></div>
+      <div class="plate-label reveal"><span class="no" aria-hidden="true"><img src="https://cdn.katalyst-crm.com/a/7b51998d-f3ba-7704-5b86-25ee23920179" alt="" onerror="this.parentNode.textContent='11'"></span><span class="nm">The Miracle Scans</span><span class="ln"></span></div>
       <div class="split split--wideText">
         <div class="col-text reveal">
           <p class="eyebrow">Waking up to a miracle</p>
